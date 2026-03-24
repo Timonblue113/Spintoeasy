@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Pháp Vòng Quay May Mắn Realtime - Chốt Sale Thần Tốc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #c1121f; --gold: #ffd700; --dark: #1a1a1a; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        
+        /* Header & Hero */
+        header { background: var(--dark); color: white; padding: 100px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/Timonblue113/spin/main/1.jpg'); background-size: cover; }
+        .hero-title { font-size: 3rem; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
+        .hero-sub { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        
+        /* Features */
+        .section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { padding: 30px; border-radius: 15px; background: #f9f9f9; text-align: center; transition: 0.3s; border-bottom: 5px solid var(--primary); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        
+        /* Demo Section */
+        .demo-box { background: var(--primary); color: white; padding: 40px; border-radius: 20px; text-align: center; }
+        .btn-cta { display: inline-block; padding: 15px 40px; background: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.2rem; transition: 0.3s; margin-top: 20px; }
+        .btn-cta:hover { background: #fff; transform: scale(1.05); }
+
+        /* Pricing */
+        .price-tag { font-size: 2.5rem; color: var(--primary); font-weight: bold; }
+        footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="hero-title">Lucky Wheel 2026</h1>
+    <p class="hero-sub">Giải pháp tăng doanh số & thu thập Data khách hàng hiệu quả Marketing</p>
+    <a href="#contact" class="btn-cta">NHẬN BÁO GIÁ NGAY</a>
+	<a href="https://timonblue113.github.io/spin/" class="btn-cta">DEMO</a>
+
+</a>
+</header>
+
+<div class="section">
+    <h2 style="text-align: center; font-size: 2.5rem;">Tại sao nên chọn chúng tôi?</h2>
+    <div class="grid">
+        <div class="card">
+            <i class="fas fa-sync-alt"></i>
+            <h3>Đồng bộ Realtime</h3>
+            <p>Quay trên máy tính, trừ quà ngay trên điện thoại. Dữ liệu lưu trữ đám mây Firebase Singapore siêu tốc.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-percentage"></i>
+            <h3>Thuật toán % Thông minh</h3>
+            <p>Tùy chỉnh tỉ lệ trúng thưởng cực dễ. Quà hết tự động nhảy tỉ lệ cho món khác, không lo lỗi logic.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-file-excel"></i>
+            <h3>Xuất Báo Cáo F9</h3>
+            <p>Xuất danh sách khách hàng & tồn kho quà tặng ra file Excel chỉ với 1 phím bấm. Quản lý cực nhàn!</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Đa nền tảng</h3>
+            <p>Chạy tốt trên Máy tính bàn, Laptop, iPad và Smartphone. Không cần cài đặt phần mềm phức tạp.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="demo-box">
+        <h2>BẠN MUỐN TĂNG TƯƠNG TÁC TẠI CỬA HÀNG?</h2>
+        <p>Hệ thống vòng quay giúp thu thập Họ tên + SĐT khách hàng 100% tự nguyện để làm Marketing sau này.</p>
+        <div style="font-size: 1.5rem; margin: 20px 0;">Giá chỉ từ: <span style="color: var(--gold); font-weight: bold;">200.000 VNĐ</span></div>
+        <p><i>(Bao gồm setup Firebase, Hosting GitHub và hỗ trợ trọn đời)</i></p>
+    </div>
+</div>
+
+<div id="contact" class="section" style="text-align: center;">
+    <h2>LIÊN HỆ TƯ VẤN</h2>
+    <p>Phát triển bởi: <strong>Timon</strong></p>
+    <div style="font-size: 1.2rem;">
+        <p><i class="fab fa-zalo" style="color: blue;"></i> Zalo: <strong>0946296269</strong></p>
+        <p><i class="fas fa-map-marker-alt" style="color: red;"></i> Địa chỉ: Cao Lãnh, Đồng Tháp</p>
+    </div>
+    <a href="https://zalo.me/0946296269" class="btn-cta" style="background: #0068ff; color: #fff;">NHẮN ZALO NGAY</a>
+</div>
+
+
+<footer>
+    <p>&copy; 2026 Lucky Wheel Solutions. Thiết kế chuyên nghiệp.</p>
+</footer>
+
+</body>
+</html>
