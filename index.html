@@ -3,77 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giải Pháp Vòng Quay May Mắn Realtime - Chốt Sale Thần Tốc</title>
+    <title>SPINEASY - Phần Mềm Vòng Quay Realtime Chuyên Nghiệp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #c1121f; --gold: #ffd700; --dark: #1a1a1a; }
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        :root { --primary: #c1121f; --dark-red: #8e0e16; --gold: #ffd700; --neon-blue: #00f2fe; --dark: #121212; }
+        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f4; color: #333; }
         
-        /* Header & Hero */
-        header { background: var(--dark); color: white; padding: 100px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/Timonblue113/spin/main/1.jpg'); background-size: cover; }
-        .hero-title { font-size: 3rem; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
-        .hero-sub { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        /* ==============================
+           HERO BANNER (Học tập từ XSPIN)
+           ============================== */
+        .hero-banner {
+            background: var(--primary) radial-gradient(circle, var(--primary) 0%, var(--dark-red) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--gold);
+        }
+
+        /* Hiệu ứng tia sét/hào quang nền */
+        .hero-banner::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.05) 0deg 10deg, transparent 10deg 20deg);
+            animation: rotateBg 60s linear infinite; opacity: 0.5; z-index: 1;
+        }
+
+        @keyframes rotateBg { 100% { transform: rotate(360deg); } }
+
+        .banner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 2; /* Nổi lên trên nền */
+        }
+
+        /* Khối bên trái - Logo & Tiêu đề chính */
+        .left-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            text-align: left;
+            position: relative;
+        }
+
+        /* Hiệu ứng bo góc Neon Blue */
+        .left-block::after {
+            content: ''; position: absolute; inset: -5px; border-radius: 25px;
+            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-blue));
+            z-index: -1; filter: blur(10px); opacity: 0.7;
+        }
+
+        .brand-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            margin-bottom: 5px;
+        }
+
+        .sub-brand {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1.2;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .slogan { font-size: 1.3rem; opacity: 0.9; font-weight: 300; }
+
+        /* Khối bên phải - Feature box & Price */
+        .right-block { text-align: right; }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 2px dashed var(--gold);
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        /* Icon vòng quay nhỏ trôi nổi */
+        .floating-wheel {
+            position: absolute; top: -25px; left: -25px;
+            font-size: 2.5rem; color: var(--gold);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .feature-box h3 { color: var(--gold); margin: 0 0 10px 0; font-size: 1.4rem; }
+        .feature-box p { margin: 5px 0; font-size: 1.1rem; }
+
+        .price-block {
+            background: #fff;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .price-text { font-size: 2.2rem; color: var(--primary); }
+
+        /* Icon Ngôi sao trang trí */
+        .deco-star { color: var(--gold); font-size: 1.2rem; margin: 0 5px; animation: twinkle 1s infinite alternate; }
+        @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
+
+        /* Contact Line */
+        .contact-line { margin-top: 20px; font-size: 1.1rem; color: rgba(255,255,255,0.8); }
+        .contact-line a { color: var(--neon-blue); text-decoration: none; font-weight: bold; }
+
+        /* Responsive cho Banner */
+        @media (max-width: 900px) {
+            .banner-container { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+            .left-block, .right-block { text-align: center; }
+            .main-title { font-size: 2rem; }
+            .price-text { font-size: 1.8rem; }
+        }
+
+        /* ==============================
+           CÁC PHẦN CÒN LẠI CỦA SITE
+           ============================== */
+        .section { padding: 60px 20px; max-width: 1100px; margin: auto; }
         
-        /* Features */
-        .section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { padding: 30px; border-radius: 15px; background: #f9f9f9; text-align: center; transition: 0.3s; border-bottom: 5px solid var(--primary); }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        /* Features Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { padding: 30px; border-radius: 15px; background: #fff; text-align: center; transition: 0.3s; border: 1px solid #eee; position: relative;}
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--primary); }
         .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
         
-        /* Demo Section */
-        .demo-box { background: var(--primary); color: white; padding: 40px; border-radius: 20px; text-align: center; }
-        .btn-cta { display: inline-block; padding: 15px 40px; background: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.2rem; transition: 0.3s; margin-top: 20px; }
-        .btn-cta:hover { background: #fff; transform: scale(1.05); }
+        /* CTA Button */
+        .btn-cta { display: inline-block; padding: 18px 50px; background: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.3rem; transition: 0.3s; margin-top: 30px; box-shadow: 0 5px 15px rgba(255,215,0,0.3); }
+        .btn-cta:hover { background: #fff; color: var(--primary); transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,255,255,0.5); }
 
-        /* Pricing */
-        .price-tag { font-size: 2.5rem; color: var(--primary); font-weight: bold; }
         footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1 class="hero-title">Lucky Wheel 2026</h1>
-    <p class="hero-sub">Giải pháp tăng doanh số & thu thập Data khách hàng hiệu quả Marketing</p>
-    <a href="#contact" class="btn-cta">NHẬN BÁO GIÁ NGAY</a>
-	<a href="https://timonblue113.github.io/spin/" class="btn-cta">DEMO</a>
+<header class="hero-banner">
+    <div class="banner-container">
+        
+        <div class="left-block">
+            <div class="brand-logo">SPINEASY</div>
+            <span class="sub-brand">PHẦN MỀM QUAY SỐ</span>
+            <h1 class="main-title">TẠO VÒNG QUAY<br>REALTIME</h1>
+            <p class="slogan">Nhanh chóng, Chuyên nghiệp & Tăng tương tác vượt trội</p>
+        </div>
 
-</a>
+        <div class="right-block">
+            <div class="feature-box">
+                <i class="fas fa-dharmachakra floating-wheel"></i>
+                <h3>TÍNH NĂNG HẤP DẪN</h3>
+                <p>Đồng bộ Đám Mây</p>
+                <p>Quản lý Tồn Kho & Data Khách</p>
+                <p>Xuất Báo Cáo Excel F9</p>
+                <p><i class="fas fa-star deco-star"></i>Từ cơ bản đến chuyên nghiệp<i class="fas fa-star deco-star"></i></p>
+            </div>
+            <br>
+            <div class="price-block">
+                Giá chỉ từ: <span class="price-text">200.000đ</span>
+            </div>
+            <p class="contact-line">Website: <a href="https://timonblue113.github.io/spin/">https://timonblue113.github.io/Spintoeasy/</a></p>
+        </div>
+
+    </div>
 </header>
 
 <div class="section">
-    <h2 style="text-align: center; font-size: 2.5rem;">Tại sao nên chọn chúng tôi?</h2>
+    <h2 style="text-align: center; font-size: 2.5rem; color: var(--dark-red);">Giải Pháp Marketing Hoàn Hảo cho Showroom</h2>
     <div class="grid">
         <div class="card">
             <i class="fas fa-sync-alt"></i>
-            <h3>Đồng bộ Realtime</h3>
-            <p>Quay trên máy tính, trừ quà ngay trên điện thoại. Dữ liệu lưu trữ đám mây Firebase Singapore siêu tốc.</p>
+            <h3>Đồng bộ Realtime 100%</h3>
+            <p>Sử dụng Firebase cho tốc độ trừ quà tức thì. Khách quay trên iPad, màn hình lớn Admin cập nhật ngay.</p>
         </div>
         <div class="card">
             <i class="fas fa-percentage"></i>
             <h3>Thuật toán % Thông minh</h3>
-            <p>Tùy chỉnh tỉ lệ trúng thưởng cực dễ. Quà hết tự động nhảy tỉ lệ cho món khác, không lo lỗi logic.</p>
+            <p>Tự động tính lại tỉ lệ trúng thưởng khi có món quà hết hàng (Qty=0). Đảm bảo vòng quay không bao giờ lỗi logic.</p>
         </div>
         <div class="card">
             <i class="fas fa-file-excel"></i>
-            <h3>Xuất Báo Cáo F9</h3>
-            <p>Xuất danh sách khách hàng & tồn kho quà tặng ra file Excel chỉ với 1 phím bấm. Quản lý cực nhàn!</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-mobile-alt"></i>
-            <h3>Đa nền tảng</h3>
-            <p>Chạy tốt trên Máy tính bàn, Laptop, iPad và Smartphone. Không cần cài đặt phần mềm phức tạp.</p>
+            <h3>Quản lý Data & Excel</h3>
+            <p>Thu thập Họ tên + SĐT khách hàng tự nguyện. Nhấn F9 để xuất file báo cáo khách hàng và tồn kho quà tặng.</p>
         </div>
     </div>
-</div>
-
-<div class="section">
-    <div class="demo-box">
-        <h2>BẠN MUỐN TĂNG TƯƠNG TÁC TẠI CỬA HÀNG?</h2>
-        <p>Hệ thống vòng quay giúp thu thập Họ tên + SĐT khách hàng 100% tự nguyện để làm Marketing sau này.</p>
-        <div style="font-size: 1.5rem; margin: 20px 0;">Giá chỉ từ: <span style="color: var(--gold); font-weight: bold;">200.000 VNĐ</span></div>
-        <p><i>(Bao gồm setup Firebase, Hosting GitHub và hỗ trợ trọn đời)</i></p>
+    <div style="text-align: center;">
+        <a href="#contact" class="btn-cta">NHẬN TƯ VẤN & BÁO GIÁ</a>
+		<a href="https://timonblue113.github.io/spin/" target="_blank" class="btn-cta" style="margin: 0; min-width: 200px; text-align: center; background: #fff; color: #c1121f; border: 2px solid #c1121f;">
+        <i class="fas fa-play-circle"></i> XEM DEMO THỰC TẾ
+    </a>
     </div>
 </div>
 
