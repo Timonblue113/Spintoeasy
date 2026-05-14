@@ -1,124 +1,96 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCLS2V19B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-0KCLS2V19B');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPINEASY - Phần Mềm Vòng Quay Realtime Chuyên Nghiệp</title>
+    <title>Giải Pháp Vòng Quay May Mắn Realtime - Chốt Sale Thần Tốc</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #c1121f; --dark-red: #8e0e16; --gold: #ffd700; --neon-blue: #00f2fe; --dark: #121212; }
-        .auth-nav { position: fixed; top: 0; right: 0; padding: 15px 30px; z-index: 1000; display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-bottom-left-radius: 20px; }
-        .user-info { background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 25px; display: none; align-items: center; gap: 10px; border: 1px solid var(--gold); }
-        .user-avatar { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gold); }
-        .btn-auth { cursor: pointer; background: var(--gold); border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
-        .role-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: var(--neon-blue); color: #000; text-transform: uppercase; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f4; color: #333; }
-        .hero-banner { background: var(--primary) radial-gradient(circle, var(--primary) 0%, var(--dark-red) 100%); color: white; padding: 80px 20px; text-align: center; position: relative; overflow: hidden; border-bottom: 8px solid var(--gold); }
-        .banner-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
-        .left-block { background: rgba(0, 0, 0, 0.3); padding: 40px; border-radius: 20px; text-align: left; }
-        .brand-logo { font-size: 3rem; font-weight: 900; color: #fff; text-transform: uppercase; margin-bottom: 5px; }
-        .main-title { font-size: 2.8rem; font-weight: 800; color: var(--gold); line-height: 1.2; margin: 0 0 15px 0; }
-        .pizza-control { display: none; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 20px; color: #333; }
+        :root { --primary: #c1121f; --gold: #ffd700; --dark: #1a1a1a; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        
+        /* Header & Hero */
+        header { background: var(--dark); color: white; padding: 100px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/Timonblue113/spin/main/1.jpg'); background-size: cover; }
+        .hero-title { font-size: 3rem; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
+        .hero-sub { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        
+        /* Features */
+        .section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { padding: 30px; border-radius: 15px; background: #f9f9f9; text-align: center; transition: 0.3s; border-bottom: 5px solid var(--primary); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        
+        /* Demo Section */
+        .demo-box { background: var(--primary); color: white; padding: 40px; border-radius: 20px; text-align: center; }
+        .btn-cta { display: inline-block; padding: 15px 40px; background: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.2rem; transition: 0.3s; margin-top: 20px; }
+        .btn-cta:hover { background: #fff; transform: scale(1.05); }
+
+        /* Pricing */
+        .price-tag { font-size: 2.5rem; color: var(--primary); font-weight: bold; }
         footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<nav class="auth-nav">
-    <div id="user-info" class="user-info">
-        <img id="user-avatar" class="user-avatar" src="" alt="">
-        <div>
-            <span id="user-name" style="font-size: 0.9rem; display: block;"></span>
-            <span id="user-role" class="role-badge"></span>
-        </div>
-        <button id="logout-btn" class="btn-auth" style="background: transparent; color: white; border: 1px solid white;">Thoát</button>
-    </div>
-    <div id="auth-buttons" style="display: flex; gap: 5px;">
-        <input type="email" id="email-input" placeholder="Email">
-        <input type="password" id="pass-input" placeholder="Mật khẩu">
-        <button id="login-email-btn" class="btn-auth">Đăng nhập</button>
-        <button id="login-btn" class="btn-auth"><i class="fab fa-google"></i> Google</button>
-    </div>
-</nav>
+<header>
+    <h1 class="hero-title">Lucky Wheel 2026</h1>
+    <p class="hero-sub">Giải pháp tăng doanh số & thu thập Data khách hàng hiệu quả Marketing</p>
+    <a href="#contact" class="btn-cta">NHẬN BÁO GIÁ NGAY</a>
+	<a href="https://timonblue113.github.io/spin/" class="btn-cta">DEMO</a>
 
-<header class="hero-banner">
-    <div class="banner-container">
-        <div class="left-block">
-            <div class="brand-logo">SPINEASY</div>
-            <h1 class="main-title">TẠO VÒNG QUAY<br>REALTIME</h1>
-            <div id="pizza-section" class="pizza-control">
-                <h3>Quản lý Pizza của bạn</h3>
-                <p>Số lượng hiện tại: <span id="pizza-count">0</span></p>
-                <input type="number" id="pizza-input" value="0">
-                <button id="update-pizza-btn">Cập nhật</button>
-            </div>
-        </div>
-    </div>
+</a>
 </header>
 
-<script type="module">
-    import { auth, db, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, doc, getDoc, setDoc, updateDoc, signInWithEmailAndPassword } from './firebase-config.js';
+<div class="section">
+    <h2 style="text-align: center; font-size: 2.5rem;">Tại sao nên chọn chúng tôi?</h2>
+    <div class="grid">
+        <div class="card">
+            <i class="fas fa-sync-alt"></i>
+            <h3>Đồng bộ Realtime</h3>
+            <p>Quay trên máy tính, trừ quà ngay trên điện thoại. Dữ liệu lưu trữ đám mây Firebase Singapore siêu tốc.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-percentage"></i>
+            <h3>Thuật toán % Thông minh</h3>
+            <p>Tùy chỉnh tỉ lệ trúng thưởng cực dễ. Quà hết tự động nhảy tỉ lệ cho món khác, không lo lỗi logic.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-file-excel"></i>
+            <h3>Xuất Báo Cáo F9</h3>
+            <p>Xuất danh sách khách hàng & tồn kho quà tặng ra file Excel chỉ với 1 phím bấm. Quản lý cực nhàn!</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Đa nền tảng</h3>
+            <p>Chạy tốt trên Máy tính bàn, Laptop, iPad và Smartphone. Không cần cài đặt phần mềm phức tạp.</p>
+        </div>
+    </div>
+</div>
 
-    const loginBtn = document.getElementById('login-btn');
-    const loginEmailBtn = document.getElementById('login-email-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const userInfo = document.getElementById('user-info');
-    const pizzaSection = document.getElementById('pizza-section');
-    const pizzaCountDisplay = document.getElementById('pizza-count');
-    const pizzaInput = document.getElementById('pizza-input');
-    const updatePizzaBtn = document.getElementById('update-pizza-btn');
+<div class="section">
+    <div class="demo-box">
+        <h2>BẠN MUỐN TĂNG TƯƠNG TÁC TẠI CỬA HÀNG?</h2>
+        <p>Hệ thống vòng quay giúp thu thập Họ tên + SĐT khách hàng 100% tự nguyện để làm Marketing sau này.</p>
+        <div style="font-size: 1.5rem; margin: 20px 0;">Giá chỉ từ: <span style="color: var(--gold); font-weight: bold;">200.000 VNĐ</span></div>
+        <p><i>(Bao gồm setup Firebase, Hosting GitHub và hỗ trợ trọn đời)</i></p>
+    </div>
+</div>
 
-    const provider = new GoogleAuthProvider();
+<div id="contact" class="section" style="text-align: center;">
+    <h2>LIÊN HỆ TƯ VẤN</h2>
+    <p>Phát triển bởi: <strong>Timon</strong></p>
+    <div style="font-size: 1.2rem;">
+        <p><i class="fab fa-zalo" style="color: blue;"></i> Zalo: <strong>0946296269</strong></p>
+        <p><i class="fas fa-map-marker-alt" style="color: red;"></i> Địa chỉ: Cao Lãnh, Đồng Tháp</p>
+    </div>
+    <a href="https://zalo.me/0946296269" class="btn-cta" style="background: #0068ff; color: #fff;">NHẮN ZALO NGAY</a>
+</div>
 
-    loginBtn.onclick = async () => {
-        try { await signInWithPopup(auth, provider); } catch (error) { alert("Google Login Error: " + error.message); }
-    };
 
-    loginEmailBtn.onclick = async () => {
-        const email = document.getElementById('email-input').value;
-        const pass = document.getElementById('pass-input').value;
-        try { await signInWithEmailAndPassword(auth, email, pass); } catch (error) { alert("Email Login Error: " + error.message); }
-    };
+<footer>
+    <p>&copy; 2026 Lucky Wheel Solutions. Thiết kế chuyên nghiệp.</p>
+</footer>
 
-    logoutBtn.onclick = () => signOut(auth);
-
-    updatePizzaBtn.onclick = async () => {
-        const user = auth.currentUser;
-        if (user) {
-            await updateDoc(doc(db, "users", user.uid), { pizzaCount: parseInt(pizzaInput.value) });
-            pizzaCountDisplay.textContent = pizzaInput.value;
-            alert("Đã cập nhật!");
-        }
-    };
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            document.getElementById('auth-buttons').style.display = 'none';
-            userInfo.style.display = 'flex';
-            pizzaSection.style.display = 'block';
-            
-            const userRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(userRef);
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                pizzaCountDisplay.textContent = data.pizzaCount || 0;
-                pizzaInput.value = data.pizzaCount || 0;
-            } else {
-                await setDoc(userRef, { email: user.email, pizzaCount: 0, createdAt: new Date().toISOString() });
-            }
-        } else {
-            document.getElementById('auth-buttons').style.display = 'flex';
-            userInfo.style.display = 'none';
-            pizzaSection.style.display = 'none';
-        }
-    });
-</script>
 </body>
 </html>
