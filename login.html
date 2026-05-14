@@ -5,12 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
-SPINEASY - Đăng nhập
-</title>
+<title>SPINEASY - Đăng nhập</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,38 +15,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 <style>
 
 :root{
-
     --primary:#c1121f;
-
     --dark:#121212;
-
     --gold:#ffd700;
 }
 
-body{
-
-    margin:0;
-
-    font-family:'Segoe UI',sans-serif;
-
-    background:
-    linear-gradient(
-    135deg,
-    #c1121f,
-    #8e0e16);
-
-    height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    overflow:hidden;
+*{
+    box-sizing:border-box;
 }
 
-/* background effect */
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#c1121f,#8e0e16);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+}
+
+/* BACKGROUND EFFECT */
 
 body::before{
 
@@ -62,9 +49,9 @@ body::before{
 
     background:
     repeating-conic-gradient(
-    from 0deg,
-    rgba(255,255,255,0.05) 0deg 10deg,
-    transparent 10deg 20deg
+        from 0deg,
+        rgba(255,255,255,0.05) 0deg 10deg,
+        transparent 10deg 20deg
     );
 
     animation:spinBg 50s linear infinite;
@@ -77,9 +64,13 @@ body::before{
     }
 }
 
+/* LOGIN BOX */
+
 .login-box{
 
     width:420px;
+
+    max-width:95%;
 
     background:white;
 
@@ -117,6 +108,8 @@ body::before{
     margin-bottom:30px;
 }
 
+/* PLAN */
+
 .plan-box{
 
     background:#fff5d6;
@@ -136,6 +129,8 @@ body::before{
 
     color:#c1121f;
 }
+
+/* INPUT */
 
 .input-group{
 
@@ -162,8 +157,6 @@ body::before{
     border:1px solid #ddd;
 
     font-size:16px;
-
-    box-sizing:border-box;
 }
 
 .input-group input:focus{
@@ -172,6 +165,8 @@ body::before{
 
     border-color:#c1121f;
 }
+
+/* BUTTON */
 
 .btn{
 
@@ -216,6 +211,8 @@ body::before{
     background:#e6e6e6;
 }
 
+/* MESSAGE */
+
 .message{
 
     margin-top:20px;
@@ -223,7 +220,11 @@ body::before{
     text-align:center;
 
     font-weight:bold;
+
+    min-height:24px;
 }
+
+/* LOADING */
 
 .loading{
 
@@ -232,7 +233,11 @@ body::before{
     text-align:center;
 
     margin-top:15px;
+
+    color:#666;
 }
+
+/* BACK */
 
 .back-home{
 
@@ -261,15 +266,11 @@ body::before{
 <div class="login-box">
 
     <div class="logo">
-
         SPINEASY
-
     </div>
 
     <div class="sub">
-
         Hệ thống vòng quay realtime
-
     </div>
 
     <div class="plan-box">
@@ -309,7 +310,8 @@ body::before{
 
         <label>Email</label>
 
-        <input type="email"
+        <input
+        type="email"
         id="email"
         placeholder="Nhập email">
 
@@ -321,7 +323,8 @@ body::before{
 
         <label>Mật khẩu</label>
 
-        <input type="password"
+        <input
+        type="password"
         id="password"
         placeholder="Nhập mật khẩu">
 
@@ -329,7 +332,8 @@ body::before{
 
     <!-- LOGIN -->
 
-    <button class="btn btn-login"
+    <button
+    class="btn btn-login"
     onclick="login()">
 
         <i class="fas fa-sign-in-alt"></i>
@@ -340,7 +344,8 @@ body::before{
 
     <!-- REGISTER -->
 
-    <button class="btn btn-register"
+    <button
+    class="btn btn-register"
     onclick="register()">
 
         <i class="fas fa-user-plus"></i>
@@ -351,7 +356,8 @@ body::before{
 
     <!-- LOADING -->
 
-    <div class="loading"
+    <div
+    class="loading"
     id="loading">
 
         Đang xử lý...
@@ -360,12 +366,14 @@ body::before{
 
     <!-- MESSAGE -->
 
-    <div class="message"
+    <div
+    class="message"
     id="message">
 
     </div>
 
-    <a href="index.html"
+    <a
+    href="index.html"
     class="back-home">
 
         ← Quay lại trang chủ
@@ -379,7 +387,7 @@ body::before{
 <script type="module">
 
 /* =========================
-   IMPORT FIREBASE
+IMPORT FIREBASE
 ========================= */
 
 import { initializeApp }
@@ -413,21 +421,29 @@ import {
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 /* =========================
-   FIREBASE CONFIG
+FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+
   authDomain: "spineasy-user.firebaseapp.com",
+
   projectId: "spineasy-user",
-  storageBucket: "spineasy-user.firebasestorage.app",
+
+  storageBucket: "spineasy-user.appspot.com",
+
   messagingSenderId: "805126611420",
+
   appId: "1:805126611420:web:59a5605b2b68b35f806f19",
+
   measurementId: "G-NE80YJTEXN"
+
 };
 
 /* =========================
-   INIT
+INIT
 ========================= */
 
 const app = initializeApp(firebaseConfig);
@@ -437,7 +453,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 /* =========================
-   HELPER
+HELPER
 ========================= */
 
 function showMessage(text,color="green"){
@@ -459,21 +475,21 @@ function loading(state){
 }
 
 /* =========================
-   REGISTER
+REGISTER
 ========================= */
 
-window.register = async ()=>{
+async function register(){
 
     const email =
-    document.getElementById("email").value;
+    document.getElementById("email").value.trim();
 
     const password =
-    document.getElementById("password").value;
+    document.getElementById("password").value.trim();
 
     if(!email || !password){
 
         showMessage(
-        "Nhập đầy đủ thông tin",
+        "Vui lòng nhập đầy đủ thông tin",
         "red"
         );
 
@@ -494,6 +510,8 @@ window.register = async ()=>{
 
         loading(true);
 
+        showMessage("");
+
         const userCredential =
 
         await createUserWithEmailAndPassword(
@@ -506,9 +524,10 @@ window.register = async ()=>{
 
         );
 
-        const user = userCredential.user;
+        const user =
+        userCredential.user;
 
-        /* tạo data user */
+        /* USERS */
 
         await setDoc(
 
@@ -532,18 +551,58 @@ window.register = async ()=>{
 
         );
 
+        /* WHEEL */
+
+        await setDoc(
+
+            doc(db,"wheels",user.uid),
+
+            {
+
+                gift1:"Voucher 50K",
+
+                gift2:"Gấu bông",
+
+                gift3:"Chúc may mắn"
+
+            }
+
+        );
+
         showMessage(
         "Tạo tài khoản thành công"
         );
+
+        setTimeout(()=>{
+
+            window.location.href =
+            "dashboard-basic.html";
+
+        },1000);
 
     }
 
     catch(error){
 
-        showMessage(
-        error.message,
-        "red"
-        );
+        console.log(error);
+
+        if(error.code == "auth/email-already-in-use"){
+
+            showMessage(
+            "Email đã tồn tại",
+            "red"
+            );
+
+        }
+
+        else{
+
+            showMessage(
+            error.message,
+            "red"
+            );
+
+        }
 
     }
 
@@ -555,20 +614,32 @@ window.register = async ()=>{
 }
 
 /* =========================
-   LOGIN
+LOGIN
 ========================= */
 
-window.login = async ()=>{
+async function login(){
 
     const email =
-    document.getElementById("email").value;
+    document.getElementById("email").value.trim();
 
     const password =
-    document.getElementById("password").value;
+    document.getElementById("password").value.trim();
+
+    if(!email || !password){
+
+        showMessage(
+        "Vui lòng nhập email và mật khẩu",
+        "red"
+        );
+
+        return;
+    }
 
     try{
 
         loading(true);
+
+        showMessage("");
 
         const userCredential =
 
@@ -582,9 +653,10 @@ window.login = async ()=>{
 
         );
 
-        const user = userCredential.user;
+        const user =
+        userCredential.user;
 
-        /* lấy data user */
+        /* GET USER */
 
         const docRef =
         doc(db,"users",user.uid);
@@ -597,27 +669,44 @@ window.login = async ()=>{
             const data =
             docSnap.data();
 
-            /* phân quyền */
+            showMessage(
+            "Đăng nhập thành công"
+            );
 
-            if(data.plan == "basic"){
+            setTimeout(()=>{
 
-                window.location.href =
-                "dashboard-basic.html";
+                if(data.plan == "basic"){
 
-            }
+                    window.location.href =
+                    "dashboard-basic.html";
 
-            else{
+                }
 
-                window.location.href =
-                "dashboard-pro.html";
+                else{
 
-            }
+                    window.location.href =
+                    "dashboard-pro.html";
+
+                }
+
+            },1000);
+
+        }
+
+        else{
+
+            showMessage(
+            "Không tìm thấy dữ liệu user",
+            "red"
+            );
 
         }
 
     }
 
     catch(error){
+
+        console.log(error);
 
         showMessage(
         "Sai tài khoản hoặc mật khẩu",
@@ -633,10 +722,15 @@ window.login = async ()=>{
 
 }
 
+/* =========================
+EXPORT WINDOW
+========================= */
+
+window.login = login;
+
+window.register = register;
+
 </script>
 
 </body>
 </html>
-
-
-
