@@ -9,57 +9,175 @@
   gtag('config', 'G-0KCLS2V19B');
 </script>
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCLS2V19B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-0KCLS2V19B');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPINEASY - Phần Mềm Vòng Quay Realtime Chuyên Nghiệp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #c1121f; --dark-red: #8e0e16; --gold: #ffd700; --neon-blue: #00f2fe; --dark: #121212; }
-        
-        /* Auth UI */
-        .auth-nav { position: fixed; top: 0; right: 0; padding: 15px 30px; z-index: 1000; display: flex; align-items: center; gap: 15px; }
-        .user-info { background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 25px; display: none; align-items: center; gap: 10px; border: 1px solid var(--gold); }
-        .user-avatar { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gold); }
-        .btn-auth { cursor: pointer; background: var(--gold); border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
-        .role-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: var(--neon-blue); color: #000; text-transform: uppercase; }
         body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+        
+        /* ==============================
+           HERO BANNER (Học tập từ XSPIN)
+           ============================== */
+        .hero-banner {
+            background: var(--primary) radial-gradient(circle, var(--primary) 0%, var(--dark-red) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--gold);
+        }
+
+        /* Hiệu ứng tia sét/hào quang nền */
+        .hero-banner::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.05) 0deg 10deg, transparent 10deg 20deg);
+            animation: rotateBg 60s linear infinite; opacity: 0.5; z-index: 1;
+        }
+
+        @keyframes rotateBg { 100% { transform: rotate(360deg); } }
+
+        .banner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 2; /* Nổi lên trên nền */
+        }
+
+        /* Khối bên trái - Logo & Tiêu đề chính */
+        .left-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            text-align: left;
+            position: relative;
+        }
+
+        /* Hiệu ứng bo góc Neon Blue */
+        .left-block::after {
+            content: ''; position: absolute; inset: -5px; border-radius: 25px;
+            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-blue));
+            z-index: -1; filter: blur(10px); opacity: 0.7;
+        }
+
+        .brand-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            margin-bottom: 5px;
+        }
+
+        .sub-brand {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1.2;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .slogan { font-size: 1.3rem; opacity: 0.9; font-weight: 300; }
+
+        /* Khối bên phải - Feature box & Price */
+        .right-block { text-align: right; }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 2px dashed var(--gold);
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        /* Icon vòng quay nhỏ trôi nổi */
+        .floating-wheel {
+            position: absolute; top: -25px; left: -25px;
+            font-size: 2.5rem; color: var(--gold);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .feature-box h3 { color: var(--gold); margin: 0 0 10px 0; font-size: 1.4rem; }
+        .feature-box p { margin: 5px 0; font-size: 1.1rem; }
+
+        .price-block {
+            background: #fff;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .price-text { font-size: 2.2rem; color: var(--primary); }
+
+        /* Icon Ngôi sao trang trí */
+        .deco-star { color: var(--gold); font-size: 1.2rem; margin: 0 5px; animation: twinkle 1s infinite alternate; }
+        @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
+
+        /* Contact Line */
+        .contact-line { margin-top: 20px; font-size: 1.1rem; color: rgba(255,255,255,0.8); }
+        .contact-line a { color: var(--neon-blue); text-decoration: none; font-weight: bold; }
+
+        /* Responsive cho Banner */
+        @media (max-width: 900px) {
+            .banner-container { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+            .left-block, .right-block { text-align: center; }
+            .main-title { font-size: 2rem; }
+            .price-text { font-size: 1.8rem; }
+        }
 
         /* ==============================
-@@ -170,22 +176,37 @@
+           CÁC PHẦN CÒN LẠI CỦA SITE
+           ============================== */
+        .section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+        
+        /* Features Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { padding: 30px; border-radius: 15px; background: #fff; text-align: center; transition: 0.3s; border: 1px solid #eee; position: relative;}
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        
+        /* CTA Button */
+        .btn-cta { display: inline-block; padding: 18px 50px; background: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 1.3rem; transition: 0.3s; margin-top: 30px; box-shadow: 0 5px 15px rgba(255,215,0,0.3); }
+        .btn-cta:hover { background: #fff; color: var(--primary); transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,255,255,0.5); }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 50px; }
+    </style>
 </head>
 <body>
 
-<nav class="auth-nav">
-    <div id="user-info" class="user-info">
-        <img id="user-avatar" class="user-avatar" src="" alt="">
-        <div>
-            <span id="user-name" style="font-size: 0.9rem; display: block;"></span>
-            <span id="user-role" class="role-badge"></span>
-        </div>
-        <button id="logout-btn" class="btn-auth" style="background: transparent; color: white; border: 1px solid white;">Thoát</button>
-    </div>
-    <div id="auth-buttons" style="display: flex; gap: 5px;">
-        <button id="login-btn" class="btn-auth"><i class="fab fa-google"></i> Google</button>
-        <button id="email-login-btn" class="btn-auth" style="background: #fff; border: 1px solid var(--gold);"><i class="fas fa-envelope"></i> Email</button>
-    </div>
-</nav>
-
 <header class="hero-banner">
     <div class="banner-container">
-
+        
         <div class="left-block">
             <div class="brand-logo">SPINEASY</div>
             <span class="sub-brand">PHẦN MỀM QUAY SỐ</span>
             <h1 class="main-title">TẠO VÒNG QUAY<br>REALTIME</h1>
             <p class="slogan">Nhanh chóng, Chuyên nghiệp & Tăng tương tác vượt trội</p>
-            <p class="slogan">Nhanh chóng, Chuyên nghiệp &amp; Tăng tương tác vượt trội</p>
         </div>
 
         <div class="right-block">
@@ -68,48 +186,35 @@
                 <h3>TÍNH NĂNG HẤP DẪN</h3>
                 <p>Đồng bộ Đám Mây</p>
                 <p>Quản lý Tồn Kho & Data Khách</p>
-                <p>Quản lý Tồn Kho &amp; Data Khách</p>
                 <p>Xuất Báo Cáo Excel F9</p>
                 <p><i class="fas fa-star deco-star"></i>Từ cơ bản đến chuyên nghiệp<i class="fas fa-star deco-star"></i></p>
             </div>
-@@ -199,6 +220,31 @@ <h3>TÍNH NĂNG HẤP DẪN</h3>
+            <br>
+            <div class="price-block">
+                Giá chỉ từ: <span class="price-text">200.000đ</span>
+            </div>
+            <p class="contact-line">Website: <a href="https://timonblue113.github.io/spin/">https://timonblue113.github.io/Spintoeasy/</a></p>
+        </div>
+
     </div>
 </header>
-
-<div id="payment-info" class="section" style="text-align: center; display: none; background: #fffbe6; border: 2px dashed var(--gold); border-radius: 15px; margin-bottom: 30px;">
-    <h3 style="color: var(--dark-red);">NÂNG CẤP TÀI KHOẢN</h3>
-    <p>Để mở khóa <b>Gói Full Chức Năng</b>, vui lòng thanh toán 300.000đ</p>
-    <div style="font-size: 1.5rem; font-weight: bold; padding: 15px; background: #fff; display: inline-block; border-radius: 10px; margin: 10px 0;">
-        STK: <span id="payment-stk">abc</span>
-    </div>
-    <p>Nội dung chuyển khoản: <span id="payment-content" style="color: var(--primary); font-weight: bold;"></span></p>
-    <p style="font-size: 0.9rem; color: #666;">Sau khi chuyển khoản, vui lòng liên hệ Zalo bên dưới để được kích hoạt.</p>
-</div>
-
-<div id="admin-panel" class="section" style="display: none; background: #2d3436; color: #dfe6e9; border-radius: 15px; margin-bottom: 30px;">
-    <h3 style="color: #00d8d6;"><i class="fab fa-github"></i> QUẢN TRỊ NỘI DUNG (GITHUB)</h3>
-    <p>Chỉnh sửa mã nguồn trực tiếp từ GitHub.</p>
-    <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-        <label>File:</label>
-        <input type="text" id="github-file-path" value="index.html" style="background: #1e272e; color: #fff; border: 1px solid #485460; padding: 8px; border-radius: 5px; flex-grow: 1;">
-    </div>
-    <textarea id="github-editor-area" style="width: 100%; height: 400px; background: #1e272e; color: #00d8d6; border: 1px solid #485460; border-radius: 5px; padding: 10px; font-family: 'Courier New', Courier, monospace; margin-bottom: 15px;"></textarea>
-    <div style="text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
-        <button id="list-github-btn" class="btn-auth" style="background: #e67e22; color: white;">DANH SÁCH FILE</button>
-        <button id="load-github-btn" class="btn-auth" style="background: #0984e3; color: white;">TẢI NỘI DUNG</button>
-        <button id="save-github-btn" class="btn-auth" style="background: #00b894; color: white;">CẬP NHẬT GITHUB</button>
-    </div>
-</div>
 
 <div class="section">
     <h2 style="text-align: center; font-size: 2.5rem; color: var(--dark-red);">Giải Pháp Marketing Hoàn Hảo cho Showroom</h2>
     <div class="grid">
-@@ -214,15 +260,15 @@ <h3>Thuật toán % Thông minh</h3>
+        <div class="card">
+            <i class="fas fa-sync-alt"></i>
+            <h3>Đồng bộ Realtime 100%</h3>
+            <p>Sử dụng Firebase cho tốc độ trừ quà tức thì. Khách quay trên iPad, màn hình lớn Admin cập nhật ngay.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-percentage"></i>
+            <h3>Thuật toán % Thông minh</h3>
+            <p>Tự động tính lại tỉ lệ trúng thưởng khi có món quà hết hàng (Qty=0). Đảm bảo vòng quay không bao giờ lỗi logic.</p>
         </div>
         <div class="card">
             <i class="fas fa-file-excel"></i>
             <h3>Quản lý Data & Excel</h3>
-            <h3>Quản lý Data &amp; Excel</h3>
             <p>Thu thập Họ tên + SĐT khách hàng tự nguyện. Nhấn F9 để xuất file báo cáo khách hàng và tồn kho quà tặng.</p>
         </div>
     </div>
@@ -118,187 +223,21 @@
 		<a href="https://timonblue113.github.io/spin/" target="_blank" class="btn-cta" style="margin: 0; min-width: 200px; text-align: center; background: #fff; color: #c1121f; border: 2px solid #c1121f;">
         <i class="fas fa-play-circle"></i> XEM DEMO THỰC TẾ
     </a>
-        <a href="#contact" class="btn-cta">NHẬN TƯ VẤN &amp; BÁO GIÁ</a>
-        <a href="https://timonblue113.github.io/spin/" target="_blank" class="btn-cta" style="margin: 0; min-width: 200px; text-align: center; background: #fff; color: #c1121f; border: 2px solid #c1121f;">
-            <i class="fas fa-play-circle"></i> XEM DEMO THỰC TẾ
-        </a>
     </div>
 </div>
 
-@@ -239,5 +285,176 @@ <h2>LIÊN HỆ TƯ VẤN</h2>
+<div id="contact" class="section" style="text-align: center;">
+    <h2>LIÊN HỆ TƯ VẤN</h2>
+    <p>Phát triển bởi: <strong>Timon</strong></p>
+    <div style="font-size: 1.2rem;">
+        <p><i class="fab fa-zalo" style="color: blue;"></i> Zalo: <strong>0946296269</strong></p>
+        <p><i class="fas fa-map-marker-alt" style="color: red;"></i> Địa chỉ: Cao Lãnh, Đồng Tháp</p>
+    </div>
+    <a href="https://zalo.me/0946296269" class="btn-cta" style="background: #0068ff; color: #fff;">NHẮN ZALO NGAY</a>
+</div>
+<footer>
     <p>&copy; 2026 Lucky Wheel Solutions. Thiết kế chuyên nghiệp.</p>
 </footer>
-
-<script type="module">
-    import { auth, db, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, doc, getDoc, setDoc, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './firebase-config.js';
-
-    const loginBtn = document.getElementById('login-btn');
-    const emailLoginBtn = document.getElementById('email-login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const userInfo = document.getElementById('user-info');
-    const userName = document.getElementById('user-name');
-    const userAvatar = document.getElementById('user-avatar');
-    const userRole = document.getElementById('user-role');
-
-    const provider = new GoogleAuthProvider();
-
-    loginBtn.onclick = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            await checkUserRole(result.user);
-        } catch (error) {
-            console.error("Login failed", error);
-        }
-    };
-
-    emailLoginBtn.onclick = async () => {
-        const email = prompt("Nhập email:");
-        if (!email) return;
-        const password = prompt("Nhập mật khẩu:");
-        if (!password) return;
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-        } catch (error) {
-            if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
-                if (confirm("Tài khoản không tồn tại hoặc sai thông tin. Bạn có muốn đăng ký mới?")) {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                }
-            } else { alert("Lỗi: " + error.message); }
-        }
-    };
-
-    logoutBtn.onclick = () => signOut(auth);
-
-    const GITHUB_TOKEN = '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';
-    const REPO_OWNER = 'timonblue113';
-    const REPO_NAME = 'Spintoeasy';
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            document.getElementById('auth-buttons').style.display = 'none';
-            userInfo.style.display = 'flex';
-            userName.textContent = user.displayName || user.email;
-            userAvatar.src = user.photoURL || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
-            await checkUserRole(user);
-        } else {
-            document.getElementById('auth-buttons').style.display = 'flex';
-            userInfo.style.display = 'none';
-            document.getElementById('payment-info').style.display = 'none';
-            document.getElementById('admin-panel').style.display = 'none';
-        }
-    });
-
-    async function checkUserRole(user) {
-        const userRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userRef);
-        let userData;
-        if (docSnap.exists()) {
-            userData = docSnap.data();
-        } else {
-            userData = {
-                uid: user.uid,
-                email: user.email,
-                bankAccount: "abc",
-                package: "basic",
-                createdAt: new Date().toISOString()
-            };
-            await setDoc(userRef, userData);
-        }
-        userRole.textContent = userData.package === 'full' ? 'Gói Full Chức Năng (300k)' : 'Gói Bình Thường (200k)';
-        
-        const isAdmin = user.email === 'timonblue113@gmail.com' || userData.package === 'admin'; 
-        if (isAdmin) {
-            document.getElementById('admin-panel').style.display = 'block';
-        } else {
-            document.getElementById('admin-panel').style.display = 'none';
-        }
-
-        if (userData.package !== 'full' && !isAdmin) {
-            document.getElementById('payment-info').style.display = 'block';
-            document.getElementById('payment-stk').textContent = userData.bankAccount;
-            document.getElementById('payment-content').textContent = `SPIN ${user.uid.substring(0,6)}`;
-        } else {
-            document.getElementById('payment-info').style.display = 'none';
-        }
-    }
-
-    const githubEditorArea = document.getElementById('github-editor-area');
-    const githubFilePath = document.getElementById('github-file-path');
-    const loadGithubBtn = document.getElementById('load-github-btn');
-    const saveGithubBtn = document.getElementById('save-github-btn');
-    const listGithubBtn = document.getElementById('list-github-btn');
-
-    listGithubBtn.onclick = async () => {
-        try {
-            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/`;
-            const response = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
-            const data = await response.json();
-            if (Array.isArray(data)) {
-                const files = data.filter(f => f.type === 'file').map(f => f.path).join('\n');
-                alert("Các file trong repo:\n" + files);
-            }
-        } catch (error) { alert("Lỗi khi tải danh sách file"); }
-    };
-
-    loadGithubBtn.onclick = async () => {
-        try {
-            const path = githubFilePath.value || 'index.html';
-            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
-            const response = await fetch(url, {
-                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-            });
-            const data = await response.json();
-            if (data.content) {
-                githubEditorArea.value = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
-                githubEditorArea.dataset.sha = data.sha;
-                alert(`Đã tải file ${path} thành công!`);
-            } else {
-                alert("Không tìm thấy file hoặc file trống.");
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Lỗi khi tải nội dung từ GitHub");
-        }
-    };
-
-    saveGithubBtn.onclick = async () => {
-        if (!githubEditorArea.dataset.sha) {
-            alert("Vui lòng 'Tải nội dung' trước khi lưu!");
-            return;
-        }
-        const path = githubFilePath.value || 'index.html';
-        if (!confirm(`Bạn có chắc chắn muốn cập nhật ${path} lên GitHub?`)) return;
-
-        try {
-            const content = githubEditorArea.value;
-            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: "Update index.html from Web Admin Panel",
-                    content: btoa(unescape(encodeURIComponent(content))),
-                    sha: githubEditorArea.dataset.sha
-                })
-            });
-            
-            if (response.ok) {
-                const data = await response.json();
-                githubEditorArea.dataset.sha = data.content.sha;
-                alert("Cập nhật GitHub thành công! Web sẽ thay đổi sau vài phút.");
-            } else {
-                const errData = await response.json();
-                throw new Error(errData.message || "Lỗi không xác định");
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Lỗi khi lưu lên GitHub: " + error.message);
-        }
-    };
-</script>
 
 </body>
 </html>
