@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+SPINEASY - Đăng nhập
+</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+
+    --primary:#c1121f;
+
+    --dark:#121212;
+
+    --gold:#ffd700;
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    linear-gradient(
+    135deg,
+    #c1121f,
+    #8e0e16);
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+/* background effect */
+
+body::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    background:
+    repeating-conic-gradient(
+    from 0deg,
+    rgba(255,255,255,0.05) 0deg 10deg,
+    transparent 10deg 20deg
+    );
+
+    animation:spinBg 50s linear infinite;
+}
+
+@keyframes spinBg{
+
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+.login-box{
+
+    width:420px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.35);
+
+    position:relative;
+
+    z-index:2;
+}
+
+.logo{
+
+    text-align:center;
+
+    font-size:2.8rem;
+
+    font-weight:900;
+
+    color:var(--primary);
+
+    margin-bottom:5px;
+}
+
+.sub{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:30px;
+}
+
+.plan-box{
+
+    background:#fff5d6;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+.plan-box strong{
+
+    color:#c1121f;
+}
+
+.input-group{
+
+    margin-bottom:18px;
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:16px;
+
+    box-sizing:border-box;
+}
+
+.input-group input:focus{
+
+    outline:none;
+
+    border-color:#c1121f;
+}
+
+.btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.btn-login{
+
+    background:#c1121f;
+
+    color:white;
+}
+
+.btn-login:hover{
+
+    transform:translateY(-2px);
+}
+
+.btn-register{
+
+    margin-top:12px;
+
+    background:#f3f3f3;
+}
+
+.btn-register:hover{
+
+    background:#e6e6e6;
+}
+
+.message{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.loading{
+
+    display:none;
+
+    text-align:center;
+
+    margin-top:15px;
+}
+
+.back-home{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#777;
+
+    text-decoration:none;
+}
+
+.back-home:hover{
+
+    color:#c1121f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+
+        SPINEASY
+
+    </div>
+
+    <div class="sub">
+
+        Hệ thống vòng quay realtime
+
+    </div>
+
+    <div class="plan-box">
+
+        <strong>BASIC - 200K</strong>
+        <br>
+
+        ✔ Sửa tên quà
+        <br>
+
+        ✔ Đồng bộ realtime
+        <br>
+
+        ✔ Firebase cloud
+
+        <br><br>
+
+        <strong>PRO - 499K</strong>
+        <br>
+
+        ✔ Upload ảnh
+        <br>
+
+        ✔ Chỉnh xác suất
+        <br>
+
+        ✔ Backdrop + logo
+        <br>
+
+        ✔ Quản lý số lượng quà
+
+    </div>
+
+    <!-- EMAIL -->
+
+    <div class="input-group">
+
+        <label>Email</label>
+
+        <input type="email"
+        id="email"
+        placeholder="Nhập email">
+
+    </div>
+
+    <!-- PASSWORD -->
+
+    <div class="input-group">
+
+        <label>Mật khẩu</label>
+
+        <input type="password"
+        id="password"
+        placeholder="Nhập mật khẩu">
+
+    </div>
+
+    <!-- LOGIN -->
+
+    <button class="btn btn-login"
+    onclick="login()">
+
+        <i class="fas fa-sign-in-alt"></i>
+
+        ĐĂNG NHẬP
+
+    </button>
+
+    <!-- REGISTER -->
+
+    <button class="btn btn-register"
+    onclick="register()">
+
+        <i class="fas fa-user-plus"></i>
+
+        TẠO TÀI KHOẢN
+
+    </button>
+
+    <!-- LOADING -->
+
+    <div class="loading"
+    id="loading">
+
+        Đang xử lý...
+
+    </div>
+
+    <!-- MESSAGE -->
+
+    <div class="message"
+    id="message">
+
+    </div>
+
+    <a href="index.html"
+    class="back-home">
+
+        ← Quay lại trang chủ
+
+    </a>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+/* =========================
+   IMPORT FIREBASE
+========================= */
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+    getAuth,
+
+    createUserWithEmailAndPassword,
+
+    signInWithEmailAndPassword
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    setDoc,
+
+    getDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+  authDomain: "spineasy-user.firebaseapp.com",
+  projectId: "spineasy-user",
+  storageBucket: "spineasy-user.firebasestorage.app",
+  messagingSenderId: "805126611420",
+  appId: "1:805126611420:web:59a5605b2b68b35f806f19",
+  measurementId: "G-NE80YJTEXN"
+};
+
+/* =========================
+   INIT
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+/* =========================
+   HELPER
+========================= */
+
+function showMessage(text,color="green"){
+
+    const msg =
+    document.getElementById("message");
+
+    msg.innerHTML = text;
+
+    msg.style.color = color;
+}
+
+function loading(state){
+
+    document.getElementById("loading")
+    .style.display = state
+    ? "block"
+    : "none";
+}
+
+/* =========================
+   REGISTER
+========================= */
+
+window.register = async ()=>{
+
+    const email =
+    document.getElementById("email").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    if(!email || !password){
+
+        showMessage(
+        "Nhập đầy đủ thông tin",
+        "red"
+        );
+
+        return;
+    }
+
+    if(password.length < 6){
+
+        showMessage(
+        "Mật khẩu tối thiểu 6 ký tự",
+        "red"
+        );
+
+        return;
+    }
+
+    try{
+
+        loading(true);
+
+        const userCredential =
+
+        await createUserWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+        const user = userCredential.user;
+
+        /* tạo data user */
+
+        await setDoc(
+
+            doc(db,"users",user.uid),
+
+            {
+
+                email:email,
+
+                plan:"basic",
+
+                status:true,
+
+                createdAt:new Date(),
+
+                wheelUrl:
+                "wheel.html?id="
+                + user.uid
+
+            }
+
+        );
+
+        showMessage(
+        "Tạo tài khoản thành công"
+        );
+
+    }
+
+    catch(error){
+
+        showMessage(
+        error.message,
+        "red"
+        );
+
+    }
+
+    finally{
+
+        loading(false);
+    }
+
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+window.login = async ()=>{
+
+    const email =
+    document.getElementById("email").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    try{
+
+        loading(true);
+
+        const userCredential =
+
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+        const user = userCredential.user;
+
+        /* lấy data user */
+
+        const docRef =
+        doc(db,"users",user.uid);
+
+        const docSnap =
+        await getDoc(docRef);
+
+        if(docSnap.exists()){
+
+            const data =
+            docSnap.data();
+
+            /* phân quyền */
+
+            if(data.plan == "basic"){
+
+                window.location.href =
+                "dashboard-basic.html";
+
+            }
+
+            else{
+
+                window.location.href =
+                "dashboard-pro.html";
+
+            }
+
+        }
+
+    }
+
+    catch(error){
+
+        showMessage(
+        "Sai tài khoản hoặc mật khẩu",
+        "red"
+        );
+
+    }
+
+    finally{
+
+        loading(false);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
+
+
