@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+SPINEASY BASIC DASHBOARD
+</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+
+    --primary:#c1121f;
+
+    --gold:#ffd700;
+
+    --dark:#121212;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:#f4f4f4;
+}
+
+/* =====================
+TOPBAR
+===================== */
+
+.topbar{
+
+    background:#121212;
+
+    color:#fff;
+
+    padding:18px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+}
+
+.logo{
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    color:var(--gold);
+}
+
+.user-box{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+}
+
+.logout-btn{
+
+    background:#c1121f;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+/* =====================
+LAYOUT
+===================== */
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:40px 20px;
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(340px,1fr));
+
+    gap:25px;
+}
+
+/* =====================
+CARD
+===================== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+}
+
+.card h2{
+
+    margin-top:0;
+
+    color:#c1121f;
+}
+
+/* =====================
+PLAN
+===================== */
+
+.plan{
+
+    background:#fff4c4;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    line-height:1.8;
+}
+
+.plan h3{
+
+    margin-top:0;
+
+    color:#c1121f;
+}
+
+/* =====================
+INPUT
+===================== */
+
+.input-group{
+
+    margin-bottom:18px;
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+}
+
+.input-group input:focus{
+
+    outline:none;
+
+    border-color:#c1121f;
+}
+
+/* =====================
+BUTTON
+===================== */
+
+.save-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#c1121f;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.save-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+/* =====================
+PREVIEW
+===================== */
+
+.preview{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+}
+
+.wheel{
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    border:10px solid #ffd700;
+
+    background:
+    conic-gradient(
+        #ff4d4d 0deg 60deg,
+        #ffd93d 60deg 120deg,
+        #6bcB77 120deg 180deg,
+        #4d96ff 180deg 240deg,
+        #c77dff 240deg 300deg,
+        #ff8fab 300deg 360deg
+    );
+
+    position:relative;
+
+    margin-bottom:25px;
+}
+
+.center-circle{
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    color:#c1121f;
+
+    box-shadow:0 0 20px rgba(0,0,0,0.15);
+}
+
+.preview-title{
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+/* =====================
+LINK BOX
+===================== */
+
+.link-box{
+
+    background:#f3f3f3;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    word-break:break-all;
+
+    font-size:14px;
+
+    width:100%;
+}
+
+.copy-btn{
+
+    margin-top:12px;
+
+    background:#121212;
+
+    color:#fff;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+/* =====================
+MESSAGE
+===================== */
+
+.message{
+
+    margin-top:18px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    min-height:24px;
+}
+
+/* =====================
+MOBILE
+===================== */
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+    <div class="logo">
+
+        SPINEASY BASIC
+
+    </div>
+
+    <div class="user-box">
+
+        <span id="userEmail">
+
+            loading...
+
+        </span>
+
+        <button class="logout-btn"
+        onclick="logout()">
+
+            Đăng xuất
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+    <!-- PLAN -->
+
+    <div class="plan">
+
+        <h3>
+
+            GÓI BASIC - 200K
+
+        </h3>
+
+        ✔ Chỉnh tên quà realtime
+        <br>
+
+        ✔ Đồng bộ Firebase cloud
+        <br>
+
+        ✔ Link vòng quay riêng
+        <br>
+
+        ✔ Tự động lưu dữ liệu
+        <br><br>
+
+        ❌ Không upload ảnh
+        <br>
+
+        ❌ Không chỉnh xác suất
+        <br>
+
+        ❌ Không chỉnh backdrop
+
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT -->
+
+        <div class="card">
+
+            <h2>
+
+                Chỉnh sửa vòng quay
+
+            </h2>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 1
+                </label>
+
+                <input type="text"
+                id="gift1">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 2
+                </label>
+
+                <input type="text"
+                id="gift2">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 3
+                </label>
+
+                <input type="text"
+                id="gift3">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 4
+                </label>
+
+                <input type="text"
+                id="gift4">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 5
+                </label>
+
+                <input type="text"
+                id="gift5">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Tên quà 6
+                </label>
+
+                <input type="text"
+                id="gift6">
+
+            </div>
+
+            <button class="save-btn"
+            onclick="saveWheel()">
+
+                <i class="fas fa-save"></i>
+
+                LƯU THAY ĐỔI
+
+            </button>
+
+            <div class="message"
+            id="message">
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="card preview">
+
+            <div class="preview-title">
+
+                PREVIEW VÒNG QUAY
+
+            </div>
+
+            <div class="wheel">
+
+                <div class="center-circle">
+
+                    SPIN
+
+                </div>
+
+            </div>
+
+            <div class="link-box"
+            id="wheelLink">
+
+                loading...
+
+            </div>
+
+            <button class="copy-btn"
+            onclick="copyLink()">
+
+                COPY LINK
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+    getAuth,
+
+    onAuthStateChanged,
+
+    signOut
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =====================
+FIREBASE CONFIG
+===================== */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+
+  authDomain: "spineasy-user.firebaseapp.com",
+
+  projectId: "spineasy-user",
+
+  storageBucket: "spineasy-user.appspot.com",
+
+  messagingSenderId: "805126611420",
+
+  appId: "1:805126611420:web:59a5605b2b68b35f806f19",
+
+  measurementId: "G-NE80YJTEXN"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+/* =====================
+CHECK LOGIN
+===================== */
+
+onAuthStateChanged(auth,async(user)=>{
+
+    if(user){
+
+        document.getElementById(
+        "userEmail"
+        ).innerHTML = user.email;
+
+        const wheelUrl =
+        window.location.origin
+        + "/wheel.html?id="
+        + user.uid;
+
+        document.getElementById(
+        "wheelLink"
+        ).innerHTML = wheelUrl;
+
+        /* LOAD DATA */
+
+        const docRef =
+        doc(db,"wheels",user.uid);
+
+        const docSnap =
+        await getDoc(docRef);
+
+        if(docSnap.exists()){
+
+            const data =
+            docSnap.data();
+
+            document.getElementById("gift1").value =
+            data.gift1 || "";
+
+            document.getElementById("gift2").value =
+            data.gift2 || "";
+
+            document.getElementById("gift3").value =
+            data.gift3 || "";
+
+            document.getElementById("gift4").value =
+            data.gift4 || "";
+
+            document.getElementById("gift5").value =
+            data.gift5 || "";
+
+            document.getElementById("gift6").value =
+            data.gift6 || "";
+
+        }
+
+        else{
+
+            /* TẠO DATA MẶC ĐỊNH */
+
+            await setDoc(
+
+                doc(db,"wheels",user.uid),
+
+                {
+
+                    gift1:"Voucher 50K",
+
+                    gift2:"Nón bảo hiểm",
+
+                    gift3:"Gấu bông",
+
+                    gift4:"Móc khóa",
+
+                    gift5:"Ly giữ nhiệt",
+
+                    gift6:"Chúc may mắn"
+
+                }
+
+            );
+
+            location.reload();
+
+        }
+
+    }
+
+    else{
+
+        window.location.href =
+        "login.html";
+    }
+
+});
+
+/* =====================
+SAVE
+===================== */
+
+async function saveWheel(){
+
+    const user =
+    auth.currentUser;
+
+    if(!user) return;
+
+    try{
+
+        await setDoc(
+
+            doc(db,"wheels",user.uid),
+
+            {
+
+                gift1:
+                document.getElementById(
+                "gift1"
+                ).value,
+
+                gift2:
+                document.getElementById(
+                "gift2"
+                ).value,
+
+                gift3:
+                document.getElementById(
+                "gift3"
+                ).value,
+
+                gift4:
+                document.getElementById(
+                "gift4"
+                ).value,
+
+                gift5:
+                document.getElementById(
+                "gift5"
+                ).value,
+
+                gift6:
+                document.getElementById(
+                "gift6"
+                ).value
+
+            }
+
+        );
+
+        document.getElementById(
+        "message"
+        ).innerHTML =
+        "Đã lưu thành công";
+
+        document.getElementById(
+        "message"
+        ).style.color =
+        "green";
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        document.getElementById(
+        "message"
+        ).innerHTML =
+        "Lỗi khi lưu dữ liệu";
+
+        document.getElementById(
+        "message"
+        ).style.color =
+        "red";
+    }
+
+}
+
+/* =====================
+COPY LINK
+===================== */
+
+function copyLink(){
+
+    const text =
+    document.getElementById(
+    "wheelLink"
+    ).innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Đã copy link");
+
+}
+
+/* =====================
+LOGOUT
+===================== */
+
+function logout(){
+
+    signOut(auth);
+
+}
+
+/* =====================
+EXPORT
+===================== */
+
+window.logout = logout;
+
+window.copyLink = copyLink;
+
+window.saveWheel = saveWheel;
+
+</script>
+
+</body>
+</html>
