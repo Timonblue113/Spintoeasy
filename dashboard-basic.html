@@ -725,25 +725,55 @@ user.uid;
 
             await setDoc(
 
-                doc(db,"wheels",user.uid),
+    doc(db,"wheels",user.uid),
 
-                {
+    {
 
-                    gift1:"Voucher 50K",
+        prizes:[
 
-                    gift2:"Nón bảo hiểm",
+            {
+                label:"Voucher 50K",
+                qty:999,
+                weight:10
+            },
 
-                    gift3:"Gấu bông",
+            {
+                label:"Nón bảo hiểm",
+                qty:999,
+                weight:10
+            },
 
-                    gift4:"Móc khóa",
+            {
+                label:"Gấu bông",
+                qty:999,
+                weight:10
+            },
 
-                    gift5:"Ly giữ nhiệt",
+            {
+                label:"Móc khóa",
+                qty:999,
+                weight:10
+            },
 
-                    gift6:"Chúc may mắn"
+            {
+                label:"Ly giữ nhiệt",
+                qty:999,
+                weight:10
+            },
 
-                }
+            {
+                label:"Chúc may mắn",
+                qty:999,
+                weight:10
+            }
 
-            );
+        ],
+
+        history:[]
+
+    }
+
+);
 
             location.reload();
 
