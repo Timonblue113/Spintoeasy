@@ -661,10 +661,22 @@ onAuthStateChanged(auth,async(user)=>{
         "userEmail"
         ).innerHTML = user.email;
 
-        const wheelUrl =
-        window.location.origin
-        + "/wheel.html?id="
-        + user.uid;
+        const basePath =
+
+window.location.origin +
+
+window.location.pathname.substring(
+    0,
+    window.location.pathname.lastIndexOf("/")
+);
+
+const wheelUrl =
+
+basePath +
+
+"/wheel.html?id=" +
+
+user.uid;
 
         document.getElementById(
         "wheelLink"
