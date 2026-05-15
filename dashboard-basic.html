@@ -589,6 +589,8 @@ MOBILE
 
 <!-- FIREBASE -->
 
+<!-- THAY TOÀN BỘ SCRIPT FIREBASE TRONG dashboard-basic.html BẰNG SCRIPT NÀY -->
+
 <script type="module">
 
 import { initializeApp }
@@ -661,123 +663,131 @@ onAuthStateChanged(auth,async(user)=>{
         "userEmail"
         ).innerHTML = user.email;
 
+        /* =====================
+        FIX LINK GITHUB PAGES
+        ===================== */
+
         const basePath =
 
-window.location.origin +
+        window.location.origin +
 
-window.location.pathname.substring(
-    0,
-    window.location.pathname.lastIndexOf("/")
-);
+        window.location.pathname.substring(
+            0,
+            window.location.pathname.lastIndexOf("/")
+        );
 
-const wheelUrl =
+        const wheelUrl =
 
-basePath +
+        basePath +
 
-"/wheel.html?id=" +
+        "/wheel.html?id=" +
 
-user.uid;
+        user.uid;
 
         document.getElementById(
         "wheelLink"
         ).innerHTML = wheelUrl;
 
-        /* LOAD DATA */
+        /* =====================
+        LOAD DATA
+        ===================== */
 
-        const docRef =
+        const wheelRef =
         doc(db,"wheels",user.uid);
 
         const docSnap =
-        await getDoc(docRef);
+        await getDoc(wheelRef);
 
-        if(docSnap.exists()){
+        /* =====================
+        IF USER CHƯA CÓ DATA
+        ===================== */
 
-            const data =
-            docSnap.data();
-
-            document.getElementById("gift1").value =
-           if(data.prizes){
-
-    document.getElementById("gift1").value =
-    data.prizes[0]?.label || "";
-
-    document.getElementById("gift2").value =
-    data.prizes[1]?.label || "";
-
-    document.getElementById("gift3").value =
-    data.prizes[2]?.label || "";
-
-    document.getElementById("gift4").value =
-    data.prizes[3]?.label || "";
-
-    document.getElementById("gift5").value =
-    data.prizes[4]?.label || "";
-
-    document.getElementById("gift6").value =
-    data.prizes[5]?.label || "";
-}
-
-        
-
-        else{
-
-            /* TẠO DATA MẶC ĐỊNH */
+        if(!docSnap.exists()){
 
             await setDoc(
 
-    doc(db,"wheels",user.uid),
+                wheelRef,
 
-    {
+                {
 
-        prizes:[
+                    prizes:[
 
-            {
-                label:"Voucher 50K",
-                qty:999,
-                weight:10
-            },
+                        {
+                            label:"Voucher 50K",
+                            qty:999,
+                            weight:10
+                        },
 
-            {
-                label:"Nón bảo hiểm",
-                qty:999,
-                weight:10
-            },
+                        {
+                            label:"Nón bảo hiểm",
+                            qty:999,
+                            weight:10
+                        },
 
-            {
-                label:"Gấu bông",
-                qty:999,
-                weight:10
-            },
+                        {
+                            label:"Gấu bông",
+                            qty:999,
+                            weight:10
+                        },
 
-            {
-                label:"Móc khóa",
-                qty:999,
-                weight:10
-            },
+                        {
+                            label:"Móc khóa",
+                            qty:999,
+                            weight:10
+                        },
 
-            {
-                label:"Ly giữ nhiệt",
-                qty:999,
-                weight:10
-            },
+                        {
+                            label:"Ly giữ nhiệt",
+                            qty:999,
+                            weight:10
+                        },
 
-            {
-                label:"Chúc may mắn",
-                qty:999,
-                weight:10
-            }
+                        {
+                            label:"Chúc may mắn",
+                            qty:999,
+                            weight:10
+                        }
 
-        ],
+                    ],
 
-        history:[]
+                    history:[]
 
-    }
+                }
 
-);
+            );
 
             location.reload();
 
+            return;
         }
+
+        /* =====================
+        LOAD PRIZES
+        ===================== */
+
+        const data =
+        docSnap.data();
+
+        const prizes =
+        data.prizes || [];
+
+        document.getElementById("gift1").value =
+        prizes[0]?.label || "";
+
+        document.getElementById("gift2").value =
+        prizes[1]?.label || "";
+
+        document.getElementById("gift3").value =
+        prizes[2]?.label || "";
+
+        document.getElementById("gift4").value =
+        prizes[3]?.label || "";
+
+        document.getElementById("gift5").value =
+        prizes[4]?.label || "";
+
+        document.getElementById("gift6").value =
+        prizes[5]?.label || "";
 
     }
 
@@ -794,8 +804,6 @@ SAVE
 ===================== */
 
 async function saveWheel(){
-
-    async function saveWheel(){
 
     const user =
     auth.currentUser;
@@ -850,9 +858,7 @@ async function saveWheel(){
 
             {
 
-                prizes:prizes,
-
-                history:[]
+                prizes:prizes
 
             },
 
