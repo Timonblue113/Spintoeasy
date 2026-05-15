@@ -329,13 +329,9 @@ function draw(){
         ctx.arc(
 
             center,
-
             center,
-
             size,
-
             i * arc,
-
             (i + 1) * arc
 
         );
@@ -371,6 +367,8 @@ function draw(){
         ctx.restore();
     }
 
+    /* ===== VIỀN 1 ===== */
+
     ctx.beginPath();
 
     ctx.lineWidth = 4;
@@ -378,38 +376,53 @@ function draw(){
     ctx.strokeStyle = "gold";
 
     ctx.arc(
-
         center,
-
         center,
-
         size - 1,
-
         0,
-
         Math.PI * 2
-
     );
 
     ctx.stroke();
+
+    /* ===== VIỀN 2 ===== */
+
+    ctx.beginPath();
+
+    ctx.lineWidth = 8;
+
+    ctx.strokeStyle = "red";
+
+    ctx.arc(
+        center,
+        center,
+        size - 8,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+    /* ===== VIỀN 3 ===== */
+
+    ctx.beginPath();
+
+    ctx.lineWidth = 4;
+
+    ctx.strokeStyle = "white";
+
+    ctx.arc(
+        center,
+        center,
+        size - 16,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
 }
-// ⚪ Viền trong (cái bạn đang có)
-ctx.beginPath();
-ctx.lineWidth = 4;
-ctx.strokeStyle = "gold";
-ctx.arc(center, center, size - 1, 0, Math.PI * 2);
-ctx.stroke();
-ctx.beginPath();
-ctx.lineWidth = 8;
-ctx.strokeStyle = "red";
-ctx.arc(center, center, size - 5, 0, Math.PI * 2);
-ctx.stroke();
-ctx.beginPath();
-ctx.lineWidth = 4;
-ctx.strokeStyle = "white";
-ctx.arc(center, center, size - 10, 0, Math.PI * 2);
-ctx.stroke();
-}
+
 draw();
 
 /* =========================
