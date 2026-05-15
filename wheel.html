@@ -307,61 +307,66 @@ function draw() {
     canvas.height = 700;
     let arc = Math.PI * 2 / prizes.length;
     
+    // Mảng màu sắc đa dạng giống trong ảnh mẫu
+    const colors = ["#FF3D68", "#A733EE", "#2196F3", "#00BCD4", "#FFC107", "#FF5722", "#4CAF50", "#E91E63"];
+
     ctx.clearRect(0, 0, 700, 700);
 
     for (let i = 0; i < prizes.length; i++) {
+        let angle = i * arc;
+        
         ctx.beginPath();
+        // Lấy màu từ mảng (dùng % để lặp lại nếu số nan nhiều hơn số màu)
+        ctx.fillStyle = colors[i % colors.length];
         
-        // Màu nền của nan
-        ctx.fillStyle = i % 2 == 0 ? "#c1121f" : "#ffffff";
-        
-        // Thiết lập đường viền giữa các nan
-        ctx.strokeStyle = "#ffd700"; // Màu vàng gold cho các nan (hoặc dùng #000 cho màu đen)
-        ctx.lineWidth = 2; // Độ dày đường kẻ giữa các nan
+        // Đường gạch giữa các nan màu trắng tinh khôi
+        ctx.strokeStyle = "#ffffff"; 
+        ctx.lineWidth = 3;
 
         ctx.moveTo(center, center);
-        ctx.arc(
-            center,
-            center,
-            size,
-            i * arc,
-            (i + 1) * arc
-        );
-        
-        ctx.fill();   // Tô màu nền
-        ctx.stroke(); // Vẽ đường gạch chia nan
+        ctx.arc(center, center, size, angle, angle + arc);
+        ctx.fill();
+        ctx.stroke();
 
-        // Vẽ chữ
+        // --- VẼ CHẤM TRÒN TRANG TRÍ ---
         ctx.save();
         ctx.translate(center, center);
-        ctx.rotate(i * arc + arc / 2);
+        ctx.rotate(angle + arc / 2); // Xoay vào giữa nan
         
-        ctx.fillStyle = i % 2 == 0 ? "#fff" : "#c1121f";
-        ctx.font = "bold 25px Britannic Bold";
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Màu trắng trong suốt
+        // Vẽ chấm tròn cách tâm khoảng 2/3 bán kính
+        ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 2); 
+        ctx.fill();
+        ctx.restore();
+
+        // --- VẼ CHỮ ---
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(angle + arc / 2);
+        
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 22px Arial";
         ctx.textAlign = "right";
-        ctx.fillText(
-            prizes[i].label,
-            size - 40,
-            10
-        );
+        // Đẩy chữ sát ra ngoài một chút để không đè lên chấm tròn
+        ctx.fillText(prizes[i].label, size - 50, 8);
         ctx.restore();
     }
 
-    // Vẽ vòng tròn viền ngoài cùng
+    // Viền ngoài dày màu xanh đậm giống ảnh
     ctx.beginPath();
-    ctx.lineWidth = 8; // Làm viền ngoài dày hơn cho đẹp
-    ctx.strokeStyle = "gold";
-    ctx.arc(
-        center,
-        center,
-        size - 1,
-        0,
-        Math.PI * 2
-    );
+    ctx.lineWidth = 15;
+    ctx.strokeStyle = "#000051"; 
+    ctx.arc(center, center, size, 0, Math.PI * 2);
     ctx.stroke();
+    
+    // Vẽ thêm cái tâm hình ngôi sao hoặc hình tròn nhỏ ở giữa nếu bạn muốn
+    ctx.beginPath();
+    ctx.fillStyle = "#fff";
+    ctx.arc(center, center, 20, 0, Math.PI * 2);
+    ctx.fill();
 }
 draw();
-
 /* =========================
 SPIN BUTTON
 ========================= */
