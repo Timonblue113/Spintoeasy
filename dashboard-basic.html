@@ -696,24 +696,28 @@ user.uid;
             docSnap.data();
 
             document.getElementById("gift1").value =
-            data.gift1 || "";
+           if(data.prizes){
 
-            document.getElementById("gift2").value =
-            data.gift2 || "";
+    document.getElementById("gift1").value =
+    data.prizes[0]?.label || "";
 
-            document.getElementById("gift3").value =
-            data.gift3 || "";
+    document.getElementById("gift2").value =
+    data.prizes[1]?.label || "";
 
-            document.getElementById("gift4").value =
-            data.gift4 || "";
+    document.getElementById("gift3").value =
+    data.prizes[2]?.label || "";
 
-            document.getElementById("gift5").value =
-            data.gift5 || "";
+    document.getElementById("gift4").value =
+    data.prizes[3]?.label || "";
 
-            document.getElementById("gift6").value =
-            data.gift6 || "";
+    document.getElementById("gift5").value =
+    data.prizes[4]?.label || "";
 
-        }
+    document.getElementById("gift6").value =
+    data.prizes[5]?.label || "";
+}
+
+        
 
         else{
 
@@ -761,6 +765,8 @@ SAVE
 
 async function saveWheel(){
 
+    async function saveWheel(){
+
     const user =
     auth.currentUser;
 
@@ -768,41 +774,61 @@ async function saveWheel(){
 
     try{
 
+        const prizes = [
+
+            {
+                label:document.getElementById("gift1").value,
+                qty:999,
+                weight:10
+            },
+
+            {
+                label:document.getElementById("gift2").value,
+                qty:999,
+                weight:10
+            },
+
+            {
+                label:document.getElementById("gift3").value,
+                qty:999,
+                weight:10
+            },
+
+            {
+                label:document.getElementById("gift4").value,
+                qty:999,
+                weight:10
+            },
+
+            {
+                label:document.getElementById("gift5").value,
+                qty:999,
+                weight:10
+            },
+
+            {
+                label:document.getElementById("gift6").value,
+                qty:999,
+                weight:10
+            }
+
+        ];
+
         await setDoc(
 
             doc(db,"wheels",user.uid),
 
             {
 
-                gift1:
-                document.getElementById(
-                "gift1"
-                ).value,
+                prizes:prizes,
 
-                gift2:
-                document.getElementById(
-                "gift2"
-                ).value,
+                history:[]
 
-                gift3:
-                document.getElementById(
-                "gift3"
-                ).value,
+            },
 
-                gift4:
-                document.getElementById(
-                "gift4"
-                ).value,
+            {
 
-                gift5:
-                document.getElementById(
-                "gift5"
-                ).value,
-
-                gift6:
-                document.getElementById(
-                "gift6"
-                ).value
+                merge:true
 
             }
 
