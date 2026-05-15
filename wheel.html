@@ -336,7 +336,12 @@ function draw() {
         ctx.beginPath();
         ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Màu trắng trong suốt
         // Vẽ chấm tròn cách tâm khoảng 2/3 bán kính
-        ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 0.85); 
+       // ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 0.85); 
+
+        let vitriOut = size * 0.85; 
+
+ctx.arc(vitriOut, 0, 10, 0, Math.PI * 2); 
+        
         ctx.fill();
         ctx.restore();
 
@@ -349,13 +354,13 @@ function draw() {
         ctx.font = "bold 22px Arial";
         ctx.textAlign = "right";
         // Đẩy chữ sát ra ngoài một chút để không đè lên chấm tròn
-        ctx.fillText(prizes[i].label, size - 50, 8);
+        ctx.fillText(prizes[i].label, size - 50, 10);
         ctx.restore();
     }
 
     // Viền ngoài dày màu xanh đậm giống ảnh
     ctx.beginPath();
-    ctx.lineWidth = 15;
+    ctx.lineWidth = 8;
     ctx.strokeStyle = "#ffffff"; 
     ctx.arc(center, center, size, 0, Math.PI * 2);
     ctx.stroke();
