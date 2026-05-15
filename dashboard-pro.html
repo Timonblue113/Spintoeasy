@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPINEASY PRO DASHBOARD</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-
 :root{
     --primary:#c1121f;
     --gold:#ffd700;
     --dark:#121212;
 }
 
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
     margin:0;
@@ -31,10 +22,7 @@ body{
     background:#f4f4f4;
 }
 
-/* =====================
-TOPBAR
-===================== */
-
+/* TOPBAR */
 .topbar{
     background:#121212;
     color:#fff;
@@ -42,10 +30,6 @@ TOPBAR
     display:flex;
     justify-content:space-between;
     align-items:center;
-    position:sticky;
-    top:0;
-    z-index:999;
-    transition:0.3s;
 }
 
 .logo{
@@ -54,26 +38,7 @@ TOPBAR
     color:var(--gold);
 }
 
-.user-box{
-    display:flex;
-    gap:15px;
-    align-items:center;
-}
-
-.logout-btn{
-    background:#c1121f;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-/* =====================
-LAYOUT
-===================== */
-
+/* LAYOUT */
 .container{
     max-width:1400px;
     margin:auto;
@@ -86,70 +51,13 @@ LAYOUT
     gap:25px;
 }
 
-/* =====================
-CARD
-===================== */
-
 .card{
     background:#fff;
     border-radius:20px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.card h2{
-    margin-top:0;
-    color:#c1121f;
-}
-
-/* =====================
-PLAN
-===================== */
-
-.plan{
-    background:#fff4c4;
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:25px;
-    line-height:1.8;
-}
-
-/* =====================
-INPUT
-===================== */
-
-.input-group{
-    margin-bottom:18px;
-}
-
-.input-group label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
-}
-
-.input-group input,
-.input-group select{
-
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid #ddd;
-    font-size:15px;
-    background:#fff;
-}
-
-.input-group input:focus,
-.input-group select:focus{
-
-    outline:none;
-    border-color:#c1121f;
-}
-
-/* =====================
-UPLOAD
-===================== */
-
+/* UPLOAD */
 .upload-box{
     background:#fafafa;
     border:2px dashed #ccc;
@@ -162,93 +70,17 @@ UPLOAD
     background:#121212;
     color:#fff;
     border:none;
-    padding:12px 18px;
+    padding:10px 14px;
+    margin-top:10px;
     border-radius:10px;
     cursor:pointer;
-    margin-top:10px;
-    width:100%;
 }
 
-.loading{
-    color:#c1121f;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-/* =====================
-PRIZE
-===================== */
-
-.prize-item{
-    background:#fafafa;
-    border:1px solid #eee;
-    padding:18px;
-    border-radius:16px;
-    margin-bottom:18px;
-}
-
-.prize-grid{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-}
-
-.remove-btn{
-    margin-top:15px;
-    background:#dc3545;
-    color:#fff;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    cursor:pointer;
-    width:100%;
-}
-
-/* =====================
-BUTTON
-===================== */
-
-.save-btn{
-    width:100%;
-    border:none;
-    background:#c1121f;
-    color:#fff;
-    padding:15px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.add-btn{
-    width:100%;
-    margin-bottom:20px;
-    border:none;
-    background:#121212;
-    color:#fff;
-    padding:15px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* =====================
-PREVIEW
-===================== */
-
+/* PREVIEW */
 .preview{
     display:flex;
-    justify-content:center;
-    align-items:center;
     flex-direction:column;
-}
-
-.preview-title{
-    font-size:1.2rem;
-    font-weight:bold;
-    margin-bottom:15px;
+    align-items:center;
 }
 
 .preview-backdrop{
@@ -261,6 +93,7 @@ PREVIEW
     margin-bottom:20px;
 }
 
+/* WHEEL */
 .wheel{
     width:280px;
     height:280px;
@@ -268,15 +101,19 @@ PREVIEW
     border:10px solid #ffd700;
     position:relative;
     margin-bottom:25px;
+
+    /* DEFAULT PIZZA */
+    background:
+    conic-gradient(
+        #ff4d4d 0deg 60deg,
+        #ffd93d 60deg 120deg,
+        #6bcB77 120deg 180deg,
+        #4d96ff 180deg 240deg,
+        #c77dff 240deg 300deg,
+        #ff8fab 300deg 360deg
+    );
     background-size:cover;
     background-position:center;
-    background-repeat:no-repeat;
-    overflow:hidden;
-    transition:0.3s;
-}
-
-.wheel:hover{
-    transform:scale(1.03);
 }
 
 .center-circle{
@@ -293,20 +130,19 @@ PREVIEW
     align-items:center;
     font-weight:bold;
     color:#c1121f;
-    box-shadow:0 0 20px rgba(0,0,0,0.15);
 }
 
-/* =====================
-LINK
-===================== */
-
-.link-box{
-    background:#f3f3f3;
-    padding:14px;
-    border-radius:12px;
-    word-break:break-all;
-    font-size:14px;
+/* BUTTON */
+.save-btn{
     width:100%;
+    border:none;
+    background:#c1121f;
+    color:#fff;
+    padding:15px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .copy-btn{
@@ -314,910 +150,165 @@ LINK
     background:#121212;
     color:#fff;
     border:none;
-    padding:12px 20px;
+    padding:12px;
     border-radius:12px;
     cursor:pointer;
     width:100%;
 }
 
-/* =====================
-MESSAGE
-===================== */
-
-.message{
-    margin-top:18px;
-    font-weight:bold;
-    text-align:center;
-    min-height:24px;
+.reset-btn{
+    background:#ff3b3b;
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:8px;
 }
 
-/* =====================
-MOBILE
-===================== */
-
-@media(max-width:900px){
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .topbar{
-        flex-direction:column;
-        gap:15px;
-    }
+.message{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="topbar">
-
-    <div class="logo">
-        SPINEASY PRO
-    </div>
-
-    <div class="user-box">
-
-        <span id="userEmail">
-            loading...
-        </span>
-
-        <button class="logout-btn"
-        onclick="logout()">
-
-            Đăng xuất
-
-        </button>
-
-    </div>
-
+    <div class="logo">SPINEASY PRO</div>
+    <div id="userEmail">loading...</div>
 </div>
 
 <div class="container">
 
-    <div class="plan">
+<div class="grid">
 
-        <h3>
-            GÓI PRO
-        </h3>
+<!-- LEFT -->
+<div class="card">
 
-        ✔ Upload ảnh trực tiếp
-        <br>
+<h2>Dashboard PRO</h2>
 
-        ✔ Theme realtime
-        <br>
+<!-- BACKDROP -->
+<div class="upload-box">
+    <b>Backdrop</b>
+    <input type="file" id="backdropFile" accept="image/*">
+    <button class="upload-btn" onclick="uploadBackdrop()">Upload</button>
+    <button class="reset-btn" onclick="resetBackdrop()">RESET</button>
+</div>
 
-        ✔ Firebase realtime
-        <br>
+<!-- WHEEL -->
+<div class="upload-box">
+    <b>Wheel Background</b>
+    <input type="file" id="wheelFile" accept="image/*">
+    <button class="upload-btn" onclick="uploadWheel()">Upload</button>
+    <button class="reset-btn" onclick="resetWheel()">RESET PIZZA</button>
+</div>
 
-        ✔ Không giới hạn quà
+<button class="save-btn" onclick="saveWheel()">LƯU</button>
 
-    </div>
+<div class="message" id="message"></div>
 
-    <div class="grid">
+</div>
 
-        <!-- LEFT -->
+<!-- RIGHT -->
+<div class="card preview">
 
-        <div class="card">
+<div class="preview-backdrop" id="previewBackdrop"></div>
 
-            <h2>
-                Quản lý vòng quay PRO
-            </h2>
+<div class="wheel" id="previewWheel">
+    <div class="center-circle">SPIN</div>
+</div>
 
-            <!-- BACKDROP -->
+</div>
 
-            <div class="upload-box">
-
-                <label>
-                    <b>Upload Backdrop</b>
-                </label>
-
-                <input
-                type="file"
-                id="backdropFile"
-                accept="image/*">
-
-                <button
-                class="upload-btn"
-                onclick="uploadBackdrop()">
-
-                    Upload Backdrop
-
-                </button>
-
-                <div
-                class="loading"
-                id="backdropLoading">
-
-                </div>
-
-                <input
-                type="hidden"
-                id="backdrop">
-
-            </div>
-
-            <!-- WHEEL -->
-
-            <div class="upload-box">
-
-                <label>
-                    <b>Upload nền vòng quay</b>
-                </label>
-
-                <input
-                type="file"
-                id="wheelFile"
-                accept="image/*">
-
-                <button
-                class="upload-btn"
-                onclick="uploadWheel()">
-
-                    Upload Wheel
-
-                </button>
-
-                <div
-                class="loading"
-                id="wheelLoading">
-
-                </div>
-
-                <input
-                type="hidden"
-                id="wheelBg">
-
-            </div>
-
-            <!-- THEME -->
-
-            <div class="input-group">
-
-                <label>
-                    Theme vòng quay
-                </label>
-
-                <select id="themeSelect">
-
-                    <option value="luxury">
-                        Luxury Gold
-                    </option>
-
-                    <option value="neon">
-                        Neon Cyber
-                    </option>
-
-                    <option value="pink">
-                        Pink Candy
-                    </option>
-
-                    <option value="fire">
-                        Fire Red
-                    </option>
-
-                </select>
-
-            </div>
-
-            <!-- PRIZE -->
-
-            <button
-            class="add-btn"
-            onclick="addPrize()">
-
-                <i class="fas fa-plus"></i>
-
-                THÊM QUÀ
-
-            </button>
-
-            <div id="prizeList"></div>
-
-            <button
-            class="save-btn"
-            onclick="saveWheel()">
-
-                <i class="fas fa-save"></i>
-
-                LƯU THAY ĐỔI
-
-            </button>
-
-            <div
-            class="message"
-            id="message">
-
-            </div>
-
-        </div>
-
-        <!-- RIGHT -->
-
-        <div class="card preview">
-
-            <div class="preview-title">
-                PREVIEW
-            </div>
-
-            <div
-            class="preview-backdrop"
-            id="previewBackdrop">
-
-            </div>
-
-            <div
-            class="wheel"
-            id="previewWheel">
-
-                <div class="center-circle">
-                    SPIN
-                </div>
-
-            </div>
-
-            <div
-            class="link-box"
-            id="wheelLink">
-
-                loading...
-
-            </div>
-
-            <button
-            class="copy-btn"
-            onclick="copyLink()">
-
-                COPY LINK
-
-            </button>
-
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 <script type="module">
 
-import { initializeApp }
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-
-    getAuth,
-    onAuthStateChanged,
-    signOut
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* =====================
-CONFIG
-===================== */
-
+/* CONFIG */
 const firebaseConfig = {
-
-  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
-
+  apiKey: "AIzaSyD35Skj...",
   authDomain: "spineasy-user.firebaseapp.com",
-
-  projectId: "spineasy-user",
-
-  storageBucket: "spineasy-user.appspot.com",
-
-  messagingSenderId: "805126611420",
-
-  appId: "1:805126611420:web:59a5605b2b68b35f806f19"
-
+  projectId: "spineasy-user"
 };
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const auth =
-getAuth(app);
+/* IMG API */
+const IMGBB = "a144f90aefe3221cee5520a75317e778";
 
-const db =
-getFirestore(app);
+/* STATE */
+let uid = "";
 
-/* =====================
-IMGBB
-===================== */
+/* UPLOAD */
+async function upload(file){
+    let form = new FormData();
+    form.append("image", file);
 
-const IMGBB_API =
-"a144f90aefe3221cee5520a75317e778";
+    let res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB}`, {
+        method:"POST",
+        body:form
+    });
 
-/* =====================
-GLOBAL
-===================== */
-
-let currentUid = "";
-
-/* =====================
-THEMES
-===================== */
-
-const THEMES = {
-
-    luxury:{
-        border:"#ffd700",
-        center:"#ffffff",
-        button:"#c1121f",
-        glow:"0 0 30px rgba(255,215,0,0.6)",
-        background:
-        "linear-gradient(135deg,#fff7cc,#ffd700)"
-    },
-
-    neon:{
-        border:"#00e5ff",
-        center:"#151515",
-        button:"#ff00ff",
-        glow:"0 0 30px rgba(0,229,255,0.8)",
-        background:
-        "linear-gradient(135deg,#000,#111)"
-    },
-
-    pink:{
-        border:"#ff66c4",
-        center:"#fff0f6",
-        button:"#ff1493",
-        glow:"0 0 30px rgba(255,102,196,0.8)",
-        background:
-        "linear-gradient(135deg,#ffe0ef,#ffc2dd)"
-    },
-
-    fire:{
-        border:"#ff6600",
-        center:"#fff",
-        button:"#ff2200",
-        glow:"0 0 30px rgba(255,80,0,0.8)",
-        background:
-        "linear-gradient(135deg,#3b0000,#ff2200)"
-    }
-
-};
-
-/* =====================
-APPLY THEME
-===================== */
-
-function applyTheme(themeName){
-
-    const theme =
-    THEMES[themeName];
-
-    if(!theme) return;
-
-    const wheel =
-    document.getElementById(
-    "previewWheel"
-    );
-
-    wheel.style.border =
-    `10px solid ${theme.border}`;
-
-    wheel.style.boxShadow =
-    theme.glow;
-
-    const center =
-    document.querySelector(
-    ".center-circle"
-    );
-
-    center.style.background =
-    theme.center;
-
-    center.style.color =
-    theme.button;
-
-    document.querySelector(
-    ".topbar"
-    ).style.background =
-    theme.background;
-
-}
-
-/* =====================
-LIVE THEME
-===================== */
-
-document.getElementById(
-"themeSelect"
-).addEventListener("change",(e)=>{
-
-    applyTheme(
-        e.target.value
-    );
-
-});
-
-/* =====================
-UPLOAD IMAGE
-===================== */
-
-async function uploadToImgBB(file){
-
-    const formData =
-    new FormData();
-
-    formData.append(
-        "image",
-        file
-    );
-
-    const response =
-    await fetch(
-
-        `https://api.imgbb.com/1/upload?key=${IMGBB_API}`,
-
-        {
-            method:"POST",
-            body:formData
-        }
-
-    );
-
-    const data =
-    await response.json();
-
-    if(!data.success){
-
-        throw new Error(
-            "Upload failed"
-        );
-    }
-
+    let data = await res.json();
     return data.data.url;
 }
 
-/* =====================
-UPLOAD BACKDROP
-===================== */
-
-async function uploadBackdrop(){
-
-    const file =
-    document.getElementById(
-    "backdropFile"
-    ).files[0];
-
-    if(!file){
-
-        alert("Chọn ảnh backdrop");
-
-        return;
-    }
-
-    document.getElementById(
-    "backdropLoading"
-    ).innerHTML =
-    "Đang upload...";
-
-    try{
-
-        const url =
-        await uploadToImgBB(file);
-
-        document.getElementById(
-        "backdrop"
-        ).value = url;
-
-        document.getElementById(
-        "previewBackdrop"
-        ).style.backgroundImage =
-        `url('${url}')`;
-
-        document.getElementById(
-        "backdropLoading"
-        ).innerHTML =
-        "Upload thành công";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Upload lỗi");
-    }
-
-}
-
-/* =====================
-UPLOAD WHEEL
-===================== */
-
-async function uploadWheel(){
-
-    const file =
-    document.getElementById(
-    "wheelFile"
-    ).files[0];
-
-    if(!file){
-
-        alert("Chọn ảnh wheel");
-
-        return;
-    }
-
-    document.getElementById(
-    "wheelLoading"
-    ).innerHTML =
-    "Đang upload...";
-
-    try{
-
-        const url =
-        await uploadToImgBB(file);
-
-        document.getElementById(
-        "wheelBg"
-        ).value = url;
-
-        document.getElementById(
-        "previewWheel"
-        ).style.backgroundImage =
-        `url('${url}')`;
-
-        document.getElementById(
-        "wheelLoading"
-        ).innerHTML =
-        "Upload thành công";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Upload lỗi");
-    }
-
-}
-
-/* =====================
-ADD PRIZE
-===================== */
-
-function addPrize(data = {}){
-
-    const div =
-    document.createElement("div");
-
-    div.className =
-    "prize-item";
-
-    div.innerHTML = `
-
-        <div class="prize-grid">
-
-            <div class="input-group">
-
-                <label>Tên quà</label>
-
-                <input
-                class="label"
-                value="${data.label || ""}">
-
-            </div>
-
-            <div class="input-group">
-
-                <label>Số lượng</label>
-
-                <input
-                type="number"
-                class="qty"
-                value="${data.qty || 0}">
-
-            </div>
-
-            <div class="input-group">
-
-                <label>% xác suất</label>
-
-                <input
-                type="number"
-                class="weight"
-                value="${data.weight || 10}">
-
-            </div>
-
-        </div>
-
-        <button
-        class="remove-btn">
-
-            Xóa quà
-
-        </button>
-
-    `;
-
-    div.querySelector(".remove-btn")
-    .onclick = ()=>{
-
-        div.remove();
-    };
-
-    document.getElementById(
-    "prizeList"
-    ).appendChild(div);
-}
-
-/* =====================
-AUTH
-===================== */
-
-onAuthStateChanged(auth,async(user)=>{
-
-    if(!user){
-
-        location.href =
-        "login.html";
-
-        return;
-    }
-
-    currentUid =
-    user.uid;
-
-    document.getElementById(
-    "userEmail"
-    ).innerHTML =
-    user.email;
-
-    const basePath =
-
-    window.location.origin +
-
-    window.location.pathname.substring(
-
-        0,
-
-        window.location.pathname.lastIndexOf("/")
-
-    );
-
-    document.getElementById(
-    "wheelLink"
-    ).innerHTML =
-
-    basePath +
-
-    "/wheel.html?id=" +
-
-    user.uid;
-
-    const ref =
-    doc(db,"wheels",user.uid);
-
-    const snap =
-    await getDoc(ref);
-
-    if(!snap.exists()){
-
-        await setDoc(ref,{
-
-            backdrop:"",
-            wheelBg:"",
-            theme:"luxury",
-            prizes:[],
-            history:[]
-
-        });
-
-        location.reload();
-
-        return;
-    }
-
-    const data =
-    snap.data();
-
-    document.getElementById(
-    "backdrop"
-    ).value =
-    data.backdrop || "";
-
-    document.getElementById(
-    "wheelBg"
-    ).value =
-    data.wheelBg || "";
-
-    if(data.backdrop){
-
-        document.getElementById(
-        "previewBackdrop"
-        ).style.backgroundImage =
-        `url('${data.backdrop}')`;
-    }
-
-    if(data.wheelBg){
-
-        document.getElementById(
-        "previewWheel"
-        ).style.backgroundImage =
-        `url('${data.wheelBg}')`;
-    }
-
-    if(data.theme){
-
-        document.getElementById(
-        "themeSelect"
-        ).value =
-        data.theme;
-
-        applyTheme(
-            data.theme
-        );
-    }
-
-    document.getElementById(
-    "prizeList"
-    ).innerHTML = "";
-
-    (data.prizes || []).forEach(p=>{
-
-        addPrize(p);
-    });
-
+/* BACKDROP */
+window.uploadBackdrop = async () => {
+    let file = document.getElementById("backdropFile").files[0];
+    if(!file) return alert("Chọn ảnh");
+
+    let url = await upload(file);
+    document.getElementById("previewBackdrop").style.backgroundImage = `url('${url}')`;
+};
+
+/* WHEEL */
+window.uploadWheel = async () => {
+    let file = document.getElementById("wheelFile").files[0];
+    if(!file) return alert("Chọn ảnh");
+
+    let url = await upload(file);
+    document.getElementById("previewWheel").style.backgroundImage = `url('${url}')`;
+};
+
+/* RESET BACKDROP */
+window.resetBackdrop = () => {
+    document.getElementById("previewBackdrop").style.backgroundImage = "none";
+};
+
+/* RESET WHEEL */
+window.resetWheel = () => {
+    document.getElementById("previewWheel").style.backgroundImage = "none";
+};
+
+/* SAVE */
+window.saveWheel = async () => {
+    await setDoc(doc(db,"wheels",uid),{
+        backdrop: document.getElementById("previewBackdrop").style.backgroundImage,
+        wheelBg: document.getElementById("previewWheel").style.backgroundImage
+    },{merge:true});
+
+    document.getElementById("message").innerText = "Đã lưu";
+};
+
+/* AUTH */
+onAuthStateChanged(auth,(user)=>{
+    if(!user) return location.href="login.html";
+
+    uid = user.uid;
+    document.getElementById("userEmail").innerText = user.email;
 });
-
-/* =====================
-SAVE
-===================== */
-
-async function saveWheel(){
-
-    try{
-
-        const prizes = [];
-
-        document.querySelectorAll(
-        ".prize-item"
-        ).forEach(item=>{
-
-            prizes.push({
-
-                label:
-                item.querySelector(".label").value,
-
-                qty:
-                Number(
-                item.querySelector(".qty").value
-                ),
-
-                weight:
-                Number(
-                item.querySelector(".weight").value
-                )
-
-            });
-
-        });
-
-        await setDoc(
-
-            doc(db,"wheels",currentUid),
-
-            {
-
-                backdrop:
-                document.getElementById(
-                "backdrop"
-                ).value,
-
-                wheelBg:
-                document.getElementById(
-                "wheelBg"
-                ).value,
-
-                theme:
-                document.getElementById(
-                "themeSelect"
-                ).value,
-
-                prizes
-
-            },
-
-            {
-
-                merge:true
-
-            }
-
-        );
-
-        document.getElementById(
-        "message"
-        ).innerHTML =
-        "Đã lưu thành công";
-
-        document.getElementById(
-        "message"
-        ).style.color =
-        "green";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        document.getElementById(
-        "message"
-        ).innerHTML =
-        "Lỗi khi lưu";
-
-        document.getElementById(
-        "message"
-        ).style.color =
-        "red";
-    }
-
-}
-
-/* =====================
-COPY LINK
-===================== */
-
-function copyLink(){
-
-    navigator.clipboard.writeText(
-
-        document.getElementById(
-        "wheelLink"
-        ).innerText
-
-    );
-
-    alert("Đã copy");
-}
-
-/* =====================
-LOGOUT
-===================== */
-
-function logout(){
-
-    signOut(auth);
-}
-
-/* =====================
-EXPORT
-===================== */
-
-window.logout = logout;
-
-window.copyLink = copyLink;
-
-window.saveWheel = saveWheel;
-
-window.addPrize = addPrize;
-
-window.uploadBackdrop = uploadBackdrop;
-
-window.uploadWheel = uploadWheel;
 
 </script>
 
