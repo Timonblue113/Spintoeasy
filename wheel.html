@@ -331,12 +331,12 @@ function draw() {
         // --- VẼ CHẤM TRÒN TRANG TRÍ ---
         ctx.save();
         ctx.translate(center, center);
-        ctx.rotate(angle + arc / 0.9); // Xoay vào giữa nan
+        ctx.rotate(angle + arc / 2); // Xoay vào giữa nan
         
         ctx.beginPath();
         ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Màu trắng trong suốt
         // Vẽ chấm tròn cách tâm khoảng 2/3 bán kính
-        ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 2); 
+        ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 0.85); 
         ctx.fill();
         ctx.restore();
 
@@ -356,7 +356,7 @@ function draw() {
     // Viền ngoài dày màu xanh đậm giống ảnh
     ctx.beginPath();
     ctx.lineWidth = 15;
-    ctx.strokeStyle = "#000051"; 
+    ctx.strokeStyle = "#ffffff"; 
     ctx.arc(center, center, size, 0, Math.PI * 2);
     ctx.stroke();
     
