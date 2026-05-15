@@ -2,19 +2,22 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucky Wheel PRO MAX</title>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
-/* ===== GIỮ NGUYÊN GIAO DIỆN ===== */
+
 body{
     margin:0;
     font-family:Arial;
-    background:#222 url("hinh.jpg") no-repeat center center;
+    background:#222 no-repeat center center;
     background-size:cover;
     height:100vh;
     width:100vw;
     overflow:hidden;
+    transition:0.4s;
 }
 
 #wheelContainer{
@@ -239,7 +242,7 @@ input{
 <script>
 
 /* =========================
-DEFAULT DATA
+DEFAULT
 ========================= */
 
 const DEFAULT_PRIZES = [
@@ -276,6 +279,8 @@ let ready = false;
 
 window.isSpinningLock = false;
 
+let wheelBgImage = "";
+
 let currentUser = {
 
     name:"",
@@ -298,78 +303,233 @@ DRAW
 ========================= */
 
 function draw() {
+
     let size = 340;
+
     let center = 350;
+
     canvas.width = 700;
+
     canvas.height = 700;
+
     let arc = Math.PI * 2 / prizes.length;
-    
-    const colors = ["#FF3D68", "#A733EE", "#2196F3", "#00BCD4", "#FFC107", "#FF5722", "#4CAF50", "#E91E63"];
 
-    ctx.clearRect(0, 0, 700, 700);
+    const colors = [
 
-    // BƯỚC 1: ĐỔ MÀU NỀN CHO TẤT CẢ CÁ NAN TRƯỚC (Để không bị đè viền)
-    for (let i = 0; i < prizes.length; i++) {
-        let angle = i * arc;
+        "#FF3D68",
+        "#A733EE",
+        "#2196F3",
+        "#00BCD4",
+        "#FFC107",
+        "#FF5722",
+        "#4CAF50",
+        "#E91E63"
+
+    ];
+
+    ctx.clearRect(0,0,700,700);
+
+    /* ===== ẢNH NỀN PIZZA ===== */
+
+    if(wheelBgImage){
+
+        ctx.save();
+
         ctx.beginPath();
-        ctx.fillStyle = colors[i % colors.length];
-        ctx.moveTo(center, center);
-        ctx.arc(center, center, size, angle, angle + arc);
-        ctx.fill();
+
+        ctx.arc(
+
+            center,
+            center,
+            size,
+
+            0,
+            Math.PI * 2
+
+        );
+
+        ctx.clip();
+
+        ctx.drawImage(
+
+            wheelBgImage,
+
+            center - size,
+            center - size,
+
+            size * 2,
+            size * 2
+
+        );
+
+        ctx.restore();
     }
 
-    // BƯỚC 2: VẼ CHI TIẾT (VẠCH NGĂN, CHẤM TRÒN, CHỮ)
-    for (let i = 0; i < prizes.length; i++) {
+    /* ===== NAN ===== */
+
+    for(let i=0;i<prizes.length;i++){
+
         let angle = i * arc;
 
-        // Vẽ vạch ngăn trắng giữa các nan
         ctx.beginPath();
-        ctx.strokeStyle = "#ffffff"; 
+
+        ctx.fillStyle = colors[i % colors.length];
+
+        ctx.globalAlpha = wheelBgImage ? 0.55 : 1;
+
+        ctx.moveTo(center,center);
+
+        ctx.arc(
+
+            center,
+            center,
+            size,
+
+            angle,
+            angle + arc
+
+        );
+
+        ctx.fill();
+
+        ctx.globalAlpha = 1;
+    }
+
+    /* ===== CHI TIẾT ===== */
+
+    for(let i=0;i<prizes.length;i++){
+
+        let angle = i * arc;
+
+        /* ===== VẠCH ===== */
+
+        ctx.beginPath();
+
+        ctx.strokeStyle = "#fff";
+
         ctx.lineWidth = 3;
-        ctx.moveTo(center, center);
-        ctx.lineTo(center + Math.cos(angle) * size, center + Math.sin(angle) * size);
+
+        ctx.moveTo(center,center);
+
+        ctx.lineTo(
+
+            center + Math.cos(angle) * size,
+
+            center + Math.sin(angle) * size
+
+        );
+
         ctx.stroke();
 
-        // --- VẼ CHẤM TRÒN TRANG TRÍ (Theo tọa độ bạn đã sửa) ---
+        /* ===== CHẤM ===== */
+
         ctx.save();
-        ctx.translate(center, center);
+
+        ctx.translate(center,center);
+
         ctx.rotate(angle + arc / 2);
-        
+
         ctx.beginPath();
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-        let vitriOut = size * 0.94; // Giữ nguyên vị trí sát mép của bạn
-        ctx.arc(vitriOut, 0, 4, 0, Math.PI * 2); 
+
+        ctx.fillStyle =
+        "rgba(255,255,255,0.8)";
+
+        ctx.arc(
+
+            size * 0.94,
+
+            0,
+
+            4,
+
+            0,
+
+            Math.PI * 2
+
+        );
+
         ctx.fill();
+
         ctx.restore();
 
-        // --- VẼ CHỮ (Theo tọa độ bạn đã sửa) ---
+        /* ===== TEXT ===== */
+
         ctx.save();
-        ctx.translate(center, center);
+
+        ctx.translate(center,center);
+
         ctx.rotate(angle + arc / 2);
-        
+
         ctx.fillStyle = "#fff";
+
         ctx.font = "bold 22px Arial";
+
         ctx.textAlign = "right";
-        ctx.fillText(prizes[i].label, size - 80, 9); // Giữ khoảng cách 80 như bạn muốn
+
+        ctx.shadowColor = "#000";
+
+        ctx.shadowBlur = 4;
+
+        ctx.fillText(
+
+            prizes[i].label,
+
+            size - 80,
+
+            9
+
+        );
+
         ctx.restore();
     }
 
-    // BƯỚC 3: VẼ VIỀN NGOÀI CÙNG (Dày 7px như bạn chỉnh)
+    /* ===== VIỀN ===== */
+
     ctx.beginPath();
+
     ctx.lineWidth = 7;
-    ctx.strokeStyle = "#ffffff"; 
-    ctx.arc(center, center, size, 0, Math.PI * 2);
+
+    ctx.strokeStyle = "#fff";
+
+    ctx.arc(
+
+        center,
+        center,
+        size,
+
+        0,
+        Math.PI * 2
+
+    );
+
     ctx.stroke();
-    
-    // BƯỚC 4: VẼ TÂM TRÒN TRẮNG
+
+    /* ===== TÂM ===== */
+
     ctx.beginPath();
+
     ctx.fillStyle = "#fff";
-    ctx.arc(center, center, 20, 0, Math.PI * 2);
+
+    ctx.arc(
+
+        center,
+        center,
+
+        20,
+
+        0,
+
+        Math.PI * 2
+
+    );
+
     ctx.fill();
 }
+
 draw();
+
 /* =========================
-SPIN BUTTON
+BUTTON
 ========================= */
 
 document.getElementById("spinBtn")
@@ -381,14 +541,12 @@ document.getElementById("spinBtn")
 
         document.getElementById("formPopup")
         .style.display = "flex";
-
     }
 
     else{
 
         spin();
     }
-
 };
 
 /* =========================
@@ -398,12 +556,10 @@ FORM
 function confirmForm(){
 
     let name =
-    document.getElementById("name")
-    .value;
+    document.getElementById("name").value;
 
     let phone =
-    document.getElementById("phone")
-    .value;
+    document.getElementById("phone").value;
 
     if(!name || !phone){
 
@@ -412,12 +568,7 @@ function confirmForm(){
         return;
     }
 
-    currentUser = {
-
-        name,
-        phone
-
-    };
+    currentUser = { name, phone };
 
     document.getElementById("formPopup")
     .style.display = "none";
@@ -601,8 +752,6 @@ import {
 
     doc,
 
-    getDoc,
-
     setDoc,
 
     onSnapshot
@@ -631,10 +780,6 @@ const firebaseConfig = {
 
 };
 
-/* =========================
-INIT
-========================= */
-
 const app =
 initializeApp(firebaseConfig);
 
@@ -642,7 +787,7 @@ const db =
 getFirestore(app);
 
 /* =========================
-GET UID
+UID
 ========================= */
 
 const params =
@@ -657,10 +802,6 @@ if(!uid){
 
     throw new Error("Missing UID");
 }
-
-/* =========================
-REF
-========================= */
 
 const wheelRef =
 doc(db,"wheels",uid);
@@ -708,12 +849,42 @@ onSnapshot(
         history =
         data.history || [];
 
-        draw();
+        /* ===== BACKDROP ===== */
+
+        if(data.backdrop){
+
+            document.body.style.backgroundImage =
+
+            `url('${data.backdrop}')`;
+        }
+
+        /* ===== WHEEL BG ===== */
+
+        if(data.wheelBg){
+
+            const img = new Image();
+
+            img.crossOrigin = "anonymous";
+
+            img.onload = ()=>{
+
+                wheelBgImage = img;
+
+                draw();
+            };
+
+            img.src = data.wheelBg;
+        }
+
+        else{
+
+            wheelBgImage = "";
+
+            draw();
+        }
 
         console.log("Realtime synced");
-
     }
-
 );
 
 /* =========================
@@ -735,19 +906,23 @@ async()=>{
 
                 history
 
+            },
+
+            {
+
+                merge:true
+
             }
 
         );
 
         console.log("Saved");
-
     }
 
     catch(err){
 
         console.log(err);
     }
-
 };
 
 /* =========================
@@ -790,11 +965,8 @@ window.addEventListener(
                 wb,
 
                 "BaoCao_QuayThuong.xlsx"
-
             );
-
         }
-
     }
 );
 
