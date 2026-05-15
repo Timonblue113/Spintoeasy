@@ -369,22 +369,37 @@ function draw(){
 
     /* ===== VIỀN 1 ===== */
 
-    ctx.beginPath();
+  ctx.beginPath();
 
-    ctx.lineWidth = 4;
+ctx.fillStyle =
+i % 2 == 0
+? "#c1121f"
+: "#ffffff";
 
-    ctx.strokeStyle = "gold";
+ctx.moveTo(center,center);
 
-    ctx.arc(
-        center,
-        center,
-        size - 1,
-        0,
-        Math.PI * 2
-    );
+ctx.arc(
 
-    ctx.stroke();
+    center,
 
+    center,
+
+    size,
+
+    i * arc,
+
+    (i + 1) * arc
+
+);
+
+ctx.fill();
+
+/* ===== GẠCH PHÂN CÁCH ===== */
+
+ctx.strokeStyle = "#ffd700";
+ctx.lineWidth = 3;
+
+ctx.stroke();
     /* ===== VIỀN 2 ===== */
 
     ctx.beginPath();
