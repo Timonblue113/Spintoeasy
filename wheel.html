@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Lucky Wheel PRO MAX</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+
+/* ===== GIỮ NGUYÊN GIAO DIỆN ===== */
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#222 url("hinh.jpg") no-repeat center center;
+    background-size:cover;
+    height:100vh;
+    width:100vw;
+    overflow:hidden;
+}
+
+#wheelContainer{
+    position:absolute;
+    right:200px;
+    top:50%;
+    transform:translateY(-50%);
+    width:700px;
+    height:700px;
+}
+
+canvas{
+    width:700px;
+    height:700px;
+    filter:drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+#spinBtn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    font-size:24px;
+    font-weight:bold;
+    background:radial-gradient(circle,#ffcc70,#ff3c00);
+    color:#fff;
+    border:5px solid #fff;
+    cursor:pointer;
+    z-index:10;
+}
+
+#arrow{
+    position:absolute;
+    right:-20px;
+    top:50%;
+    transform:translateY(-50%);
+    width:0;
+    height:0;
+    border-top:25px solid transparent;
+    border-bottom:25px solid transparent;
+    border-right:40px solid gold;
+    z-index:20;
+}
+
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.box{
+    background:#fff;
+    padding:30px;
+    width:400px;
+    border-radius:15px;
+    text-align:center;
+}
+
+input{
+    width:90%;
+    padding:12px;
+    margin:10px 0;
+    background:#f0f0f0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.btn{
+    padding:12px 25px;
+    margin:10px 5px;
+    border:none;
+    border-radius:5px;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.green{
+    background:#28a745;
+}
+
+.red{
+    background:#dc3545;
+}
+
+#infoBox{
+    position:absolute;
+    top:40%;
+    left:200px;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,0.9);
+    padding:25px;
+    min-width:350px;
+    border-radius:15px;
+    display:none;
+}
+
+#resultBox{
+    background:#b30000;
+    width:500px;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    color:#fff;
+    position:relative;
+    border:5px solid gold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="infoBox">
+
+    <h2 style="color:#b30000;margin-top:0;">
+        SẴN SÀNG!
+    </h2>
+
+    <p id="infoName"></p>
+
+    <p id="infoPhone"></p>
+
+    <hr>
+
+    <small>Bạn có 1 lượt quay</small>
+
+</div>
+
+<div id="wheelContainer">
+
+    <div id="arrow"></div>
+
+    <canvas id="wheel"></canvas>
+
+    <button id="spinBtn">
+        QUAY
+    </button>
+
+</div>
+
+<!-- FORM -->
+
+<div id="formPopup" class="popup">
+
+    <div class="box">
+
+        <h3>Nhập thông tin nhận quà</h3>
+
+        <input
+        id="name"
+        placeholder="Họ và tên">
+
+        <input
+        id="phone"
+        placeholder="Số điện thoại"
+        type="tel">
+
+        <br>
+
+        <button
+        class="btn green"
+        onclick="confirmForm()">
+
+            XÁC NHẬN
+
+        </button>
+
+        <button
+        class="btn red"
+        onclick="closeForm()">
+
+            HỦY
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- RESULT -->
+
+<div id="resultPopup" class="popup">
+
+    <div id="resultBox">
+
+        <div
+        class="closeBtn"
+        onclick="closeResult()"
+        style="position:absolute;top:10px;right:20px;cursor:pointer;">
+
+            ✖
+
+        </div>
+
+        <h1 style="font-size:28px;">
+
+            🎁 CHÚC MỪNG BẠN ĐÃ TRÚNG THƯỞNG
+
+        </h1>
+
+        <div
+        id="resultText"
+        style="font-size:49px;font-family:'Britannic Bold';color:yellow;">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+DEFAULT DATA
+========================= */
+
+const DEFAULT_PRIZES = [
+
+    { label:"Laptop", qty:10, weight:7 },
+
+    { label:"Tivi", qty:20, weight:14 },
+
+    { label:"Dán màn hình", qty:57, weight:34 },
+
+    { label:"Ốp lưng", qty:10, weight:7 },
+
+    { label:"Củ sạc", qty:3, weight:2 },
+
+    { label:"Sạc dự phòng", qty:1, weight:1 },
+
+    { label:"Tai nghe", qty:2, weight:1 },
+
+    { label:"Voucher giảm giá", qty:57, weight:34 }
+
+];
+
+/* =========================
+GLOBAL
+========================= */
+
+let prizes = DEFAULT_PRIZES;
+
+let history = [];
+
+let spinning = false;
+
+let ready = false;
+
+window.isSpinningLock = false;
+
+let currentUser = {
+
+    name:"",
+    phone:""
+
+};
+
+/* =========================
+CANVAS
+========================= */
+
+const canvas =
+document.getElementById("wheel");
+
+const ctx =
+canvas.getContext("2d");
+
+/* =========================
+DRAW
+========================= */
+
+function draw(){
+
+    let size = 350;
+
+    let center = 350;
+
+    canvas.width = 700;
+
+    canvas.height = 700;
+
+    let arc =
+    Math.PI * 2 / prizes.length;
+
+    ctx.clearRect(0,0,700,700);
+
+    for(let i=0;i<prizes.length;i++){
+
+        ctx.beginPath();
+
+        ctx.fillStyle =
+        i % 2 == 0
+        ? "#c1121f"
+        : "#ffffff";
+
+        ctx.moveTo(center,center);
+
+        ctx.arc(
+
+            center,
+
+            center,
+
+            size,
+
+            i * arc,
+
+            (i + 1) * arc
+
+        );
+
+        ctx.fill();
+
+        ctx.save();
+
+        ctx.translate(center,center);
+
+        ctx.rotate(i * arc + arc / 2);
+
+        ctx.fillStyle =
+        i % 2 == 0
+        ? "#fff"
+        : "#c1121f";
+
+        ctx.font =
+        "bold 25px Britannic Bold";
+
+        ctx.textAlign = "right";
+
+        ctx.fillText(
+
+            prizes[i].label,
+
+            size - 40,
+
+            10
+
+        );
+
+        ctx.restore();
+    }
+
+    ctx.beginPath();
+
+    ctx.lineWidth = 4;
+
+    ctx.strokeStyle = "gold";
+
+    ctx.arc(
+
+        center,
+
+        center,
+
+        size - 1,
+
+        0,
+
+        Math.PI * 2
+
+    );
+
+    ctx.stroke();
+}
+
+draw();
+
+/* =========================
+SPIN BUTTON
+========================= */
+
+document.getElementById("spinBtn")
+.onclick = ()=>{
+
+    if(spinning) return;
+
+    if(!ready){
+
+        document.getElementById("formPopup")
+        .style.display = "flex";
+
+    }
+
+    else{
+
+        spin();
+    }
+
+};
+
+/* =========================
+FORM
+========================= */
+
+function confirmForm(){
+
+    let name =
+    document.getElementById("name")
+    .value;
+
+    let phone =
+    document.getElementById("phone")
+    .value;
+
+    if(!name || !phone){
+
+        alert("Vui lòng nhập đủ!");
+
+        return;
+    }
+
+    currentUser = {
+
+        name,
+        phone
+
+    };
+
+    document.getElementById("formPopup")
+    .style.display = "none";
+
+    document.getElementById("infoName")
+    .innerText =
+    "Khách: " + name;
+
+    document.getElementById("infoPhone")
+    .innerText =
+    "SĐT: " + phone;
+
+    document.getElementById("infoBox")
+    .style.display = "block";
+
+    ready = true;
+}
+
+function closeForm(){
+
+    document.getElementById("formPopup")
+    .style.display = "none";
+}
+
+/* =========================
+SPIN
+========================= */
+
+function spin(){
+
+    if(spinning) return;
+
+    let totalQty =
+    prizes.reduce(
+        (sum,p)=>sum+p.qty,
+        0
+    );
+
+    if(totalQty <= 0){
+
+        alert("Hết quà rồi!");
+
+        return;
+    }
+
+    spinning = true;
+
+    window.isSpinningLock = true;
+
+    let totalWeight =
+    prizes.reduce(
+
+        (sum,p)=>
+
+        sum + (p.qty > 0 ? p.weight : 0),
+
+        0
+
+    );
+
+    let randomNum =
+    Math.random() * totalWeight;
+
+    let weightSum = 0;
+
+    let winItem = null;
+
+    let resultIndex = -1;
+
+    for(let i=0;i<prizes.length;i++){
+
+        if(prizes[i].qty > 0){
+
+            weightSum += prizes[i].weight;
+
+            if(randomNum <= weightSum){
+
+                winItem = prizes[i];
+
+                resultIndex = i;
+
+                break;
+            }
+        }
+    }
+
+    let arc = 360 / prizes.length;
+
+    let stopAngle =
+    360 - (resultIndex * arc) - (arc / 2);
+
+    let totalRotate =
+    360 * 10 + stopAngle;
+
+    canvas.style.transition =
+    "transform 5s cubic-bezier(0.15,0,0.15,1)";
+
+    canvas.style.transform =
+    `rotate(${totalRotate}deg)`;
+
+    setTimeout(async()=>{
+
+        if(winItem.qty > 0){
+
+            winItem.qty--;
+        }
+
+        history.push({
+
+            "Thời gian":
+            new Date().toLocaleString(),
+
+            "Tên":
+            currentUser.name,
+
+            "SĐT":
+            currentUser.phone,
+
+            "Quà":
+            winItem.label
+
+        });
+
+        if(window.saveFirebase){
+
+            await window.saveFirebase();
+        }
+
+        document.getElementById("resultText")
+        .innerText =
+        winItem.label;
+
+        document.getElementById("resultPopup")
+        .style.display = "flex";
+
+        spinning = false;
+
+        ready = false;
+
+        window.isSpinningLock = false;
+
+    },5000);
+}
+
+/* =========================
+CLOSE RESULT
+========================= */
+
+function closeResult(){
+
+    document.getElementById("resultPopup")
+    .style.display = "none";
+
+    document.getElementById("infoBox")
+    .style.display = "none";
+
+    canvas.style.transition = "none";
+
+    canvas.style.transform = "rotate(0deg)";
+
+    document.getElementById("name").value = "";
+
+    document.getElementById("phone").value = "";
+
+    draw();
+}
+
+</script>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc,
+
+    onSnapshot
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+CONFIG
+========================= */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+
+  authDomain: "spineasy-user.firebaseapp.com",
+
+  projectId: "spineasy-user",
+
+  storageBucket: "spineasy-user.appspot.com",
+
+  messagingSenderId: "805126611420",
+
+  appId: "1:805126611420:web:59a5605b2b68b35f806f19"
+
+};
+
+/* =========================
+INIT
+========================= */
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* =========================
+GET UID
+========================= */
+
+const params =
+new URLSearchParams(window.location.search);
+
+const uid =
+params.get("id");
+
+if(!uid){
+
+    alert("Thiếu ID user");
+
+    throw new Error("Missing UID");
+}
+
+/* =========================
+REF
+========================= */
+
+const wheelRef =
+doc(db,"wheels",uid);
+
+/* =========================
+REALTIME
+========================= */
+
+onSnapshot(
+
+    wheelRef,
+
+    async(snapshot)=>{
+
+        if(!snapshot.exists()){
+
+            await setDoc(
+
+                wheelRef,
+
+                {
+
+                    prizes:DEFAULT_PRIZES,
+
+                    history:[]
+
+                }
+
+            );
+
+            return;
+        }
+
+        if(window.isSpinningLock){
+
+            return;
+        }
+
+        const data =
+        snapshot.data();
+
+        prizes =
+        data.prizes || DEFAULT_PRIZES;
+
+        history =
+        data.history || [];
+
+        draw();
+
+        console.log("Realtime synced");
+
+    }
+
+);
+
+/* =========================
+SAVE
+========================= */
+
+window.saveFirebase =
+async()=>{
+
+    try{
+
+        await setDoc(
+
+            wheelRef,
+
+            {
+
+                prizes,
+
+                history
+
+            }
+
+        );
+
+        console.log("Saved");
+
+    }
+
+    catch(err){
+
+        console.log(err);
+    }
+
+};
+
+/* =========================
+EXPORT EXCEL
+========================= */
+
+window.addEventListener(
+
+    'keydown',
+
+    (e)=>{
+
+        if(e.key === 'F9'){
+
+            const wb =
+            XLSX.utils.book_new();
+
+            XLSX.utils.book_append_sheet(
+
+                wb,
+
+                XLSX.utils.json_to_sheet(history),
+
+                "Khách hàng"
+
+            );
+
+            XLSX.utils.book_append_sheet(
+
+                wb,
+
+                XLSX.utils.json_to_sheet(prizes),
+
+                "Tồn kho"
+
+            );
+
+            XLSX.writeFile(
+
+                wb,
+
+                "BaoCao_QuayThuong.xlsx"
+
+            );
+
+        }
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
