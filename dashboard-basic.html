@@ -39,10 +39,6 @@ body{
     background:#f4f4f4;
 }
 
-/* =====================
-TOPBAR
-===================== */
-
 .topbar{
 
     background:#121212;
@@ -99,10 +95,6 @@ TOPBAR
     font-weight:bold;
 }
 
-/* =====================
-LAYOUT
-===================== */
-
 .container{
 
     max-width:1200px;
@@ -121,10 +113,6 @@ LAYOUT
 
     gap:25px;
 }
-
-/* =====================
-CARD
-===================== */
 
 .card{
 
@@ -145,10 +133,6 @@ CARD
     color:#c1121f;
 }
 
-/* =====================
-PLAN
-===================== */
-
 .plan{
 
     background:#fff4c4;
@@ -168,10 +152,6 @@ PLAN
 
     color:#c1121f;
 }
-
-/* =====================
-INPUT
-===================== */
 
 .input-group{
 
@@ -207,10 +187,6 @@ INPUT
     border-color:#c1121f;
 }
 
-/* =====================
-BUTTON
-===================== */
-
 .save-btn{
 
     width:100%;
@@ -232,16 +208,14 @@ BUTTON
     cursor:pointer;
 
     transition:0.3s;
+
+    margin-top:10px;
 }
 
 .save-btn:hover{
 
     transform:translateY(-2px);
 }
-
-/* =====================
-PREVIEW
-===================== */
 
 .preview{
 
@@ -317,10 +291,6 @@ PREVIEW
     margin-bottom:10px;
 }
 
-/* =====================
-LINK BOX
-===================== */
-
 .link-box{
 
     background:#f3f3f3;
@@ -351,11 +321,18 @@ LINK BOX
     border-radius:12px;
 
     cursor:pointer;
+
+    width:100%;
 }
 
-/* =====================
-MESSAGE
-===================== */
+.pro-btn{
+
+    background:#ffd700;
+
+    color:#121212;
+
+    font-weight:bold;
+}
 
 .message{
 
@@ -367,10 +344,6 @@ MESSAGE
 
     min-height:24px;
 }
-
-/* =====================
-MOBILE
-===================== */
 
 @media(max-width:768px){
 
@@ -387,8 +360,6 @@ MOBILE
 </head>
 
 <body>
-
-<!-- TOPBAR -->
 
 <div class="topbar">
 
@@ -417,11 +388,7 @@ MOBILE
 
 </div>
 
-<!-- CONTENT -->
-
 <div class="container">
-
-    <!-- PLAN -->
 
     <div class="plan">
 
@@ -455,8 +422,6 @@ MOBILE
 
     <div class="grid">
 
-        <!-- LEFT -->
-
         <div class="card">
 
             <h2>
@@ -467,9 +432,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 1
-                </label>
+                <label>Tên quà 1</label>
 
                 <input type="text"
                 id="gift1">
@@ -478,9 +441,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 2
-                </label>
+                <label>Tên quà 2</label>
 
                 <input type="text"
                 id="gift2">
@@ -489,9 +450,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 3
-                </label>
+                <label>Tên quà 3</label>
 
                 <input type="text"
                 id="gift3">
@@ -500,9 +459,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 4
-                </label>
+                <label>Tên quà 4</label>
 
                 <input type="text"
                 id="gift4">
@@ -511,9 +468,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 5
-                </label>
+                <label>Tên quà 5</label>
 
                 <input type="text"
                 id="gift5">
@@ -522,9 +477,7 @@ MOBILE
 
             <div class="input-group">
 
-                <label>
-                    Tên quà 6
-                </label>
+                <label>Tên quà 6</label>
 
                 <input type="text"
                 id="gift6">
@@ -546,8 +499,6 @@ MOBILE
             </div>
 
         </div>
-
-        <!-- RIGHT -->
 
         <div class="card preview">
 
@@ -580,22 +531,19 @@ MOBILE
                 COPY LINK
 
             </button>
-            <button class="copy-btn"
-onclick="upgradePro()"
-style="background:#ffd700;color:#121212;font-weight:bold;">
 
-    🚀 NÂNG CẤP PRO
+            <button class="copy-btn pro-btn"
+            onclick="upgradePro()">
 
-    </button>
+                🚀 NÂNG CẤP PRO
+
+            </button>
+
         </div>
 
     </div>
 
 </div>
-
-<!-- FIREBASE -->
-
-<!-- THAY TOÀN BỘ SCRIPT FIREBASE TRONG dashboard-basic.html BẰNG SCRIPT NÀY -->
 
 <script type="module">
 
@@ -624,15 +572,10 @@ import {
     getDoc,
 
     setDoc
-    
 
 }
 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* =====================
-FIREBASE CONFIG
-===================== */
 
 const firebaseConfig = {
 
@@ -658,10 +601,6 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-/* =====================
-CHECK LOGIN
-===================== */
-
 onAuthStateChanged(auth,async(user)=>{
 
     if(user){
@@ -671,7 +610,30 @@ onAuthStateChanged(auth,async(user)=>{
         ).innerHTML = user.email;
 
         /* =====================
-        FIX LINK GITHUB PAGES
+        CHECK USER PLAN
+        ===================== */
+
+        const userRef =
+        doc(db,"users",user.uid);
+
+        const userSnap =
+        await getDoc(userRef);
+
+        const userData =
+        userSnap.data();
+
+        if(
+            userData?.plan === "pro"
+        ){
+
+            window.location.href =
+            "dashboard-pro.html";
+
+            return;
+        }
+
+        /* =====================
+        FIX LINK GITHUB
         ===================== */
 
         const basePath =
@@ -704,10 +666,6 @@ onAuthStateChanged(auth,async(user)=>{
 
         const docSnap =
         await getDoc(wheelRef);
-
-        /* =====================
-        IF USER CHƯA CÓ DATA
-        ===================== */
 
         if(!docSnap.exists()){
 
@@ -767,10 +725,6 @@ onAuthStateChanged(auth,async(user)=>{
 
             return;
         }
-
-        /* =====================
-        LOAD PRIZES
-        ===================== */
 
         const data =
         docSnap.data();
@@ -907,42 +861,6 @@ async function saveWheel(){
 }
 
 /* =====================
-COPY LINK
-===================== */
-
-function copyLink(){
-
-    const text =
-    document.getElementById(
-    "wheelLink"
-    ).innerText;
-
-    navigator.clipboard.writeText(text);
-
-    alert("Đã copy link");
-
-}
-
-/* =====================
-LOGOUT
-===================== */
-
-function logout(){
-
-    signOut(auth);
-
-}
-
-/* =====================
-EXPORT
-===================== */
-
-window.logout = logout;
-
-window.copyLink = copyLink;
-
-window.saveWheel = saveWheel;
-    /* =====================
 UPGRADE PRO
 ===================== */
 
@@ -960,8 +878,6 @@ async function upgradePro(){
         auth.currentUser;
 
         if(!user) return;
-
-        /* CHECK CODE */
 
         const codeRef =
         doc(db,"upgradeCodes",code);
@@ -986,8 +902,6 @@ async function upgradePro(){
             return;
         }
 
-        /* UPDATE USER */
-
         await setDoc(
 
             doc(db,"users",user.uid),
@@ -1005,8 +919,6 @@ async function upgradePro(){
             }
 
         );
-
-        /* KHÓA MÃ */
 
         await setDoc(
 
@@ -1047,6 +959,41 @@ async function upgradePro(){
     }
 
 }
+
+/* =====================
+COPY LINK
+===================== */
+
+function copyLink(){
+
+    const text =
+    document.getElementById(
+    "wheelLink"
+    ).innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Đã copy link");
+
+}
+
+/* =====================
+LOGOUT
+===================== */
+
+function logout(){
+
+    signOut(auth);
+
+}
+
+window.logout = logout;
+
+window.copyLink = copyLink;
+
+window.saveWheel = saveWheel;
+
+window.upgradePro = upgradePro;
 
 </script>
 
