@@ -300,144 +300,66 @@ canvas.getContext("2d");
 DRAW
 ========================= */
 
-function draw(){
-
+function draw() {
     let size = 350;
-
     let center = 350;
-
     canvas.width = 700;
-
     canvas.height = 700;
+    let arc = Math.PI * 2 / prizes.length;
+    
+    ctx.clearRect(0, 0, 700, 700);
 
-    let arc =
-    Math.PI * 2 / prizes.length;
-
-    ctx.clearRect(0,0,700,700);
-
-    for(let i=0;i<prizes.length;i++){
-
+    for (let i = 0; i < prizes.length; i++) {
         ctx.beginPath();
+        
+        // Màu nền của nan
+        ctx.fillStyle = i % 2 == 0 ? "#c1121f" : "#ffffff";
+        
+        // Thiết lập đường viền giữa các nan
+        ctx.strokeStyle = "#ffd700"; // Màu vàng gold cho các nan (hoặc dùng #000 cho màu đen)
+        ctx.lineWidth = 2; // Độ dày đường kẻ giữa các nan
 
-        ctx.fillStyle =
-        i % 2 == 0
-        ? "#c1121f"
-        : "#ffffff";
-
-        ctx.moveTo(center,center);
-
+        ctx.moveTo(center, center);
         ctx.arc(
-
             center,
             center,
             size,
             i * arc,
             (i + 1) * arc
-
         );
+        
+        ctx.fill();   // Tô màu nền
+        ctx.stroke(); // Vẽ đường gạch chia nan
 
-        ctx.fill();
-
+        // Vẽ chữ
         ctx.save();
-
-        ctx.translate(center,center);
-
+        ctx.translate(center, center);
         ctx.rotate(i * arc + arc / 2);
-
-        ctx.fillStyle =
-        i % 2 == 0
-        ? "#fff"
-        : "#c1121f";
-
-        ctx.font =
-        "bold 25px Britannic Bold";
-
+        
+        ctx.fillStyle = i % 2 == 0 ? "#fff" : "#c1121f";
+        ctx.font = "bold 25px Britannic Bold";
         ctx.textAlign = "right";
-
         ctx.fillText(
-
             prizes[i].label,
-
             size - 40,
-
             10
-
         );
-
         ctx.restore();
     }
 
-    /* ===== VIỀN 1 ===== */
-
-  ctx.beginPath();
-
-ctx.fillStyle =
-i % 2 == 0
-? "#c1121f"
-: "#ffffff";
-
-ctx.moveTo(center,center);
-
-ctx.arc(
-
-    center,
-
-    center,
-
-    size,
-
-    i * arc,
-
-    (i + 1) * arc
-
-);
-
-ctx.fill();
-
-/* ===== GẠCH PHÂN CÁCH ===== */
-
-ctx.strokeStyle = "#ffd700";
-ctx.lineWidth = 3;
-
-ctx.stroke();
-    /* ===== VIỀN 2 ===== */
-
+    // Vẽ vòng tròn viền ngoài cùng
     ctx.beginPath();
-
-    ctx.lineWidth = 8;
-
-    ctx.strokeStyle = "red";
-
+    ctx.lineWidth = 10; // Làm viền ngoài dày hơn cho đẹp
+    ctx.strokeStyle = "gold";
     ctx.arc(
         center,
         center,
-        size - 8,
+        size - 1,
         0,
         Math.PI * 2
     );
-
     ctx.stroke();
-
-    /* ===== VIỀN 3 ===== */
-
-    ctx.beginPath();
-
-    ctx.lineWidth = 4;
-
-    ctx.strokeStyle = "white";
-
-    ctx.arc(
-        center,
-        center,
-        size - 16,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.stroke();
-
 }
-
 draw();
 
 /* =========================
