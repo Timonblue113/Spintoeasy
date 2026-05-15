@@ -304,44 +304,45 @@ function draw() {
     canvas.height = 700;
     let arc = Math.PI * 2 / prizes.length;
     
-    // Mảng màu sắc đa dạng giống trong ảnh mẫu
     const colors = ["#FF3D68", "#A733EE", "#2196F3", "#00BCD4", "#FFC107", "#FF5722", "#4CAF50", "#E91E63"];
 
     ctx.clearRect(0, 0, 700, 700);
 
+    // BƯỚC 1: ĐỔ MÀU NỀN CHO TẤT CẢ CÁ NAN TRƯỚC (Để không bị đè viền)
     for (let i = 0; i < prizes.length; i++) {
         let angle = i * arc;
-        
         ctx.beginPath();
-        // Lấy màu từ mảng (dùng % để lặp lại nếu số nan nhiều hơn số màu)
         ctx.fillStyle = colors[i % colors.length];
-        
-        // Đường gạch giữa các nan màu trắng tinh khôi
-        ctx.strokeStyle = "#ffffff"; 
-        ctx.lineWidth = 3;
-
         ctx.moveTo(center, center);
         ctx.arc(center, center, size, angle, angle + arc);
         ctx.fill();
+    }
+
+    // BƯỚC 2: VẼ CHI TIẾT (VẠCH NGĂN, CHẤM TRÒN, CHỮ)
+    for (let i = 0; i < prizes.length; i++) {
+        let angle = i * arc;
+
+        // Vẽ vạch ngăn trắng giữa các nan
+        ctx.beginPath();
+        ctx.strokeStyle = "#ffffff"; 
+        ctx.lineWidth = 3;
+        ctx.moveTo(center, center);
+        ctx.lineTo(center + Math.cos(angle) * size, center + Math.sin(angle) * size);
         ctx.stroke();
 
-        // --- VẼ CHẤM TRÒN TRANG TRÍ ---
+        // --- VẼ CHẤM TRÒN TRANG TRÍ (Theo tọa độ bạn đã sửa) ---
         ctx.save();
         ctx.translate(center, center);
-        ctx.rotate(angle + arc / 2); // Xoay vào giữa nan
+        ctx.rotate(angle + arc / 2);
         
         ctx.beginPath();
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // Màu trắng trong suốt
-        // Vẽ chấm tròn cách tâm khoảng 2/3 bán kính
-       // ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 0.85); 
-        let vitriOut = size * 0.94; 
-
+        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+        let vitriOut = size * 0.94; // Giữ nguyên vị trí sát mép của bạn
         ctx.arc(vitriOut, 0, 4, 0, Math.PI * 2); 
-        
         ctx.fill();
         ctx.restore();
 
-        // --- VẼ CHỮ ---
+        // --- VẼ CHỮ (Theo tọa độ bạn đã sửa) ---
         ctx.save();
         ctx.translate(center, center);
         ctx.rotate(angle + arc / 2);
@@ -349,19 +350,18 @@ function draw() {
         ctx.fillStyle = "#fff";
         ctx.font = "bold 22px Arial";
         ctx.textAlign = "right";
-        // Đẩy chữ sát ra ngoài một chút để không đè lên chấm tròn
-        ctx.fillText(prizes[i].label, size - 80, 9);
+        ctx.fillText(prizes[i].label, size - 80, 9); // Giữ khoảng cách 80 như bạn muốn
         ctx.restore();
     }
 
-    // Viền ngoài dày màu xanh đậm giống ảnh
+    // BƯỚC 3: VẼ VIỀN NGOÀI CÙNG (Dày 7px như bạn chỉnh)
     ctx.beginPath();
     ctx.lineWidth = 7;
     ctx.strokeStyle = "#ffffff"; 
     ctx.arc(center, center, size, 0, Math.PI * 2);
     ctx.stroke();
     
-    // Vẽ thêm cái tâm hình ngôi sao hoặc hình tròn nhỏ ở giữa nếu bạn muốn
+    // BƯỚC 4: VẼ TÂM TRÒN TRẮNG
     ctx.beginPath();
     ctx.fillStyle = "#fff";
     ctx.arc(center, center, 20, 0, Math.PI * 2);
