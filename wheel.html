@@ -338,7 +338,7 @@ function draw() {
         // Vẽ chấm tròn cách tâm khoảng 2/3 bán kính
        // ctx.arc(size * 0.7, 0, 10, 0, Math.PI * 0.85); 
 
-        let vitriOut = size * 0.85; 
+        let vitriOut = size * 0.7; 
 
 ctx.arc(vitriOut, 0, 10, 0, Math.PI * 2); 
         
@@ -360,7 +360,7 @@ ctx.arc(vitriOut, 0, 10, 0, Math.PI * 2);
 
     // Viền ngoài dày màu xanh đậm giống ảnh
     ctx.beginPath();
-    ctx.lineWidth = 8;
+    ctx.lineWidth = 7;
     ctx.strokeStyle = "#ffffff"; 
     ctx.arc(center, center, size, 0, Math.PI * 2);
     ctx.stroke();
