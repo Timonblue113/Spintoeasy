@@ -393,7 +393,23 @@ function draw(){
 
     ctx.stroke();
 }
-
+// ⚪ Viền trong (cái bạn đang có)
+ctx.beginPath();
+ctx.lineWidth = 4;
+ctx.strokeStyle = "gold";
+ctx.arc(center, center, size - 1, 0, Math.PI * 2);
+ctx.stroke();
+ctx.beginPath();
+ctx.lineWidth = 8;
+ctx.strokeStyle = "red";
+ctx.arc(center, center, size - 5, 0, Math.PI * 2);
+ctx.stroke();
+ctx.beginPath();
+ctx.lineWidth = 4;
+ctx.strokeStyle = "white";
+ctx.arc(center, center, size - 10, 0, Math.PI * 2);
+ctx.stroke();
+}
 draw();
 
 /* =========================
