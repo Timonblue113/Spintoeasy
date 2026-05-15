@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+SPINEASY PRO DASHBOARD
+</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+
+    --primary:#c1121f;
+
+    --gold:#ffd700;
+
+    --dark:#121212;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:#f4f4f4;
+}
+
+/* =====================
+TOPBAR
+===================== */
+
+.topbar{
+
+    background:#121212;
+
+    color:#fff;
+
+    padding:18px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+}
+
+.logo{
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    color:var(--gold);
+}
+
+.user-box{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+}
+
+.logout-btn{
+
+    background:#c1121f;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+/* =====================
+LAYOUT
+===================== */
+
+.container{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:40px 20px;
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1.2fr 0.8fr;
+
+    gap:25px;
+}
+
+/* =====================
+CARD
+===================== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+}
+
+.card h2{
+
+    margin-top:0;
+
+    color:#c1121f;
+}
+
+/* =====================
+PLAN
+===================== */
+
+.plan{
+
+    background:#fff4c4;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    line-height:1.8;
+}
+
+.plan h3{
+
+    margin-top:0;
+
+    color:#c1121f;
+}
+
+/* =====================
+INPUT
+===================== */
+
+.input-group{
+
+    margin-bottom:18px;
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+}
+
+.input-group input:focus{
+
+    outline:none;
+
+    border-color:#c1121f;
+}
+
+/* =====================
+PRIZE ITEM
+===================== */
+
+.prize-item{
+
+    background:#fafafa;
+
+    border:1px solid #eee;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    margin-bottom:18px;
+}
+
+.prize-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
+
+    gap:15px;
+}
+
+.remove-btn{
+
+    margin-top:15px;
+
+    background:#dc3545;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+/* =====================
+BUTTON
+===================== */
+
+.save-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#c1121f;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.save-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.add-btn{
+
+    width:100%;
+
+    margin-bottom:20px;
+
+    border:none;
+
+    background:#121212;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* =====================
+PREVIEW
+===================== */
+
+.preview{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+}
+
+.wheel{
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    border:10px solid #ffd700;
+
+    background:
+    conic-gradient(
+        #ff4d4d 0deg 60deg,
+        #ffd93d 60deg 120deg,
+        #6bcB77 120deg 180deg,
+        #4d96ff 180deg 240deg,
+        #c77dff 240deg 300deg,
+        #ff8fab 300deg 360deg
+    );
+
+    position:relative;
+
+    margin-bottom:25px;
+
+    background-size:cover;
+
+    background-position:center;
+}
+
+.center-circle{
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    color:#c1121f;
+
+    box-shadow:0 0 20px rgba(0,0,0,0.15);
+}
+
+.preview-title{
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+/* =====================
+LINK BOX
+===================== */
+
+.link-box{
+
+    background:#f3f3f3;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    word-break:break-all;
+
+    font-size:14px;
+
+    width:100%;
+}
+
+.copy-btn{
+
+    margin-top:12px;
+
+    background:#121212;
+
+    color:#fff;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+/* =====================
+MESSAGE
+===================== */
+
+.message{
+
+    margin-top:18px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    min-height:24px;
+}
+
+.preview-backdrop{
+
+    width:100%;
+
+    height:180px;
+
+    border-radius:16px;
+
+    background:#ddd;
+
+    background-size:cover;
+
+    background-position:center;
+
+    margin-bottom:20px;
+}
+
+/* =====================
+MOBILE
+===================== */
+
+@media(max-width:900px){
+
+    .grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+    <div class="logo">
+
+        SPINEASY PRO
+
+    </div>
+
+    <div class="user-box">
+
+        <span id="userEmail">
+
+            loading...
+
+        </span>
+
+        <button class="logout-btn"
+        onclick="logout()">
+
+            Đăng xuất
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="plan">
+
+        <h3>
+
+            GÓI PRO - 499K
+
+        </h3>
+
+        ✔ Upload backdrop
+        <br>
+
+        ✔ Upload nền vòng quay
+        <br>
+
+        ✔ Không giới hạn quà
+        <br>
+
+        ✔ Chỉnh xác suất %
+        <br>
+
+        ✔ Quản lý số lượng
+        <br>
+
+        ✔ Firebase realtime
+
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT -->
+
+        <div class="card">
+
+            <h2>
+
+                Quản lý vòng quay PRO
+
+            </h2>
+
+            <div class="input-group">
+
+                <label>
+                    Link ảnh backdrop
+                </label>
+
+                <input
+                type="text"
+                id="backdrop">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Link ảnh nền vòng quay
+                </label>
+
+                <input
+                type="text"
+                id="wheelBg">
+
+            </div>
+
+            <button
+            class="add-btn"
+            onclick="addPrize()">
+
+                <i class="fas fa-plus"></i>
+
+                THÊM QUÀ
+
+            </button>
+
+            <div id="prizeList"></div>
+
+            <button
+            class="save-btn"
+            onclick="saveWheel()">
+
+                <i class="fas fa-save"></i>
+
+                LƯU THAY ĐỔI
+
+            </button>
+
+            <div
+            class="message"
+            id="message">
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="card preview">
+
+            <div class="preview-title">
+
+                PREVIEW
+
+            </div>
+
+            <div
+            class="preview-backdrop"
+            id="previewBackdrop">
+
+            </div>
+
+            <div
+            class="wheel"
+            id="previewWheel">
+
+                <div class="center-circle">
+
+                    SPIN
+
+                </div>
+
+            </div>
+
+            <div
+            class="link-box"
+            id="wheelLink">
+
+                loading...
+
+            </div>
+
+            <button
+            class="copy-btn"
+            onclick="copyLink()">
+
+                COPY LINK
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+    getAuth,
+
+    onAuthStateChanged,
+
+    signOut
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =====================
+CONFIG
+===================== */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+
+  authDomain: "spineasy-user.firebaseapp.com",
+
+  projectId: "spineasy-user",
+
+  storageBucket: "spineasy-user.appspot.com",
+
+  messagingSenderId: "805126611420",
+
+  appId: "1:805126611420:web:59a5605b2b68b35f806f19"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+/* =====================
+GLOBAL
+===================== */
+
+let currentUid = "";
+
+/* =====================
+ADD PRIZE UI
+===================== */
+
+function addPrize(data = {}){
+
+    const div =
+    document.createElement("div");
+
+    div.className =
+    "prize-item";
+
+    div.innerHTML = `
+
+        <div class="prize-grid">
+
+            <div class="input-group">
+
+                <label>Tên quà</label>
+
+                <input
+                class="label"
+                value="${data.label || ""}">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Số lượng</label>
+
+                <input
+                type="number"
+                class="qty"
+                value="${data.qty || 0}">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>% xác suất</label>
+
+                <input
+                type="number"
+                class="weight"
+                value="${data.weight || 10}">
+
+            </div>
+
+        </div>
+
+        <button
+        class="remove-btn">
+
+            Xóa quà
+
+        </button>
+
+    `;
+
+    div.querySelector(".remove-btn")
+    .onclick = ()=>{
+
+        div.remove();
+    };
+
+    document.getElementById(
+    "prizeList"
+    ).appendChild(div);
+}
+
+/* =====================
+LOGIN
+===================== */
+
+onAuthStateChanged(auth,async(user)=>{
+
+    if(!user){
+
+        location.href =
+        "login.html";
+
+        return;
+    }
+
+    currentUid = user.uid;
+
+    document.getElementById(
+    "userEmail"
+    ).innerHTML =
+    user.email;
+
+    const basePath =
+
+    window.location.origin +
+
+    window.location.pathname.substring(
+
+        0,
+
+        window.location.pathname.lastIndexOf("/")
+
+    );
+
+    document.getElementById(
+    "wheelLink"
+    ).innerHTML =
+
+    basePath +
+
+    "/wheel.html?id=" +
+
+    user.uid;
+
+    const ref =
+    doc(db,"wheels",user.uid);
+
+    const snap =
+    await getDoc(ref);
+
+    if(!snap.exists()){
+
+        await setDoc(ref,{
+
+            backdrop:"",
+
+            wheelBg:"",
+
+            prizes:[
+
+                {
+
+                    label:"Voucher 50K",
+
+                    qty:100,
+
+                    weight:30
+
+                },
+
+                {
+
+                    label:"Gấu bông",
+
+                    qty:50,
+
+                    weight:20
+
+                }
+
+            ],
+
+            history:[]
+
+        });
+
+        location.reload();
+
+        return;
+    }
+
+    const data =
+    snap.data();
+
+    document.getElementById(
+    "backdrop"
+    ).value =
+    data.backdrop || "";
+
+    document.getElementById(
+    "wheelBg"
+    ).value =
+    data.wheelBg || "";
+
+    if(data.backdrop){
+
+        document.getElementById(
+        "previewBackdrop"
+        ).style.backgroundImage =
+        `url('${data.backdrop}')`;
+    }
+
+    if(data.wheelBg){
+
+        document.getElementById(
+        "previewWheel"
+        ).style.backgroundImage =
+        `url('${data.wheelBg}')`;
+    }
+
+    document.getElementById(
+    "prizeList"
+    ).innerHTML = "";
+
+    (data.prizes || []).forEach(p=>{
+
+        addPrize(p);
+    });
+
+});
+
+/* =====================
+LIVE PREVIEW
+===================== */
+
+document.getElementById(
+"backdrop"
+).addEventListener("input",(e)=>{
+
+    document.getElementById(
+    "previewBackdrop"
+    ).style.backgroundImage =
+    `url('${e.target.value}')`;
+
+});
+
+document.getElementById(
+"wheelBg"
+).addEventListener("input",(e)=>{
+
+    document.getElementById(
+    "previewWheel"
+    ).style.backgroundImage =
+    `url('${e.target.value}')`;
+
+});
+
+/* =====================
+SAVE
+===================== */
+
+async function saveWheel(){
+
+    try{
+
+        const prizes = [];
+
+        document.querySelectorAll(
+        ".prize-item"
+        ).forEach(item=>{
+
+            prizes.push({
+
+                label:
+                item.querySelector(".label").value,
+
+                qty:
+                Number(
+                item.querySelector(".qty").value
+                ),
+
+                weight:
+                Number(
+                item.querySelector(".weight").value
+                )
+
+            });
+
+        });
+
+        await setDoc(
+
+            doc(db,"wheels",currentUid),
+
+            {
+
+                backdrop:
+                document.getElementById(
+                "backdrop"
+                ).value,
+
+                wheelBg:
+                document.getElementById(
+                "wheelBg"
+                ).value,
+
+                prizes
+
+            },
+
+            {
+
+                merge:true
+
+            }
+
+        );
+
+        document.getElementById(
+        "message"
+        ).innerHTML =
+        "Đã lưu thành công";
+
+        document.getElementById(
+        "message"
+        ).style.color =
+        "green";
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        document.getElementById(
+        "message"
+        ).innerHTML =
+        "Lỗi khi lưu";
+
+        document.getElementById(
+        "message"
+        ).style.color =
+        "red";
+    }
+
+}
+
+/* =====================
+COPY LINK
+===================== */
+
+function copyLink(){
+
+    navigator.clipboard.writeText(
+
+        document.getElementById(
+        "wheelLink"
+        ).innerText
+
+    );
+
+    alert("Đã copy");
+}
+
+/* =====================
+LOGOUT
+===================== */
+
+function logout(){
+
+    signOut(auth);
+}
+
+/* =====================
+EXPORT
+===================== */
+
+window.logout = logout;
+
+window.copyLink = copyLink;
+
+window.saveWheel = saveWheel;
+
+window.addPrize = addPrize;
+
+</script>
+
+</body>
+</html>
