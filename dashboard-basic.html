@@ -624,6 +624,7 @@ import {
     getDoc,
 
     setDoc
+    
 
 }
 
@@ -953,29 +954,39 @@ async function upgradePro(){
 
     if(!code) return;
 
-    /* MÃ PRO CỦA BẠN */
-
-    const PRO_CODES = [
-
-        "SPINPRO2026",
-        "VIPPRO999",
-        "TIMONPRO"
-
-    ];
-
-    if(!PRO_CODES.includes(code)){
-
-        alert("Mã PRO không hợp lệ");
-
-        return;
-    }
-
     try{
 
         const user =
         auth.currentUser;
 
         if(!user) return;
+
+        /* CHECK CODE */
+
+        const codeRef =
+        doc(db,"upgradeCodes",code);
+
+        const codeSnap =
+        await getDoc(codeRef);
+
+        if(!codeSnap.exists()){
+
+            alert("Mã không tồn tại");
+
+            return;
+        }
+
+        const codeData =
+        codeSnap.data();
+
+        if(codeData.used){
+
+            alert("Mã đã được sử dụng");
+
+            return;
+        }
+
+        /* UPDATE USER */
 
         await setDoc(
 
@@ -984,6 +995,30 @@ async function upgradePro(){
             {
 
                 plan:"pro"
+
+            },
+
+            {
+
+                merge:true
+
+            }
+
+        );
+
+        /* KHÓA MÃ */
+
+        await setDoc(
+
+            codeRef,
+
+            {
+
+                used:true,
+
+                usedBy:user.uid,
+
+                usedAt:new Date()
 
             },
 
@@ -1012,10 +1047,6 @@ async function upgradePro(){
     }
 
 }
-
-/* EXPORT */
-
-window.upgradePro = upgradePro;
 
 </script>
 
