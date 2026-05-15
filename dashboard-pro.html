@@ -1,1009 +1,225 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>SPINEASY PRO DASHBOARD</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<style>
-
-:root{
-    --primary:#c1121f;
-    --gold:#ffd700;
-    --dark:#121212;
-}
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:#f4f4f4;
-}
-
-.topbar{
-    background:#121212;
-    color:#fff;
-    padding:18px 35px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:999;
-}
-
-.logo{
-    font-size:1.8rem;
-    font-weight:900;
-    color:var(--gold);
-}
-
-.user-box{
-    display:flex;
-    gap:15px;
-    align-items:center;
-}
-
-.logout-btn{
-    background:#c1121f;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.container{
-    max-width:1400px;
-    margin:auto;
-    padding:40px 20px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:1.2fr 0.8fr;
-    gap:25px;
-}
-
-.card{
-    background:#fff;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-.card h2{
-    margin-top:0;
-    color:#c1121f;
-}
-
-.plan{
-    background:#fff4c4;
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:25px;
-    line-height:1.8;
-}
-
-.plan h3{
-    margin-top:0;
-    color:#c1121f;
-}
-
-.input-group{
-    margin-bottom:18px;
-}
-
-.input-group label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
-}
-
-.input-group input{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid #ddd;
-    font-size:15px;
-}
-
-.input-group input:focus{
-    outline:none;
-    border-color:#c1121f;
-}
-
-.prize-item{
-    background:#fafafa;
-    border:1px solid #eee;
-    padding:18px;
-    border-radius:16px;
-    margin-bottom:18px;
-}
-
-.prize-grid{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-}
-
-.remove-btn{
-    margin-top:15px;
-    background:#dc3545;
-    color:#fff;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.save-btn{
-    width:100%;
-    border:none;
-    background:#c1121f;
-    color:#fff;
-    padding:15px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.add-btn{
-    width:100%;
-    margin-bottom:20px;
-    border:none;
-    background:#121212;
-    color:#fff;
-    padding:15px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.preview{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-}
-
-.preview-backdrop{
-    width:100%;
-    height:180px;
-    border-radius:16px;
-    background:#ddd;
-    background-size:cover;
-    background-position:center;
-    margin-bottom:20px;
-}
-
-.wheel{
-    width:280px;
-    height:280px;
-    border-radius:50%;
-    border:10px solid #ffd700;
-    position:relative;
-    margin-bottom:25px;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-}
-
-.center-circle{
-    position:absolute;
-    width:90px;
-    height:90px;
-    background:#fff;
-    border-radius:50%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-    color:#c1121f;
-    box-shadow:0 0 20px rgba(0,0,0,0.15);
-}
-
-.preview-title{
-    font-size:1.2rem;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-.link-box{
-    background:#f3f3f3;
-    padding:14px;
-    border-radius:12px;
-    word-break:break-all;
-    font-size:14px;
-    width:100%;
-}
-
-.copy-btn{
-    margin-top:12px;
-    background:#121212;
-    color:#fff;
-    border:none;
-    padding:12px 20px;
-    border-radius:12px;
-    cursor:pointer;
-    width:100%;
-}
-
-.message{
-    margin-top:18px;
-    font-weight:bold;
-    text-align:center;
-    min-height:24px;
-}
-
-.upload-box{
-    background:#fafafa;
-    border:2px dashed #ccc;
-    padding:20px;
-    border-radius:16px;
-    margin-bottom:20px;
-}
-
-.upload-btn{
-    background:#121212;
-    color:#fff;
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.loading{
-    color:#c1121f;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-@media(max-width:900px){
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .topbar{
-        flex-direction:column;
-        gap:15px;
-    }
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <title>Spineasy Pro Dashboard - Timon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #A733EE; --dark: #1a1a1a; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; margin: 0; height: 100vh; }
+        
+        /* Sidebar điều khiển */
+        .sidebar { width: 350px; background: var(--dark); color: white; padding: 20px; overflow-y: auto; box-shadow: 2px 0 10px rgba(0,0,0,0.3); }
+        .sidebar h2 { color: gold; border-bottom: 2px solid gold; padding-bottom: 10px; }
+        
+        .control-group { margin-bottom: 20px; background: #2a2a2a; padding: 15px; border-radius: 8px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        select, input, button { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none; box-sizing: border-box; }
+        
+        .btn-save { background: #28a745; color: white; cursor: pointer; font-weight: bold; }
+        .btn-reset { background: #dc3545; color: white; cursor: pointer; }
+        
+        /* Khu vực Preview */
+        .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #333; position: relative; }
+        canvas { max-width: 90%; max-height: 80vh; background: #fff; border-radius: 50%; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        
+        .prize-item { display: flex; gap: 5px; margin-bottom: 5px; }
+        .prize-item input { margin-bottom: 0; }
+    </style>
 </head>
-
 <body>
 
-<div class="topbar">
-
-    <div class="logo">
-        SPINEASY PRO
+<div class="sidebar">
+    <h2><i class="fas fa-crown"></i> PRO DASHBOARD</h2>
+    
+    <div class="control-group">
+        <label><i class="fas fa-palette"></i> Chọn Theme Màu sắc</label>
+        <select id="themeSelect" onchange="updatePreview()">
+            <option value="default">Mặc định Spineasy</option>
+            <option value="neon">Cyber Neon (Tím - Xanh)</option>
+            <option value="luxury">Luxury (Vàng - Đen)</option>
+            <option value="pastel">Mùa hè (Pastel)</option>
+        </select>
+        
+        <label><i class="fas fa-image"></i> Hoặc dùng Ảnh nền riêng</label>
+        <input type="file" id="bgInput" accept="image/*" onchange="previewImage(this)">
     </div>
 
-    <div class="user-box">
-
-        <span id="userEmail">
-            loading...
-        </span>
-
-        <button class="logout-btn"
-        onclick="logout()">
-
-            Đăng xuất
-
-        </button>
-
+    <div class="control-group">
+        <label><i class="fas fa-list"></i> Danh sách quà & Tỷ lệ</label>
+        <div id="prizeList">
+            </div>
+        <button onclick="addPrize()" style="background: #444; color: #fff;">+ Thêm quà</button>
     </div>
 
+    <button class="btn-save" onclick="saveToFirebase()"><i class="fas fa-cloud-upload-alt"></i> LƯU & XUẤT BẢN</button>
+    <button class="btn-reset" onclick="resetAll()"><i class="fas fa-undo"></i> RESET MẶC ĐỊNH</button>
 </div>
 
-<div class="container">
-
-    <div class="plan">
-
-        <h3>GÓI PRO - 499K</h3>
-
-        ✔ Upload ảnh trực tiếp
-        <br>
-
-        ✔ Backdrop realtime
-        <br>
-
-        ✔ Nền vòng quay realtime
-        <br>
-
-        ✔ Không giới hạn quà
-        <br>
-
-        ✔ Chỉnh xác suất %
-        <br>
-
-        ✔ Firebase realtime
-
-    </div>
-
-    <div class="grid">
-
-        <!-- LEFT -->
-
-        <div class="card">
-
-            <h2>Quản lý vòng quay PRO</h2>
-
-            <!-- BACKDROP -->
-
-            <div class="upload-box">
-
-                <label><b>Upload Backdrop</b></label>
-
-                <input
-                type="file"
-                id="backdropFile"
-                accept="image/*">
-
-                <button
-                class="upload-btn"
-                onclick="uploadBackdrop()">
-
-                    Upload Backdrop
-
-                </button>
-
-                <div
-                class="loading"
-                id="backdropLoading">
-
-                </div>
-
-                <input
-                type="hidden"
-                id="backdrop">
-
-            </div>
-
-            <!-- WHEEL BG -->
-
-            <div class="upload-box">
-
-                <label><b>Upload nền vòng quay</b></label>
-
-                <input
-                type="file"
-                id="wheelFile"
-                accept="image/*">
-
-                <button
-                class="upload-btn"
-                onclick="uploadWheel()">
-
-                    Upload Wheel
-
-                </button>
-
-                <div
-                class="loading"
-                id="wheelLoading">
-
-                </div>
-
-                <input
-                type="hidden"
-                id="wheelBg">
-
-            </div>
-
-            <button
-            class="add-btn"
-            onclick="addPrize()">
-
-                <i class="fas fa-plus"></i>
-
-                THÊM QUÀ
-
-            </button>
-
-            <div id="prizeList"></div>
-
-            <button
-            class="save-btn"
-            onclick="saveWheel()">
-
-                <i class="fas fa-save"></i>
-
-                LƯU THAY ĐỔI
-
-            </button>
-
-            <div
-            class="message"
-            id="message">
-
-            </div>
-
-        </div>
-
-        <!-- RIGHT -->
-
-        <div class="card preview">
-
-            <div class="preview-title">
-                PREVIEW
-            </div>
-
-            <div
-            class="preview-backdrop"
-            id="previewBackdrop">
-
-            </div>
-
-            <div
-            class="wheel"
-            id="previewWheel">
-
-                <div class="center-circle">
-                    SPIN
-                </div>
-
-            </div>
-
-            <div
-            class="link-box"
-            id="wheelLink">
-
-                loading...
-
-            </div>
-
-            <button
-            class="copy-btn"
-            onclick="copyLink()">
-
-                COPY LINK
-
-            </button>
-
-        </div>
-
-    </div>
-
+<div class="main-content">
+    <canvas id="wheelCanvas"></canvas>
+    <p style="color: #ccc; margin-top: 20px;">ID của bạn: <span id="displayId" style="color: gold;">---</span></p>
 </div>
 
 <script type="module">
-
-import { initializeApp }
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-
-    getAuth,
-    onAuthStateChanged,
-    signOut
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* =====================
-CONFIG
-===================== */
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
-
-  authDomain: "spineasy-user.firebaseapp.com",
-
-  projectId: "spineasy-user",
-
-  storageBucket: "spineasy-user.appspot.com",
-
-  messagingSenderId: "805126611420",
-
-  appId: "1:805126611420:web:59a5605b2b68b35f806f19"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-/* =====================
-IMGBB API
-===================== */
-
-const IMGBB_API =
-"a144f90aefe3221cee5520a75317e778";
-
-/* =====================
-GLOBAL
-===================== */
-
-let currentUid = "";
-
-/* =====================
-UPLOAD IMAGE
-===================== */
-
-async function uploadToImgBB(file){
-
-    const formData =
-    new FormData();
-
-    formData.append(
-        "image",
-        file
-    );
-
-    const response =
-    await fetch(
-
-        `https://api.imgbb.com/1/upload?key=${IMGBB_API}`,
-
-        {
-            method:"POST",
-            body:formData
-        }
-
-    );
-
-    const data =
-    await response.json();
-
-    return data.data.url;
-}
-
-/* =====================
-UPLOAD BACKDROP
-===================== */
-
-async function uploadBackdrop(){
-
-    const file =
-    document.getElementById(
-    "backdropFile"
-    ).files[0];
-
-    if(!file){
-
-        alert("Chọn ảnh backdrop");
-
-        return;
-    }
-
-    document.getElementById(
-    "backdropLoading"
-    ).innerHTML =
-    "Đang upload...";
-
-    try{
-
-        const url =
-        await uploadToImgBB(file);
-
-        document.getElementById(
-        "backdrop"
-        ).value = url;
-
-        document.getElementById(
-        "previewBackdrop"
-        ).style.backgroundImage =
-        `url('${url}')`;
-
-        document.getElementById(
-        "backdropLoading"
-        ).innerHTML =
-        "Upload thành công";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Upload lỗi");
-    }
-
-}
-
-/* =====================
-UPLOAD WHEEL
-===================== */
-
-async function uploadWheel(){
-
-    const file =
-    document.getElementById(
-    "wheelFile"
-    ).files[0];
-
-    if(!file){
-
-        alert("Chọn ảnh vòng quay");
-
-        return;
-    }
-
-    document.getElementById(
-    "wheelLoading"
-    ).innerHTML =
-    "Đang upload...";
-
-    try{
-
-        const url =
-        await uploadToImgBB(file);
-
-        document.getElementById(
-        "wheelBg"
-        ).value = url;
-
-        document.getElementById(
-        "previewWheel"
-        ).style.backgroundImage =
-        `url('${url}')`;
-
-        document.getElementById(
-        "wheelLoading"
-        ).innerHTML =
-        "Upload thành công";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Upload lỗi");
-    }
-
-}
-
-/* =====================
-ADD PRIZE
-===================== */
-
-function addPrize(data = {}){
-
-    const div =
-    document.createElement("div");
-
-    div.className =
-    "prize-item";
-
-    div.innerHTML = `
-
-        <div class="prize-grid">
-
-            <div class="input-group">
-
-                <label>Tên quà</label>
-
-                <input
-                class="label"
-                value="${data.label || ""}">
-
-            </div>
-
-            <div class="input-group">
-
-                <label>Số lượng</label>
-
-                <input
-                type="number"
-                class="qty"
-                value="${data.qty || 0}">
-
-            </div>
-
-            <div class="input-group">
-
-                <label>% xác suất</label>
-
-                <input
-                type="number"
-                class="weight"
-                value="${data.weight || 10}">
-
-            </div>
-
-        </div>
-
-        <button
-        class="remove-btn">
-
-            Xóa quà
-
-        </button>
-
-    `;
-
-    div.querySelector(".remove-btn")
-    .onclick = ()=>{
-
-        div.remove();
+    import { db, storage } from "./firebase-config.js";
+    import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+    // Khởi tạo biến
+    const canvas = document.getElementById("wheelCanvas");
+    const ctx = canvas.getContext("2d");
+    let prizes = [
+        { label: "Quà 1", weight: 1 },
+        { label: "Quà 2", weight: 1 },
+        { label: "Quà 3", weight: 1 },
+        { label: "Quà 4", weight: 1 }
+    ];
+    let customImg = null;
+    let wheelId = new URLSearchParams(window.location.search).get('id') || "demo-user";
+    document.getElementById('displayId').innerText = wheelId;
+
+    const themes = {
+        default: ["#FF3D68", "#A733EE", "#2196F3", "#00BCD4", "#FFC107"],
+        neon: ["#00f2ff", "#001eff", "#bd00ff", "#d600ff"],
+        luxury: ["#1a1a1a", "#aa841e", "#d4af37", "#444"],
+        pastel: ["#ffadad", "#ffd6a5", "#fdffb6", "#caffbf"]
     };
 
-    document.getElementById(
-    "prizeList"
-    ).appendChild(div);
-}
+    // Vẽ Preview
+    window.updatePreview = function() {
+        const theme = themes[document.getElementById('themeSelect').value];
+        const size = 360;
+        const center = 375;
+        canvas.width = 750;
+        canvas.height = 750;
+        const arc = (Math.PI * 2) / prizes.length;
 
-/* =====================
-LOGIN
-===================== */
+        ctx.clearRect(0, 0, 750, 750);
 
-onAuthStateChanged(auth,async(user)=>{
+        // 1. Vẽ Nan (Fill)
+        for (let i = 0; i < prizes.length; i++) {
+            let angle = i * arc;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(center, center);
+            ctx.arc(center, center, size, angle, angle + arc);
+            ctx.clip();
 
-    if(!user){
+            if (customImg) {
+                ctx.drawImage(customImg, center - size, center - size, size * 2, size * 2);
+                ctx.fillStyle = "rgba(0,0,0,0.15)";
+                ctx.fill();
+            } else {
+                ctx.fillStyle = theme[i % theme.length];
+                ctx.fill();
+            }
+            ctx.restore();
+        }
 
-        location.href =
-        "login.html";
+        // 2. Vẽ viền và chữ
+        for (let i = 0; i < prizes.length; i++) {
+            let angle = i * arc;
+            ctx.beginPath();
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 3;
+            ctx.moveTo(center, center);
+            ctx.lineTo(center + Math.cos(angle) * size, center + Math.sin(angle) * size);
+            ctx.stroke();
 
-        return;
-    }
+            // Chữ & Chấm tròn
+            ctx.save();
+            ctx.translate(center, center);
+            ctx.rotate(angle + arc / 2);
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 20px Arial";
+            ctx.textAlign = "right";
+            ctx.fillText(prizes[i].label, size - 70, 7);
+            
+            ctx.beginPath();
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            ctx.arc(size * 0.94, 0, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
 
-    currentUid =
-    user.uid;
+        // 3. Viền ngoài & Tâm
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "#fff";
+        ctx.arc(center, center, size, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.fillStyle = "#fff";
+        ctx.arc(center, center, 20, 0, Math.PI * 2);
+        ctx.fill();
+    };
 
-    document.getElementById(
-    "userEmail"
-    ).innerHTML =
-    user.email;
+    // Quản lý quà
+    window.renderPrizes = function() {
+        const container = document.getElementById('prizeList');
+        container.innerHTML = prizes.map((p, i) => `
+            <div class="prize-item">
+                <input type="text" value="${p.label}" onchange="prizes[${i}].label=this.value; updatePreview()">
+                <button onclick="prizes.splice(${i},1); renderPrizes(); updatePreview()" style="width:40px; background:red">X</button>
+            </div>
+        `).join('');
+    };
 
-    const basePath =
+    window.addPrize = function() {
+        prizes.push({ label: "Quà mới", weight: 1 });
+        renderPrizes();
+        updatePreview();
+    };
 
-    window.location.origin +
+    window.previewImage = function(input) {
+        if (input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => { customImg = img; updatePreview(); };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
 
-    window.location.pathname.substring(
-
-        0,
-
-        window.location.pathname.lastIndexOf("/")
-
-    );
-
-    document.getElementById(
-    "wheelLink"
-    ).innerHTML =
-
-    basePath +
-
-    "/wheel.html?id=" +
-
-    user.uid;
-
-    const ref =
-    doc(db,"wheels",user.uid);
-
-    const snap =
-    await getDoc(ref);
-
-    if(!snap.exists()){
-
-        await setDoc(ref,{
-
-            backdrop:"",
-            wheelBg:"",
-            prizes:[],
-            history:[]
-
-        });
-
-        location.reload();
-
-        return;
-    }
-
-    const data =
-    snap.data();
-
-    document.getElementById(
-    "backdrop"
-    ).value =
-    data.backdrop || "";
-
-    document.getElementById(
-    "wheelBg"
-    ).value =
-    data.wheelBg || "";
-
-    if(data.backdrop){
-
-        document.getElementById(
-        "previewBackdrop"
-        ).style.backgroundImage =
-        `url('${data.backdrop}')`;
-    }
-
-    if(data.wheelBg){
-
-        document.getElementById(
-        "previewWheel"
-        ).style.backgroundImage =
-        `url('${data.wheelBg}')`;
-    }
-
-    document.getElementById(
-    "prizeList"
-    ).innerHTML = "";
-
-    (data.prizes || []).forEach(p=>{
-
-        addPrize(p);
-    });
-
-});
-
-/* =====================
-SAVE
-===================== */
-
-async function saveWheel(){
-
-    try{
-
-        const prizes = [];
-
-        document.querySelectorAll(
-        ".prize-item"
-        ).forEach(item=>{
-
-            prizes.push({
-
-                label:
-                item.querySelector(".label").value,
-
-                qty:
-                Number(
-                item.querySelector(".qty").value
-                ),
-
-                weight:
-                Number(
-                item.querySelector(".weight").value
-                )
-
-            });
-
-        });
-
-        await setDoc(
-
-            doc(db,"wheels",currentUid),
-
-            {
-
-                backdrop:
-                document.getElementById(
-                "backdrop"
-                ).value,
-
-                wheelBg:
-                document.getElementById(
-                "wheelBg"
-                ).value,
-
-                prizes
-
-            },
-
-            {
-
-                merge:true
-
+    // LƯU LÊN FIREBASE
+    window.saveToFirebase = async function() {
+        try {
+            const btn = document.querySelector('.btn-save');
+            btn.innerText = "Đang lưu...";
+            
+            let imgUrl = null;
+            const file = document.getElementById('bgInput').files[0];
+            
+            // Nếu có up ảnh, đẩy lên Storage trước
+            if (file) {
+                const storageRef = ref(storage, `wheels/${wheelId}/bg.png`);
+                await uploadBytes(storageRef, file);
+                imgUrl = await getDownloadURL(storageRef);
             }
 
-        );
+            // Lưu thông tin vào Firestore
+            await setDoc(doc(db, "wheels", wheelId), {
+                prizes: prizes,
+                theme: document.getElementById('themeSelect').value,
+                customBg: imgUrl,
+                updatedAt: new Date()
+            });
 
-        document.getElementById(
-        "message"
-        ).innerHTML =
-        "Đã lưu thành công";
+            alert("Đã lưu cấu hình Pro thành công!");
+            btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> LƯU & XUẤT BẢN';
+        } catch (e) {
+            console.error(e);
+            alert("Lỗi khi lưu!");
+        }
+    };
 
-        document.getElementById(
-        "message"
-        ).style.color =
-        "green";
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        document.getElementById(
-        "message"
-        ).innerHTML =
-        "Lỗi khi lưu";
-
-        document.getElementById(
-        "message"
-        ).style.color =
-        "red";
-    }
-
-}
-
-/* =====================
-COPY LINK
-===================== */
-
-function copyLink(){
-
-    navigator.clipboard.writeText(
-
-        document.getElementById(
-        "wheelLink"
-        ).innerText
-
-    );
-
-    alert("Đã copy");
-}
-
-/* =====================
-LOGOUT
-===================== */
-
-function logout(){
-
-    signOut(auth);
-}
-
-/* =====================
-EXPORT
-===================== */
-
-window.logout = logout;
-
-window.copyLink = copyLink;
-
-window.saveWheel = saveWheel;
-
-window.addPrize = addPrize;
-
-window.uploadBackdrop = uploadBackdrop;
-
-window.uploadWheel = uploadWheel;
-
+    // Khởi tạo lần đầu
+    renderPrizes();
+    updatePreview();
 </script>
-
 </body>
 </html>
