@@ -620,7 +620,9 @@ onAuthStateChanged(auth,async(user)=>{
         await getDoc(userRef);
 
         const userData =
-        userSnap.data();
+userSnap.exists()
+? userSnap.data()
+: {};
 
         if(
             userData?.plan === "pro"
@@ -994,8 +996,8 @@ window.copyLink = copyLink;
 window.saveWheel = saveWheel;
 
 window.upgradePro = upgradePro;
+console.log("upgrade ready");
 
 </script>
-
 </body>
 </html>
