@@ -544,10 +544,14 @@ async function register(){
                 createdAt:new Date(),
 
                 wheelUrl:
-window.location.origin +
-window.location.pathname.replace("/login.html","") +
-"/wheel.html?id=" +
-user.uid
+                window.location.origin +
+                window.location.pathname.substring(
+    0,
+                window.location.pathname.lastIndexOf("/")
+    )
+    +
+    "/wheel.html?id=" +
+                user.uid
 
             }
 
