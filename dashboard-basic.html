@@ -580,7 +580,13 @@ MOBILE
                 COPY LINK
 
             </button>
+            <button class="copy-btn"
+onclick="upgradePro()"
+style="background:#ffd700;color:#121212;font-weight:bold;">
 
+    🚀 NÂNG CẤP PRO
+
+    </button>
         </div>
 
     </div>
@@ -935,6 +941,81 @@ window.logout = logout;
 window.copyLink = copyLink;
 
 window.saveWheel = saveWheel;
+    /* =====================
+UPGRADE PRO
+===================== */
+
+async function upgradePro(){
+
+    const code = prompt(
+    "Nhập mã nâng cấp PRO"
+    );
+
+    if(!code) return;
+
+    /* MÃ PRO CỦA BẠN */
+
+    const PRO_CODES = [
+
+        "SPINPRO2026",
+        "VIPPRO999",
+        "TIMONPRO"
+
+    ];
+
+    if(!PRO_CODES.includes(code)){
+
+        alert("Mã PRO không hợp lệ");
+
+        return;
+    }
+
+    try{
+
+        const user =
+        auth.currentUser;
+
+        if(!user) return;
+
+        await setDoc(
+
+            doc(db,"users",user.uid),
+
+            {
+
+                plan:"pro"
+
+            },
+
+            {
+
+                merge:true
+
+            }
+
+        );
+
+        alert(
+        "Nâng cấp PRO thành công"
+        );
+
+        window.location.href =
+        "dashboard-pro.html";
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        alert("Có lỗi xảy ra");
+    }
+
+}
+
+/* EXPORT */
+
+window.upgradePro = upgradePro;
 
 </script>
 
