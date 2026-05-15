@@ -544,8 +544,10 @@ async function register(){
                 createdAt:new Date(),
 
                 wheelUrl:
-                "wheel.html?id="
-                + user.uid
+                window.location.origin +
+                window.location.pathname.replace("login.html","") +
+                "wheel.html?id=" +
+                user.uid
 
             }
 
