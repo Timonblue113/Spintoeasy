@@ -537,7 +537,7 @@ async function register(){
 
                 email:email,
 
-                plan:"basic",
+                plan:"none",
 
                 status:true,
 
@@ -582,7 +582,7 @@ async function register(){
         setTimeout(()=>{
 
             window.location.href =
-            "dashboard-basic.html";
+            "paymentRequests.html";
 
         },1000);
 
@@ -679,23 +679,34 @@ async function login(){
             "Đăng nhập thành công"
             );
 
-            setTimeout(()=>{
+           setTimeout(()=>{
 
-                if(data.plan == "basic"){
+    /* BASIC */
 
-                    window.location.href =
-                    "dashboard-basic.html";
+    if(data.plan == "basic"){
 
-                }
+        window.location.href =
+        "dashboard-basic.html";
 
-                else{
+        return;
+    }
 
-                    window.location.href =
-                    "dashboard-pro.html";
+    /* PRO */
 
-                }
+    if(data.plan == "pro"){
 
-            },1000);
+        window.location.href =
+        "dashboard-pro.html";
+
+        return;
+    }
+
+    /* NONE */
+
+    window.location.href =
+    "paymentRequests.html";
+
+},1000);
 
         }
 
