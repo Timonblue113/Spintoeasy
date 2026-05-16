@@ -977,6 +977,18 @@ onSnapshot(
         data.history || [];
 
         draw();
+        /* AUTO RELOAD FIRST LOAD */
+
+if(!window.firstLoaded){
+
+    window.firstLoaded = true;
+
+    setTimeout(()=>{
+
+        location.reload();
+
+    },800);
+}
 
         /* BACKDROP */
 
