@@ -314,6 +314,7 @@ body::before{
         type="email"
         id="email"
         placeholder="Nhập email">
+        autocomplete="off">
 
     </div>
 
@@ -327,6 +328,7 @@ body::before{
         type="password"
         id="password"
         placeholder="Nhập mật khẩu">
+        autocomplete="new-password">
 
     </div>
 
@@ -746,7 +748,17 @@ EXPORT WINDOW
 window.login = login;
 
 window.register = register;
+window.login = login;
 
+window.register = register;
+
+window.onload = () => {
+
+    document.getElementById("email").value = "";
+
+    document.getElementById("password").value = "";
+
+};
 </script>
 
 </body>
