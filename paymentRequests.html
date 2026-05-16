@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Bảng giá SPINEASY</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f4;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:50px 20px;
+}
+
+.title{
+    text-align:center;
+    font-size:42px;
+    font-weight:bold;
+    margin-bottom:50px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.price{
+    font-size:50px;
+    color:#c1121f;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 30px;
+    border-radius:12px;
+    background:#c1121f;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.pro{
+    border:3px solid gold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<div class="title">
+
+    CHỌN GÓI SỬ DỤNG
+
+</div>
+
+<div class="grid">
+
+    <div class="card">
+
+        <h2>BASIC</h2>
+
+        <div class="price">
+            200K
+        </div>
+
+        ✔ Chỉnh quà realtime
+        <br>
+        ✔ Link riêng
+        <br>
+        ✔ Firebase cloud
+        <br>
+        ✔ Lưu dữ liệu
+        <br><br>
+
+        ❌ Không upload ảnh
+        <br>
+        ❌ Không theme
+        <br>
+        ❌ Không xác suất
+
+        <br><br>
+
+        <a
+        class="btn"
+        href="basic-payment.html">
+
+            MUA BASIC
+
+        </a>
+
+    </div>
+
+    <div class="card pro">
+
+        <h2>PRO</h2>
+
+        <div class="price">
+            499K
+        </div>
+
+        ✔ Upload backdrop
+        <br>
+        ✔ Upload wheel
+        <br>
+        ✔ Themes
+        <br>
+        ✔ Chỉnh xác suất
+        <br>
+        ✔ Không giới hạn quà
+
+        <br><br>
+
+        <a
+        class="btn"
+        href="pro-payment.html">
+
+            MUA PRO
+
+        </a>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+</body>
+</html>
