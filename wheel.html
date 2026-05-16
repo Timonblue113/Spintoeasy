@@ -980,9 +980,31 @@ onSnapshot(
 
         /* BACKDROP */
 
-        if(data.backdrop){
+/* ===== BACKDROP ===== */
 
-            document.body.style.backgroundImage =
+const defaultBackdrop =
+"https://i.ibb.co/dw29MMnJ/DONE.jpg";
+
+/* PRO có backdrop */
+if(data.backdrop){
+
+    document.body.style.backgroundImage =
+
+    `linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.35)
+    ),
+    url('${data.backdrop}')`;
+}
+
+/* BASIC không có backdrop */
+else{
+
+
+
+        
+
+       /* document.body.style.backgroundImage =
 
             `url('${data.backdrop}')`;
         }
