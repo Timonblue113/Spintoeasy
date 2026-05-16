@@ -978,10 +978,12 @@ onSnapshot(
 
         draw();
         /* AUTO RELOAD FIRST LOAD */
+if(!sessionStorage.getItem("wheelReloaded")){
 
-if(!window.firstLoaded){
-
-    window.firstLoaded = true;
+    sessionStorage.setItem(
+        "wheelReloaded",
+        "true"
+    );
 
     setTimeout(()=>{
 
@@ -990,27 +992,21 @@ if(!window.firstLoaded){
     },800);
 }
 
-        /* BACKDROP */
-
 /* ===== BACKDROP ===== */
 
 const defaultBackdrop =
 "https://i.ibb.co/dw29MMnJ/DONE.jpg";
 
-/* PRO có backdrop */
 if(data.backdrop){
 
     document.body.style.backgroundImage =
 
-    url('${data.backdrop}')`;
+    `url('${data.backdrop}')`;
 }
 
-/* BASIC không có backdrop */
 else{
-    document.body.style.backgroundImage =
 
-    url('${defaultBackdrop}')`;
-}
+    document.body.style.backgroundImage =
 
 document.body.style.backgroundSize = "cover";
 document.body.style.backgroundPosition = "center";
