@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SPINEASY - Thanh toán</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+
+    --primary:#c1121f;
+
+    --dark:#121212;
+
+    --gold:#ffd700;
+}
+
+*{
+
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #c1121f,
+        #8e0e16
+    );
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+}
+
+.payment-box{
+
+    width:500px;
+
+    max-width:100%;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.35);
+
+    text-align:center;
+}
+
+.logo{
+
+    font-size:2.3rem;
+
+    font-weight:900;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+}
+
+.sub{
+
+    color:#666;
+
+    margin-bottom:30px;
+}
+
+.plan-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.plan{
+
+    border:2px solid #eee;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.plan:hover{
+
+    transform:translateY(-3px);
+}
+
+.plan.active{
+
+    border-color:#c1121f;
+
+    background:#fff5f5;
+}
+
+.plan h3{
+
+    margin:0 0 10px;
+
+    color:#c1121f;
+}
+
+.price{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#121212;
+}
+
+.qr-box{
+
+    margin-top:25px;
+}
+
+.qr-box img{
+
+    width:260px;
+
+    max-width:100%;
+
+    border-radius:20px;
+
+    border:4px solid #eee;
+}
+
+.bank-info{
+
+    margin-top:25px;
+
+    background:#f5f5f5;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    text-align:left;
+
+    line-height:2;
+}
+
+.note{
+
+    margin-top:20px;
+
+    background:#fff5d6;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    color:#333;
+
+    font-weight:bold;
+}
+
+.btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin-top:15px;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.btn-back{
+
+    background:#eee;
+
+    color:#121212;
+}
+
+.btn-zalo{
+
+    background:#28a745;
+
+    color:#fff;
+}
+
+.selected-plan{
+
+    margin-top:10px;
+
+    font-weight:bold;
+
+    color:#c1121f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="payment-box">
+
+    <div class="logo">
+
+        SPINEASY
+
+    </div>
+
+    <div class="sub">
+
+        Chọn gói và chuyển khoản để kích hoạt
+
+    </div>
+
+    <!-- PLAN -->
+
+    <div class="plan-grid">
+
+        <div
+        class="plan active"
+        id="basicPlan"
+        onclick="selectPlan('BASIC - 200K')">
+
+            <h3>
+
+                BASIC
+
+            </h3>
+
+            <div class="price">
+
+                200K
+
+            </div>
+
+        </div>
+
+        <div
+        class="plan"
+        id="proPlan"
+        onclick="selectPlan('PRO - 499K')">
+
+            <h3>
+
+                PRO
+
+            </h3>
+
+            <div class="price">
+
+                499K
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+    class="selected-plan"
+    id="selectedPlan">
+
+        Gói đã chọn:
+        BASIC - 200K
+
+    </div>
+
+    <!-- QR -->
+
+    <div class="qr-box">
+
+        <!-- THAY QR CỦA BẠN -->
+
+        <img
+        src="YOUR_QR_IMAGE.png"
+        alt="QR chuyển khoản">
+
+    </div>
+
+    <!-- INFO -->
+
+    <div class="bank-info">
+
+        👤 <b>BÙI VĂN ÚT</b>
+        <br>
+
+        🏦 BIDV
+        <br>
+
+        💳 STK:
+        <b>6930236116</b>
+        <br>
+
+        📱 MOMO:
+        <b>0946296269</b>
+
+    </div>
+
+    <!-- NOTE -->
+
+    <div class="note">
+
+        ⚠️ Khi chuyển khoản vui lòng ghi chú:
+        <br><br>
+
+        <span id="noteText">
+
+            loading...
+
+        </span>
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <button
+    class="btn btn-zalo"
+    onclick="openZalo()">
+
+        <i class="fas fa-comment"></i>
+
+        Tôi đã chuyển khoản
+
+    </button>
+
+    <button
+    class="btn btn-back"
+    onclick="goBack()">
+
+        ← Quay lại đăng nhập
+
+    </button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+    getAuth,
+    onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* =====================
+FIREBASE
+===================== */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD35Skj_dI0_X7Nsau6fjpPUN5H-Zza8AY",
+
+  authDomain: "spineasy-user.firebaseapp.com",
+
+  projectId: "spineasy-user",
+
+  storageBucket: "spineasy-user.appspot.com",
+
+  messagingSenderId: "805126611420",
+
+  appId: "1:805126611420:web:59a5605b2b68b35f806f19",
+
+  measurementId: "G-NE80YJTEXN"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+/* =====================
+PLAN
+===================== */
+
+let currentPlan =
+"BASIC - 200K";
+
+window.selectPlan =
+(plan)=>{
+
+    currentPlan = plan;
+
+    document.getElementById(
+    "selectedPlan"
+    ).innerHTML =
+
+    "Gói đã chọn: " + plan;
+
+    document.getElementById(
+    "basicPlan"
+    ).classList.remove("active");
+
+    document.getElementById(
+    "proPlan"
+    ).classList.remove("active");
+
+    if(plan.includes("BASIC")){
+
+        document.getElementById(
+        "basicPlan"
+        ).classList.add("active");
+    }
+
+    else{
+
+        document.getElementById(
+        "proPlan"
+        ).classList.add("active");
+    }
+
+    updateNote();
+};
+
+/* =====================
+NOTE
+===================== */
+
+function updateNote(){
+
+    const user =
+    auth.currentUser;
+
+    if(!user) return;
+
+    document.getElementById(
+    "noteText"
+    ).innerHTML =
+
+    user.email +
+    " - " +
+    currentPlan;
+}
+
+/* =====================
+AUTH
+===================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    (user)=>{
+
+        if(!user){
+
+            window.location.href =
+            "login.html";
+
+            return;
+        }
+
+        updateNote();
+    }
+
+);
+
+/* =====================
+BUTTON
+===================== */
+
+window.goBack = ()=>{
+
+    window.location.href =
+    "login.html";
+};
+
+window.openZalo = ()=>{
+
+    alert(
+
+`Sau khi kiểm tra chuyển khoản,
+admin sẽ kích hoạt tài khoản cho bạn.
+
+Ghi chú:
+${document.getElementById("noteText").innerText}`
+
+    );
+};
+
+</script>
+
+</body>
+</html>
