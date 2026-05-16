@@ -1000,16 +1000,19 @@ const defaultBackdrop =
 if(data.backdrop){
 
     document.body.style.backgroundImage =
-
     `url('${data.backdrop}')`;
 }
 
 else{
 
     document.body.style.backgroundImage =
+    `url('${defaultBackdrop}')`;
+}
 
 document.body.style.backgroundSize = "cover";
+
 document.body.style.backgroundPosition = "center";
+
 document.body.style.backgroundRepeat = "no-repeat";
 
 
