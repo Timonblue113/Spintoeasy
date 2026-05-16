@@ -999,7 +999,18 @@ if(data.backdrop){
 
 /* BASIC không có backdrop */
 else{
+    document.body.style.backgroundImage =
 
+    `linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.35)
+    ),
+    url('${defaultBackdrop}')`;
+}
+
+document.body.style.backgroundSize = "cover";
+document.body.style.backgroundPosition = "center";
+document.body.style.backgroundRepeat = "no-repeat";
 
 
         
