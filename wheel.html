@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Lucky Wheel PRO MAX</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
@@ -20,9 +25,13 @@ body{
     transition:0.4s;
 }
 
+/* =====================
+WHEEL
+===================== */
+
 #wheelContainer{
     position:absolute;
-    right:200px;
+    right:120px;
     top:50%;
     transform:translateY(-50%);
     width:700px;
@@ -32,8 +41,14 @@ body{
 canvas{
     width:700px;
     height:700px;
+    border-radius:50%;
+    overflow:hidden;
     filter:drop-shadow(0 0 20px rgba(0,0,0,0.5));
 }
+
+/* =====================
+BUTTON
+===================== */
 
 #spinBtn{
     position:absolute;
@@ -64,6 +79,10 @@ canvas{
     border-right:40px solid gold;
     z-index:20;
 }
+
+/* =====================
+POPUP
+===================== */
 
 .popup{
     position:fixed;
@@ -113,17 +132,26 @@ input{
     background:#dc3545;
 }
 
+/* =====================
+INFO
+===================== */
+
 #infoBox{
     position:absolute;
     top:40%;
-    left:200px;
+    left:120px;
     transform:translateY(-50%);
-    background:rgba(255,255,255,0.9);
+    background:rgba(255,255,255,0.92);
     padding:25px;
     min-width:350px;
     border-radius:15px;
     display:none;
+    backdrop-filter:blur(10px);
 }
+
+/* =====================
+RESULT
+===================== */
 
 #resultBox{
     background:#b30000;
@@ -136,15 +164,69 @@ input{
     border:5px solid gold;
 }
 
+.closeBtn{
+    position:absolute;
+    top:10px;
+    right:20px;
+    cursor:pointer;
+    font-size:22px;
+}
+
+#resultText{
+    font-size:48px;
+    font-family:'Britannic Bold';
+    color:yellow;
+}
+
+/* =====================
+RESPONSIVE
+===================== */
+
+@media(max-width:1100px){
+
+    #wheelContainer{
+
+        position:relative;
+        right:auto;
+        top:auto;
+        transform:none;
+        margin:auto;
+
+        width:95vw;
+        height:95vw;
+    }
+
+    canvas{
+
+        width:95vw;
+        height:95vw;
+    }
+
+    #infoBox{
+
+        position:relative;
+        left:auto;
+        top:auto;
+        transform:none;
+        margin:20px auto;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- INFO -->
+
 <div id="infoBox">
 
     <h2 style="color:#b30000;margin-top:0;">
+
         SẴN SÀNG!
+
     </h2>
 
     <p id="infoName"></p>
@@ -157,6 +239,8 @@ input{
 
 </div>
 
+<!-- WHEEL -->
+
 <div id="wheelContainer">
 
     <div id="arrow"></div>
@@ -164,7 +248,9 @@ input{
     <canvas id="wheel"></canvas>
 
     <button id="spinBtn">
+
         QUAY
+
     </button>
 
 </div>
@@ -216,24 +302,19 @@ input{
 
         <div
         class="closeBtn"
-        onclick="closeResult()"
-        style="position:absolute;top:10px;right:20px;cursor:pointer;">
+        onclick="closeResult()">
 
             ✖
 
         </div>
 
-        <h1 style="font-size:28px;">
+        <h1>
 
             🎁 CHÚC MỪNG BẠN ĐÃ TRÚNG THƯỞNG
 
         </h1>
 
-        <div
-        id="resultText"
-        style="font-size:49px;font-family:'Britannic Bold';color:yellow;">
-
-        </div>
+        <div id="resultText"></div>
 
     </div>
 
@@ -241,9 +322,9 @@ input{
 
 <script>
 
-/* =========================
+/* =====================
 DEFAULT
-========================= */
+===================== */
 
 const DEFAULT_PRIZES = [
 
@@ -251,23 +332,13 @@ const DEFAULT_PRIZES = [
 
     { label:"Tivi", qty:20, weight:14 },
 
-    { label:"Dán màn hình", qty:57, weight:34 },
-
-    { label:"Ốp lưng", qty:10, weight:7 },
-
-    { label:"Củ sạc", qty:3, weight:2 },
-
-    { label:"Sạc dự phòng", qty:1, weight:1 },
-
-    { label:"Tai nghe", qty:2, weight:1 },
-
-    { label:"Voucher giảm giá", qty:57, weight:34 }
+    { label:"Voucher", qty:70, weight:79 }
 
 ];
 
-/* =========================
+/* =====================
 GLOBAL
-========================= */
+===================== */
 
 let prizes = DEFAULT_PRIZES;
 
@@ -285,12 +356,11 @@ let currentUser = {
 
     name:"",
     phone:""
-
 };
 
-/* =========================
+/* =====================
 CANVAS
-========================= */
+===================== */
 
 const canvas =
 document.getElementById("wheel");
@@ -298,21 +368,22 @@ document.getElementById("wheel");
 const ctx =
 canvas.getContext("2d");
 
-/* =========================
+/* =====================
 DRAW
-========================= */
+===================== */
 
-function draw() {
+function draw(){
 
-    let size = 340;
+    const size = 340;
 
-    let center = 350;
+    const center = 350;
 
     canvas.width = 700;
 
     canvas.height = 700;
 
-    let arc = Math.PI * 2 / prizes.length;
+    const arc =
+    Math.PI * 2 / prizes.length;
 
     const colors = [
 
@@ -329,7 +400,9 @@ function draw() {
 
     ctx.clearRect(0,0,700,700);
 
-    /* ===== ẢNH NỀN PIZZA ===== */
+    /* =====================
+    IMAGE BG
+    ===================== */
 
     if(wheelBgImage){
 
@@ -365,17 +438,22 @@ function draw() {
         ctx.restore();
     }
 
-    /* ===== NAN ===== */
+    /* =====================
+    SLICES
+    ===================== */
 
     for(let i=0;i<prizes.length;i++){
 
-        let angle = i * arc;
+        const angle =
+        i * arc;
 
         ctx.beginPath();
 
-        ctx.fillStyle = colors[i % colors.length];
+        ctx.fillStyle =
+        colors[i % colors.length];
 
-        ctx.globalAlpha = wheelBgImage ? 0.55 : 1;
+        ctx.globalAlpha =
+        wheelBgImage ? 0.45 : 1;
 
         ctx.moveTo(center,center);
 
@@ -395,17 +473,19 @@ function draw() {
         ctx.globalAlpha = 1;
     }
 
-    /* ===== CHI TIẾT ===== */
+    /* =====================
+    TEXT
+    ===================== */
 
     for(let i=0;i<prizes.length;i++){
 
-        let angle = i * arc;
-
-        /* ===== VẠCH ===== */
+        const angle =
+        i * arc;
 
         ctx.beginPath();
 
-        ctx.strokeStyle = "#fff";
+        ctx.strokeStyle =
+        "#fff";
 
         ctx.lineWidth = 3;
 
@@ -421,39 +501,6 @@ function draw() {
 
         ctx.stroke();
 
-        /* ===== CHẤM ===== */
-
-        ctx.save();
-
-        ctx.translate(center,center);
-
-        ctx.rotate(angle + arc / 2);
-
-        ctx.beginPath();
-
-        ctx.fillStyle =
-        "rgba(255,255,255,0.8)";
-
-        ctx.arc(
-
-            size * 0.94,
-
-            0,
-
-            4,
-
-            0,
-
-            Math.PI * 2
-
-        );
-
-        ctx.fill();
-
-        ctx.restore();
-
-        /* ===== TEXT ===== */
-
         ctx.save();
 
         ctx.translate(center,center);
@@ -468,7 +515,7 @@ function draw() {
 
         ctx.shadowColor = "#000";
 
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = 5;
 
         ctx.fillText(
 
@@ -476,18 +523,20 @@ function draw() {
 
             size - 80,
 
-            9
+            8
 
         );
 
         ctx.restore();
     }
 
-    /* ===== VIỀN ===== */
+    /* =====================
+    BORDER
+    ===================== */
 
     ctx.beginPath();
 
-    ctx.lineWidth = 7;
+    ctx.lineWidth = 8;
 
     ctx.strokeStyle = "#fff";
 
@@ -504,98 +553,88 @@ function draw() {
 
     ctx.stroke();
 
-    /* ===== TÂM ===== */
-
-    ctx.beginPath();
-
-    ctx.fillStyle = "#fff";
-
-    ctx.arc(
-
-        center,
-        center,
-
-        20,
-
-        0,
-
-        Math.PI * 2
-
-    );
-
-    ctx.fill();
 }
 
 draw();
 
-/* =========================
-BUTTON
-========================= */
+/* =====================
+FORM
+===================== */
 
-document.getElementById("spinBtn")
-.onclick = ()=>{
+function confirmForm(){
+
+    const name =
+    document.getElementById("name").value;
+
+    const phone =
+    document.getElementById("phone").value;
+
+    if(!name || !phone){
+
+        alert("Nhập đầy đủ thông tin");
+
+        return;
+    }
+
+    currentUser = {
+
+        name,
+        phone
+    };
+
+    ready = true;
+
+    document.getElementById(
+    "formPopup"
+    ).style.display = "none";
+
+    document.getElementById(
+    "infoBox"
+    ).style.display = "block";
+
+    document.getElementById(
+    "infoName"
+    ).innerText =
+    "Khách: " + name;
+
+    document.getElementById(
+    "infoPhone"
+    ).innerText =
+    "SĐT: " + phone;
+}
+
+function closeForm(){
+
+    document.getElementById(
+    "formPopup"
+    ).style.display = "none";
+}
+
+/* =====================
+SPIN BUTTON
+===================== */
+
+document.getElementById(
+"spinBtn"
+).onclick = ()=>{
 
     if(spinning) return;
 
     if(!ready){
 
-        document.getElementById("formPopup")
-        .style.display = "flex";
-    }
-
-    else{
-
-        spin();
-    }
-};
-
-/* =========================
-FORM
-========================= */
-
-function confirmForm(){
-
-    let name =
-    document.getElementById("name").value;
-
-    let phone =
-    document.getElementById("phone").value;
-
-    if(!name || !phone){
-
-        alert("Vui lòng nhập đủ!");
+        document.getElementById(
+        "formPopup"
+        ).style.display = "flex";
 
         return;
     }
 
-    currentUser = { name, phone };
+    spin();
+};
 
-    document.getElementById("formPopup")
-    .style.display = "none";
-
-    document.getElementById("infoName")
-    .innerText =
-    "Khách: " + name;
-
-    document.getElementById("infoPhone")
-    .innerText =
-    "SĐT: " + phone;
-
-    document.getElementById("infoBox")
-    .style.display = "block";
-
-    ready = true;
-}
-
-function closeForm(){
-
-    document.getElementById("formPopup")
-    .style.display = "none";
-}
-
-/* =========================
+/* =====================
 SPIN
-========================= */
+===================== */
 
 function spin(){
 
@@ -603,13 +642,16 @@ function spin(){
 
     let totalQty =
     prizes.reduce(
+
         (sum,p)=>sum+p.qty,
+
         0
+
     );
 
     if(totalQty <= 0){
 
-        alert("Hết quà rồi!");
+        alert("Hết quà");
 
         return;
     }
@@ -655,10 +697,16 @@ function spin(){
         }
     }
 
-    let arc = 360 / prizes.length;
+    let arc =
+    360 / prizes.length;
 
     let stopAngle =
-    360 - (resultIndex * arc) - (arc / 2);
+
+    360 -
+
+    (resultIndex * arc) -
+
+    (arc / 2);
 
     let totalRotate =
     360 * 10 + stopAngle;
@@ -697,12 +745,14 @@ function spin(){
             await window.saveFirebase();
         }
 
-        document.getElementById("resultText")
-        .innerText =
+        document.getElementById(
+        "resultText"
+        ).innerText =
         winItem.label;
 
-        document.getElementById("resultPopup")
-        .style.display = "flex";
+        document.getElementById(
+        "resultPopup"
+        ).style.display = "flex";
 
         spinning = false;
 
@@ -713,27 +763,103 @@ function spin(){
     },5000);
 }
 
-/* =========================
-CLOSE RESULT
-========================= */
+/* =====================
+RESULT
+===================== */
 
 function closeResult(){
 
-    document.getElementById("resultPopup")
-    .style.display = "none";
+    document.getElementById(
+    "resultPopup"
+    ).style.display = "none";
 
-    document.getElementById("infoBox")
-    .style.display = "none";
+    document.getElementById(
+    "infoBox"
+    ).style.display = "none";
 
-    canvas.style.transition = "none";
+    document.getElementById(
+    "name"
+    ).value = "";
 
-    canvas.style.transform = "rotate(0deg)";
+    document.getElementById(
+    "phone"
+    ).value = "";
 
-    document.getElementById("name").value = "";
+    canvas.style.transition =
+    "none";
 
-    document.getElementById("phone").value = "";
+    canvas.style.transform =
+    "rotate(0deg)";
 
     draw();
+}
+
+/* =====================
+THEMES
+===================== */
+
+function applyTheme(type){
+
+    if(type === "pizza"){
+
+        canvas.style.background =
+        `
+        conic-gradient(
+        #ff4d4d 0deg 60deg,
+        #ffd93d 60deg 120deg,
+        #6bcB77 120deg 180deg,
+        #4d96ff 180deg 240deg,
+        #c77dff 240deg 300deg,
+        #ff8fab 300deg 360deg
+        )
+        `;
+    }
+
+    if(type === "luxury"){
+
+        canvas.style.background =
+        `
+        conic-gradient(
+        #000000 0deg 60deg,
+        #1a1a1a 60deg 120deg,
+        #333333 120deg 180deg,
+        #555555 180deg 240deg,
+        #777777 240deg 300deg,
+        #ffd700 300deg 360deg
+        )
+        `;
+    }
+
+    if(type === "neon"){
+
+        canvas.style.background =
+        `
+        conic-gradient(
+        #ff00ff 0deg 60deg,
+        #00ffff 60deg 120deg,
+        #39ff14 120deg 180deg,
+        #ffff00 180deg 240deg,
+        #ff6600 240deg 300deg,
+        #ff0066 300deg 360deg
+        )
+        `;
+    }
+
+    if(type === "ocean"){
+
+        canvas.style.background =
+        `
+        conic-gradient(
+        #003566 0deg 60deg,
+        #00509d 60deg 120deg,
+        #0077b6 120deg 180deg,
+        #0096c7 180deg 240deg,
+        #00b4d8 240deg 300deg,
+        #90e0ef 300deg 360deg
+        )
+        `;
+    }
+
 }
 
 </script>
@@ -749,20 +875,17 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
 
     getFirestore,
-
     doc,
-
     setDoc,
-
     onSnapshot
 
 }
 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* =========================
+/* =====================
 CONFIG
-========================= */
+===================== */
 
 const firebaseConfig = {
 
@@ -786,19 +909,22 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-/* =========================
+/* =====================
 UID
-========================= */
+===================== */
 
 const params =
-new URLSearchParams(window.location.search);
+new URLSearchParams(
+
+    window.location.search
+);
 
 const uid =
 params.get("id");
 
 if(!uid){
 
-    alert("Thiếu ID user");
+    alert("Thiếu ID");
 
     throw new Error("Missing UID");
 }
@@ -806,9 +932,9 @@ if(!uid){
 const wheelRef =
 doc(db,"wheels",uid);
 
-/* =========================
+/* =====================
 REALTIME
-========================= */
+===================== */
 
 onSnapshot(
 
@@ -825,8 +951,9 @@ onSnapshot(
                 {
 
                     prizes:DEFAULT_PRIZES,
-
-                    history:[]
+                    history:[],
+                    backdrop:"",
+                    wheelBg:"theme:pizza"
 
                 }
 
@@ -849,7 +976,9 @@ onSnapshot(
         history =
         data.history || [];
 
-        /* ===== BACKDROP ===== */
+        draw();
+
+        /* BACKDROP */
 
         if(data.backdrop){
 
@@ -858,38 +987,69 @@ onSnapshot(
             `url('${data.backdrop}')`;
         }
 
-        /* ===== WHEEL BG ===== */
+        else{
+
+            document.body.style.backgroundImage =
+            "none";
+        }
+
+        /* WHEEL BG */
 
         if(data.wheelBg){
 
-            const img = new Image();
+            if(data.wheelBg.startsWith("theme:")){
 
-            img.crossOrigin = "anonymous";
+                const theme =
 
-            img.onload = ()=>{
+                data.wheelBg.replace(
 
-                wheelBgImage = img;
+                    "theme:",
+                    ""
+
+                );
+
+                wheelBgImage = "";
+
+                applyTheme(theme);
 
                 draw();
-            };
+            }
 
-            img.src = data.wheelBg;
+            else{
+
+                const img =
+                new Image();
+
+                img.crossOrigin =
+                "anonymous";
+
+                img.onload = ()=>{
+
+                    wheelBgImage = img;
+
+                    draw();
+                };
+
+                img.src =
+                data.wheelBg;
+            }
         }
 
         else{
 
             wheelBgImage = "";
 
+            applyTheme("pizza");
+
             draw();
         }
 
-        console.log("Realtime synced");
     }
 );
 
-/* =========================
+/* =====================
 SAVE
-========================= */
+===================== */
 
 window.saveFirebase =
 async()=>{
@@ -903,7 +1063,6 @@ async()=>{
             {
 
                 prizes,
-
                 history
 
             },
@@ -916,7 +1075,6 @@ async()=>{
 
         );
 
-        console.log("Saved");
     }
 
     catch(err){
@@ -925,17 +1083,17 @@ async()=>{
     }
 };
 
-/* =========================
+/* =====================
 EXPORT EXCEL
-========================= */
+===================== */
 
 window.addEventListener(
 
-    'keydown',
+    "keydown",
 
     (e)=>{
 
-        if(e.key === 'F9'){
+        if(e.key === "F9"){
 
             const wb =
             XLSX.utils.book_new();
@@ -965,6 +1123,7 @@ window.addEventListener(
                 wb,
 
                 "BaoCao_QuayThuong.xlsx"
+
             );
         }
     }
