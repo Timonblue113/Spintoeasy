@@ -17,7 +17,7 @@ content="width=device-width, initial-scale=1.0">
 body{
     margin:0;
     font-family:Arial;
-    background:#222 no-repeat center center;
+    background:no-repeat center center;
     background-size:cover;
     height:100vh;
     width:100vw;
@@ -43,7 +43,7 @@ canvas{
     height:700px;
     border-radius:50%;
     overflow:hidden;
-    filter:drop-shadow(0 0 20px rgba(0,0,0,0.5));
+    filter:drop-shadow(0 0 20px rgba(0,0,0,0.45));
 }
 
 /* =====================
@@ -66,6 +66,10 @@ BUTTON
     cursor:pointer;
     z-index:10;
 }
+
+/* =====================
+ARROW
+===================== */
 
 #arrow{
     position:absolute;
@@ -400,10 +404,6 @@ function draw(){
 
     ctx.clearRect(0,0,700,700);
 
-    /* =====================
-    IMAGE BG
-    ===================== */
-
     if(wheelBgImage){
 
         ctx.save();
@@ -411,36 +411,25 @@ function draw(){
         ctx.beginPath();
 
         ctx.arc(
-
             center,
             center,
             size,
-
             0,
             Math.PI * 2
-
         );
 
         ctx.clip();
 
         ctx.drawImage(
-
             wheelBgImage,
-
             center - size,
             center - size,
-
             size * 2,
             size * 2
-
         );
 
         ctx.restore();
     }
-
-    /* =====================
-    SLICES
-    ===================== */
 
     for(let i=0;i<prizes.length;i++){
 
@@ -458,24 +447,17 @@ function draw(){
         ctx.moveTo(center,center);
 
         ctx.arc(
-
             center,
             center,
             size,
-
             angle,
             angle + arc
-
         );
 
         ctx.fill();
 
         ctx.globalAlpha = 1;
     }
-
-    /* =====================
-    TEXT
-    ===================== */
 
     for(let i=0;i<prizes.length;i++){
 
@@ -492,11 +474,8 @@ function draw(){
         ctx.moveTo(center,center);
 
         ctx.lineTo(
-
             center + Math.cos(angle) * size,
-
             center + Math.sin(angle) * size
-
         );
 
         ctx.stroke();
@@ -518,21 +497,13 @@ function draw(){
         ctx.shadowBlur = 5;
 
         ctx.fillText(
-
             prizes[i].label,
-
             size - 80,
-
             8
-
         );
 
         ctx.restore();
     }
-
-    /* =====================
-    BORDER
-    ===================== */
 
     ctx.beginPath();
 
@@ -541,21 +512,15 @@ function draw(){
     ctx.strokeStyle = "#fff";
 
     ctx.arc(
-
         center,
         center,
         size,
-
         0,
         Math.PI * 2
-
     );
 
     ctx.stroke();
-
 }
-
-draw();
 
 /* =====================
 FORM
@@ -576,11 +541,7 @@ function confirmForm(){
         return;
     }
 
-    currentUser = {
-
-        name,
-        phone
-    };
+    currentUser = { name, phone };
 
     ready = true;
 
@@ -611,7 +572,7 @@ function closeForm(){
 }
 
 /* =====================
-SPIN BUTTON
+SPIN
 ===================== */
 
 document.getElementById(
@@ -632,29 +593,9 @@ document.getElementById(
     spin();
 };
 
-/* =====================
-SPIN
-===================== */
-
 function spin(){
 
     if(spinning) return;
-
-    let totalQty =
-    prizes.reduce(
-
-        (sum,p)=>sum+p.qty,
-
-        0
-
-    );
-
-    if(totalQty <= 0){
-
-        alert("Hết quà");
-
-        return;
-    }
 
     spinning = true;
 
@@ -703,9 +644,7 @@ function spin(){
     let stopAngle =
 
     360 -
-
     (resultIndex * arc) -
-
     (arc / 2);
 
     let totalRotate =
@@ -763,10 +702,6 @@ function spin(){
     },5000);
 }
 
-/* =====================
-RESULT
-===================== */
-
 function closeResult(){
 
     document.getElementById(
@@ -794,74 +729,6 @@ function closeResult(){
     draw();
 }
 
-/* =====================
-THEMES
-===================== */
-
-function applyTheme(type){
-
-    if(type === "pizza"){
-
-        canvas.style.background =
-        `
-        conic-gradient(
-        #ff4d4d 0deg 60deg,
-        #ffd93d 60deg 120deg,
-        #6bcB77 120deg 180deg,
-        #4d96ff 180deg 240deg,
-        #c77dff 240deg 300deg,
-        #ff8fab 300deg 360deg
-        )
-        `;
-    }
-
-    if(type === "luxury"){
-
-        canvas.style.background =
-        `
-        conic-gradient(
-        #000000 0deg 60deg,
-        #1a1a1a 60deg 120deg,
-        #333333 120deg 180deg,
-        #555555 180deg 240deg,
-        #777777 240deg 300deg,
-        #ffd700 300deg 360deg
-        )
-        `;
-    }
-
-    if(type === "neon"){
-
-        canvas.style.background =
-        `
-        conic-gradient(
-        #ff00ff 0deg 60deg,
-        #00ffff 60deg 120deg,
-        #39ff14 120deg 180deg,
-        #ffff00 180deg 240deg,
-        #ff6600 240deg 300deg,
-        #ff0066 300deg 360deg
-        )
-        `;
-    }
-
-    if(type === "ocean"){
-
-        canvas.style.background =
-        `
-        conic-gradient(
-        #003566 0deg 60deg,
-        #00509d 60deg 120deg,
-        #0077b6 120deg 180deg,
-        #0096c7 180deg 240deg,
-        #00b4d8 240deg 300deg,
-        #90e0ef 300deg 360deg
-        )
-        `;
-    }
-
-}
-
 </script>
 
 <!-- FIREBASE -->
@@ -882,10 +749,6 @@ import {
 }
 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* =====================
-CONFIG
-===================== */
 
 const firebaseConfig = {
 
@@ -909,32 +772,14 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-/* =====================
-UID
-===================== */
-
 const params =
-new URLSearchParams(
-
-    window.location.search
-);
+new URLSearchParams(window.location.search);
 
 const uid =
 params.get("id");
 
-if(!uid){
-
-    alert("Thiếu ID");
-
-    throw new Error("Missing UID");
-}
-
 const wheelRef =
 doc(db,"wheels",uid);
-
-/* =====================
-REALTIME
-===================== */
 
 onSnapshot(
 
@@ -953,7 +798,7 @@ onSnapshot(
                     prizes:DEFAULT_PRIZES,
                     history:[],
                     backdrop:"",
-                    wheelBg:"theme:pizza"
+                    wheelBg:""
 
                 }
 
@@ -976,194 +821,88 @@ onSnapshot(
         history =
         data.history || [];
 
-        draw();
-        /* AUTO RELOAD FIRST LOAD */
-if(!sessionStorage.getItem("wheelReloaded")){
+        /* BACKDROP */
 
-    sessionStorage.setItem(
-        "wheelReloaded",
-        "true"
-    );
+        const defaultBackdrop =
+        "https://i.ibb.co/dw29MMnJ/DONE.jpg";
 
-    setTimeout(()=>{
+        if(data.backdrop){
 
-        location.reload();
-
-    },800);
-}
-
-/* ===== BACKDROP ===== */
-
-const defaultBackdrop =
-"https://i.ibb.co/tPxKT1Ym/DONE.jpg";
-
-if(data.backdrop){
-
-    document.body.style.backgroundImage =
-    `url('${data.backdrop}')`;
-}
-
-else{
-
-    document.body.style.backgroundImage =
-    `url('${defaultBackdrop}')`;
-}
-
-document.body.style.backgroundSize = "cover";
-
-document.body.style.backgroundPosition = "center";
-
-document.body.style.backgroundRepeat = "no-repeat";
-
-
-        
-
-       /* document.body.style.backgroundImage =
-
+            document.body.style.backgroundImage =
             `url('${data.backdrop}')`;
         }
 
         else{
 
             document.body.style.backgroundImage =
-            "none";
+            `url('${defaultBackdrop}')`;
         }
 
-        /* WHEEL BG */
+        /* WHEEL IMAGE */
 
         if(data.wheelBg){
 
-            if(data.wheelBg.startsWith("theme:")){
+            const img =
+            new Image();
 
-                const theme =
+            img.crossOrigin =
+            "anonymous";
 
-                data.wheelBg.replace(
+            img.onload = ()=>{
 
-                    "theme:",
-                    ""
-
-                );
-
-                wheelBgImage = "";
-
-                applyTheme(theme);
+                wheelBgImage = img;
 
                 draw();
-            }
+            };
 
-            else{
-
-                const img =
-                new Image();
-
-                img.crossOrigin =
-                "anonymous";
-
-                img.onload = ()=>{
-
-                    wheelBgImage = img;
-
-                    draw();
-                };
-
-                img.src =
-                data.wheelBg;
-            }
+            img.src =
+            data.wheelBg;
         }
 
         else{
 
             wheelBgImage = "";
 
-            applyTheme("pizza");
-
             draw();
         }
 
-    }
-);
+        if(!window.firstLoaded){
 
-/* =====================
-SAVE
-===================== */
+            window.firstLoaded = true;
+
+            setTimeout(()=>{
+
+                draw();
+
+            },300);
+        }
+
+    }
+
+);
 
 window.saveFirebase =
 async()=>{
 
-    try{
+    await setDoc(
 
-        await setDoc(
+        wheelRef,
 
-            wheelRef,
+        {
 
-            {
+            prizes,
+            history
 
-                prizes,
-                history
+        },
 
-            },
+        {
 
-            {
+            merge:true
 
-                merge:true
-
-            }
-
-        );
-
-    }
-
-    catch(err){
-
-        console.log(err);
-    }
-};
-
-/* =====================
-EXPORT EXCEL
-===================== */
-
-window.addEventListener(
-
-    "keydown",
-
-    (e)=>{
-
-        if(e.key === "F9"){
-
-            const wb =
-            XLSX.utils.book_new();
-
-            XLSX.utils.book_append_sheet(
-
-                wb,
-
-                XLSX.utils.json_to_sheet(history),
-
-                "Khách hàng"
-
-            );
-
-            XLSX.utils.book_append_sheet(
-
-                wb,
-
-                XLSX.utils.json_to_sheet(prizes),
-
-                "Tồn kho"
-
-            );
-
-            XLSX.writeFile(
-
-                wb,
-
-                "BaoCao_QuayThuong.xlsx"
-
-            );
         }
-    }
-);
+
+    );
+};
 
 </script>
 
