@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SPINEASY - Demo Realtime</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+
+    --primary:#c1121f;
+
+    --dark-red:#8e0e16;
+
+    --gold:#ffd700;
+
+    --dark:#121212;
+}
+
+*{
+
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:
+    radial-gradient(circle at top,
+    #d62839 0%,
+    #8e0e16 100%);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+}
+
+/* =========================
+LAYOUT
+========================= */
+
+.mainLayout{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:25px;
+
+    max-width:1600px;
+
+    margin:auto;
+
+    min-height:100vh;
+
+    padding:20px;
+}
+
+/* =========================
+LEFT PANEL
+========================= */
+
+#demoPanel{
+
+    flex:2;
+
+    max-width:850px;
+
+    background:rgba(255,255,255,0.96);
+
+    border-radius:35px;
+
+    padding:45px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.3);
+
+    border:3px solid rgba(255,215,0,0.3);
+}
+
+.demoBadge{
+
+    display:inline-block;
+
+    background:
+    linear-gradient(
+    45deg,
+    var(--gold),
+    #ff9800
+    );
+
+    color:#000;
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+}
+
+#demoPanel h1{
+
+    margin:0;
+
+    font-size:4.2rem;
+
+    line-height:1.1;
+
+    color:var(--primary);
+
+    font-weight:900;
+}
+
+.demoSlogan{
+
+    color:#ff9800;
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+    margin-top:15px;
+
+    line-height:1.6;
+}
+
+.demoText{
+
+    margin-top:25px;
+
+    line-height:1.9;
+
+    color:#444;
+
+    font-size:18px;
+}
+
+/* =========================
+FEATURE
+========================= */
+
+.featureGrid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+    margin-top:30px;
+}
+
+.demoFeature{
+
+    background:#fff8e8;
+
+    border:2px solid rgba(255,215,0,0.3);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    display:flex;
+
+    gap:15px;
+
+    transition:0.3s;
+}
+
+.demoFeature:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.1);
+}
+
+.demoIcon{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    45deg,
+    var(--gold),
+    #ff9800
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#000;
+
+    font-size:24px;
+
+    flex-shrink:0;
+}
+
+.demoFeature h3{
+
+    margin:0 0 6px 0;
+
+    color:var(--primary);
+
+    font-size:18px;
+}
+
+.demoFeature p{
+
+    margin:0;
+
+    line-height:1.7;
+
+    color:#555;
+
+    font-size:15px;
+}
+
+/* =========================
+COUNTER
+========================= */
+
+.demoCounter{
+
+    margin-top:30px;
+
+    background:
+    linear-gradient(
+    45deg,
+    #fff3c4,
+    #ffe082
+    );
+
+    border-radius:25px;
+
+    padding:22px;
+
+    text-align:center;
+
+    border:3px dashed #ff9800;
+}
+
+.demoCounter p{
+
+    margin:0;
+
+    color:#444;
+}
+
+.demoCounter h2{
+
+    margin:10px 0;
+
+    font-size:4rem;
+
+    color:var(--primary);
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.demoBtn{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    background:
+    linear-gradient(
+    45deg,
+    var(--gold),
+    #ff9800
+    );
+
+    color:#000;
+
+    text-decoration:none;
+
+    padding:18px 35px;
+
+    border-radius:50px;
+
+    font-weight:900;
+
+    transition:0.3s;
+
+    font-size:18px;
+
+    box-shadow:
+    0 8px 25px rgba(255,215,0,0.3);
+}
+
+.demoBtn:hover{
+
+    transform:scale(1.05);
+}
+
+/* =========================
+WHEEL
+========================= */
+
+#wheelContainer{
+
+    flex:1;
+
+    position:relative;
+
+    width:700px;
+
+    height:700px;
+    margin-left:250px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+canvas{
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    filter:
+    drop-shadow(
+    0 0 30px rgba(0,0,0,0.4)
+    );
+}
+
+/* =========================
+SPIN BUTTON
+========================= */
+
+#spinBtn{
+
+    position:absolute;
+
+    width:130px;
+
+    height:130px;
+
+    border-radius:50%;
+
+    border:7px solid #fff;
+
+    background:
+    radial-gradient(
+    circle,
+    #ffe082,
+    #ff9800
+    );
+
+    color:#000;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    z-index:10;
+
+    box-shadow:
+    0 0 30px rgba(255,152,0,0.5);
+}
+
+/* =========================
+ARROW
+========================= */
+
+#arrow{
+
+    position:absolute;
+
+    right:-30px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:0;
+
+    height:0;
+
+    border-top:30px solid transparent;
+
+    border-bottom:30px solid transparent;
+
+    border-right:50px solid var(--gold);
+
+    z-index:20;
+}
+
+/* =========================
+POPUP
+========================= */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.75);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+}
+
+.popupBox{
+
+    width:500px;
+
+    background:#fff;
+
+    border-radius:30px;
+
+    padding:40px;
+
+    text-align:center;
+}
+
+.popupBox h1{
+
+    color:var(--primary);
+
+    margin-top:0;
+}
+
+#resultText{
+
+    font-size:3rem;
+
+    font-weight:900;
+
+    color:#ff9800;
+
+    margin:25px 0;
+}
+
+.popupBtn{
+
+    display:inline-block;
+
+    margin:10px;
+
+    padding:15px 25px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:900;
+
+    transition:0.3s;
+}
+
+.btnUpgrade{
+
+    background:linear-gradient(
+    45deg,
+    var(--gold),
+    #ff9800
+    );
+
+    color:#000;
+}
+
+.btnHome{
+
+    background:#eee;
+
+    color:#333;
+}
+
+.popupBtn:hover{
+
+    transform:scale(1.05);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .mainLayout{
+
+        flex-direction:column;
+
+        padding:20px;
+    }
+
+    #demoPanel{
+
+        width:100%;
+        max-width:none;
+    }
+
+    .featureGrid{
+
+        grid-template-columns:1fr;
+    }
+
+    #wheelContainer{
+
+        width:90vw;
+        height:90vw;
+        margin-left:150px;
+    }
+
+    canvas{
+
+        width:90vw;
+        height:90vw;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="mainLayout">
+
+<!-- =========================
+LEFT INFO
+========================= -->
+
+<div id="demoPanel">
+
+    <div class="demoBadge">
+
+        SPINEASY DEMO EXPERIENCE
+
+    </div>
+
+    <h1>
+
+        VÒNG QUAY
+        <br>
+
+        REALTIME PRO
+
+    </h1>
+
+    <div class="demoSlogan">
+
+        “Tạo vòng quay livestream trong 30 giây”
+        <br>
+
+        “Mini game tăng tương tác cho shop”
+        <br>
+
+        “Spin để giữ chân khách hàng”
+
+    </div>
+
+    <div class="demoText">
+
+        SPINEASY là hệ thống vòng quay realtime
+        dành cho livestream,
+        shop online,
+        mini game marketing,
+        quán cafe,
+        showroom,
+        sự kiện và chương trình khách hàng thân thiết.
+
+    </div>
+
+    <!-- FEATURES -->
+
+    <div class="featureGrid">
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                🎡
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Tạo game cực nhanh
+
+                </h3>
+
+                <p>
+
+                    Tạo mini game realtime
+                    trong vài phút.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                ☁️
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Firebase Cloud
+
+                </h3>
+
+                <p>
+
+                    Đồng bộ realtime
+                    đa thiết bị.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                📊
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Export Excel
+
+                </h3>
+
+                <p>
+
+                    Thu thập data khách hàng
+                    tự động.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                🎨
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Upload giao diện
+
+                </h3>
+
+                <p>
+
+                    Upload logo,
+                    backdrop,
+                    quà tặng.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                🎯
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Chỉnh xác suất
+
+                </h3>
+
+                <p>
+
+                    Điều chỉnh tỉ lệ trúng
+                    thông minh.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="demoFeature">
+
+            <div class="demoIcon">
+
+                🚀
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Tăng tương tác
+
+                </h3>
+
+                <p>
+
+                    Giữ chân khách hàng
+                    livestream.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- COUNTER -->
+
+    <div class="demoCounter">
+
+        <p>
+
+            Demo miễn phí còn lại
+
+        </p>
+
+        <h2 id="spinLeft">
+
+            3
+
+        </h2>
+
+        <p>
+
+            lượt quay trải nghiệm
+
+        </p>
+
+    </div>
+
+    <a
+    href="https://zalo.me/0946296269"
+    target="_blank"
+    class="demoBtn">
+
+        🚀 ĐĂNG KÝ PRO NGAY
+
+    </a>
+
+</div>
+
+<!-- =========================
+WHEEL
+========================= -->
+
+<div id="wheelContainer">
+
+    <div id="arrow"></div>
+
+    <canvas id="wheel"></canvas>
+
+    <button id="spinBtn">
+
+        QUAY
+
+    </button>
+
+</div>
+
+</div>
+
+<!-- =========================
+POPUP
+========================= -->
+
+<div id="resultPopup"
+class="popup">
+
+    <div class="popupBox">
+
+        <h1>
+
+            🎉 CHÚC MỪNG
+
+        </h1>
+
+        <div id="resultText"></div>
+
+        <div id="popupActions"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+PRIZES
+========================= */
+
+const prizes = [
+
+    {
+        label:"Voucher 50K",
+        weight:40
+    },
+
+    {
+        label:"Free Ship",
+        weight:30
+    },
+
+    {
+        label:"Tai Nghe RGB",
+        weight:20
+    },
+    {
+        label:"Dán BBP",
+        weight:20
+    },
+    {
+        label:"Nạp Pro 499k",
+        weight:20
+    },
+    {
+        label:"Jackpot",
+        weight:10
+    }
+
+];
+
+/* =========================
+GLOBAL
+========================= */
+
+let spinning = false;
+
+let currentSpin = 0;
+
+const maxSpin = 3;
+
+/* =========================
+CANVAS
+========================= */
+
+const canvas =
+document.getElementById("wheel");
+
+const ctx =
+canvas.getContext("2d");
+
+/* =========================
+DRAW
+========================= */
+
+function drawWheel(){
+
+    canvas.width = 750;
+
+    canvas.height = 750;
+
+    const center = 375;
+
+    const radius = 350;
+
+    const arc =
+    Math.PI * 2 / prizes.length;
+
+    const colors = [
+
+        "#ff3d68",
+        "#ffd700",
+        "#ff9800",
+        "#8e0e16"
+
+    ];
+
+    ctx.clearRect(0,0,560,560);
+
+    for(let i=0;i<prizes.length;i++){
+
+        const angle = i * arc;
+
+        ctx.beginPath();
+
+        ctx.moveTo(center,center);
+
+        ctx.arc(
+            center,
+            center,
+            radius,
+            angle,
+            angle + arc
+        );
+
+        ctx.fillStyle =
+        colors[i % colors.length];
+
+        ctx.fill();
+
+        ctx.strokeStyle = "#fff";
+
+        ctx.lineWidth = 4;
+
+        ctx.stroke();
+
+        ctx.save();
+
+        ctx.translate(center,center);
+
+        ctx.rotate(angle + arc / 2);
+
+        ctx.fillStyle = "#fff";
+
+        ctx.font =
+        "bold 22px Arial";
+
+        ctx.textAlign = "right";
+
+        ctx.fillText(
+            prizes[i].label,
+            radius - 40,
+            10
+        );
+
+        ctx.restore();
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+        center,
+        center,
+        radius,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.lineWidth = 10;
+
+    ctx.strokeStyle = "#fff";
+
+    ctx.stroke();
+}
+
+drawWheel();
+
+/* =========================
+SPIN
+========================= */
+
+document.getElementById(
+"spinBtn"
+).onclick = ()=>{
+
+    if(spinning) return;
+
+    if(currentSpin >= maxSpin){
+
+        showLimitPopup();
+
+        return;
+    }
+
+    spin();
+};
+
+function spin(){
+
+    spinning = true;
+
+    currentSpin++;
+
+    document.getElementById(
+    "spinLeft"
+    ).innerText =
+
+    maxSpin - currentSpin;
+
+    let totalWeight =
+
+    prizes.reduce(
+        (sum,p)=>sum+p.weight,
+        0
+    );
+
+    let randomNum =
+    Math.random() * totalWeight;
+
+    let weightSum = 0;
+
+    let resultIndex = 0;
+
+    let resultPrize;
+
+    for(let i=0;i<prizes.length;i++){
+
+        weightSum += prizes[i].weight;
+
+        if(randomNum <= weightSum){
+
+            resultPrize = prizes[i];
+
+            resultIndex = i;
+
+            break;
+        }
+    }
+
+    const arc =
+    360 / prizes.length;
+
+    const stopAngle =
+
+    360 -
+    (resultIndex * arc) -
+    (arc / 2);
+
+    const totalRotate =
+    360 * 8 + stopAngle;
+
+    canvas.style.transition =
+    "transform 5s cubic-bezier(0.15,0,0.15,1)";
+
+    canvas.style.transform =
+    `rotate(${totalRotate}deg)`;
+
+    setTimeout(()=>{
+
+        showResult(
+            resultPrize.label
+        );
+
+        spinning = false;
+
+    },5000);
+}
+
+/* =========================
+RESULT
+========================= */
+
+function showResult(text){
+
+    document.getElementById(
+    "resultPopup"
+    ).style.display = "flex";
+
+    document.getElementById(
+    "resultText"
+    ).innerText = text;
+
+    let html = "";
+
+    if(currentSpin >= maxSpin){
+
+        html = `
+
+        <a
+        href="login.html"
+        class="popupBtn btnUpgrade">
+
+            🚀 ĐĂNG KÝ PRO
+
+        </a>
+
+        <a
+        href="index.html"
+        class="popupBtn btnHome">
+
+            ⬅ TRANG CHỦ
+
+        </a>
+
+        `;
+    }
+
+    else{
+
+        html = `
+
+        <button
+        onclick="closePopup()"
+        class="popupBtn btnUpgrade"
+        style="border:none;cursor:pointer;">
+
+            QUAY TIẾP
+
+        </button>
+
+        `;
+    }
+
+    document.getElementById(
+    "popupActions"
+    ).innerHTML = html;
+}
+
+function closePopup(){
+
+    document.getElementById(
+    "resultPopup"
+    ).style.display = "none";
+
+    canvas.style.transition = "none";
+
+    canvas.style.transform = "rotate(0deg)";
+}
+
+function showLimitPopup(){
+
+    document.getElementById(
+    "resultPopup"
+    ).style.display = "flex";
+
+    document.getElementById(
+    "resultText"
+    ).innerHTML =
+
+    "ĐÃ HẾT<br>3 LƯỢT DEMO";
+
+    document.getElementById(
+    "popupActions"
+    ).innerHTML = `
+
+    <a
+    href="login.html"
+    class="popupBtn btnUpgrade">
+
+        🚀 ĐĂNG KÝ PRO
+
+    </a>
+
+    <a
+    href="index.html"
+    class="popupBtn btnHome">
+
+        ⬅ TRANG CHỦ
+
+    </a>
+
+    `;
+}
+
+</script>
+
+</body>
+</html>
