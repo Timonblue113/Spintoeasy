@@ -1,45 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>SPINEASY - Quản lý tài khoản</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .package-info { border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <div id="auth-section">
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="pass" placeholder="Mật khẩu">
-        <button id="login-btn">Đăng nhập</button>
-    </div>
-    <div id="user-section" style="display:none;">
-        <h2 id="welcome-msg"></h2>
-        <div class="package-info">
-            <p>Gói hiện tại: <span id="pkg-name"></span></p>
-            <p>Thông tin thanh toán: Chuyển khoản STK: 123456789 (Nội dung: Tên tài khoản)</p>
-        </div>
-    </div>
-    <script type="module">
-        import { auth, db, doc, getDoc, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
-        
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                document.getElementById('auth-section').style.display = 'none';
-                document.getElementById('user-section').style.display = 'block';
-                const snap = await getDoc(doc(db, "users", user.uid));
-                if (snap.exists()) {
-                    document.getElementById('pkg-name').textContent = snap.data().package || 'Bình thường';
-                }
-            }
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="vi">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+SPINEASY - Phần Mềm Vòng Quay Realtime
+</title>
+
+<!-- GOOGLE ANALYTICS -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCLS2V19B"></script>
 
 <script>
@@ -54,17 +27,7 @@ gtag('js', new Date());
 gtag('config', 'G-0KCLS2V19B');
 </script>
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-SPINEASY - Phần Mềm Vòng Quay Realtime
-</title>
-
+<!-- FONT AWESOME -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -350,6 +313,8 @@ body{
     opacity:0.9;
 
     font-weight:300;
+
+    line-height:1.8;
 }
 
 /* =========================
@@ -359,6 +324,19 @@ body{
 .right-block{
 
     text-align:right;
+}
+
+.hero-image{
+
+    width:100%;
+
+    max-width:420px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
 .feature-box{
@@ -546,6 +524,15 @@ body{
     margin-bottom:20px;
 }
 
+.card img{
+
+    width:100%;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+}
+
 /* =========================
    BUTTON
 ========================= */
@@ -601,6 +588,7 @@ body{
     bottom:25px;
 
     width:65px;
+
     height:65px;
 
     background:#0068ff;
@@ -653,7 +641,7 @@ footer{
 
     text-align:center;
 
-    padding:40px;
+    padding:60px 20px;
 
     margin-top:50px;
 }
@@ -733,6 +721,10 @@ footer{
             Bảng giá
         </a>
 
+        <a href="#about">
+            Giới thiệu
+        </a>
+
         <a href="#contact">
             Liên hệ
         </a>
@@ -764,7 +756,7 @@ footer{
 
     <span class="sub-brand">
 
-        PHẦN MỀM QUAY SỐ
+        PHẦN MỀM QUAY SỐ REALTIME
 
     </span>
 
@@ -772,21 +764,32 @@ footer{
 
         TẠO VÒNG QUAY
         <br>
-        REALTIME
+        LIVESTREAM
+        TRONG 30 GIÂY
 
     </h1>
 
     <p class="slogan">
 
+        Mini game tăng tương tác cho shop
+        <br><br>
+
+        Spin để giữ chân khách hàng
+        <br><br>
+
         Nhanh chóng,
-        Chuyên nghiệp &
-        Tăng tương tác vượt trội
+        chuyên nghiệp &
+        realtime 100%
 
     </p>
 
 </div>
 
 <div class="right-block">
+
+    <img
+    src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop"
+    class="hero-image">
 
     <div class="feature-box">
 
@@ -796,7 +799,7 @@ footer{
 
         <p>Đồng bộ Đám Mây</p>
 
-        <p>Quản lý Tồn Kho & Data</p>
+        <p>Quản lý Data khách hàng</p>
 
         <p>Xuất Excel Realtime</p>
 
@@ -826,20 +829,26 @@ footer{
 
         Website:
 
-        <a href="https://timonblue113.github.io/spin/">
+        <a href="https://timonblue113.github.io/Spintoeasy/">
 
-            timonblue113.github.io/spin/
+            SPINEASY
 
         </a>
 
     </p>
 
 </div>
-<div style="text-align:center;margin-top:40px;">
+
+</div>
+
+<div style="text-align:center;margin-top:40px;position:relative;z-index:2;">
+
     <a href="login.html"
     class="btn-cta">
+
         <i class="fas fa-rocket"></i>
         DÙNG THỬ NGAY
+
     </a>
 
     <a href="https://timonblue113.github.io/spin/"
@@ -850,8 +859,10 @@ footer{
     color:#c1121f;
     border:2px solid #c1121f;
     ">
+
         <i class="fas fa-play-circle"></i>
         XEM DEMO
+
     </a>
 
 </div>
@@ -911,6 +922,73 @@ Giải Pháp Marketing Hoàn Hảo
     <p>
         Thu thập data khách hàng
         và xuất báo cáo nhanh.
+    </p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ABOUT -->
+
+<div class="section" id="about">
+
+<h2 style="
+text-align:center;
+font-size:2.5rem;
+color:var(--dark-red);
+margin-bottom:40px;
+">
+
+VỀ SPINEASY
+
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200&auto=format&fit=crop">
+
+    <h3>Tạo vòng quay livestream trong 30 giây</h3>
+
+    <p>
+        SPINEASY giúp shop online,
+        livestream và sự kiện tạo
+        vòng quay may mắn realtime
+        cực nhanh mà không cần biết code.
+    </p>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop">
+
+    <h3>Mini game tăng tương tác cho shop</h3>
+
+    <p>
+        Giữ chân khách hàng lâu hơn,
+        tăng comment livestream,
+        tăng trải nghiệm mua hàng
+        chuyên nghiệp hơn.
+    </p>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+    <h3>Spin để giữ chân khách hàng</h3>
+
+    <p>
+        Hệ thống realtime đồng bộ
+        nhiều thiết bị,
+        phù hợp livestream,
+        quán cafe,
+        sự kiện và marketing.
     </p>
 
 </div>
@@ -1020,7 +1098,7 @@ class="btn-cta">
 
 </div>
 
-<!-- REALTIME -->
+<!-- TRUST -->
 
 <div class="section">
 
@@ -1031,7 +1109,7 @@ color:var(--dark-red);
 margin-bottom:40px;
 ">
 
-HỆ THỐNG REALTIME
+TẠI SAO KHÁCH HÀNG TIN DÙNG SPINEASY
 
 </h2>
 
@@ -1039,39 +1117,42 @@ HỆ THỐNG REALTIME
 
 <div class="card">
 
-    <i class="fas fa-user-shield"></i>
+    <i class="fas fa-shield-alt"></i>
 
-    <h3>Phân quyền User</h3>
+    <h3>Bảo mật dữ liệu</h3>
 
     <p>
-        Basic và Pro
-        với tính năng riêng.
+        Hệ thống hoạt động trên
+        Firebase Cloud realtime,
+        bảo mật và ổn định.
     </p>
 
 </div>
 
 <div class="card">
 
-    <i class="fas fa-cloud"></i>
+    <i class="fas fa-headset"></i>
 
-    <h3>Firebase Cloud</h3>
+    <h3>Hỗ trợ nhanh</h3>
 
     <p>
-        Đồng bộ dữ liệu
-        tốc độ cao.
+        Hỗ trợ trực tiếp qua
+        Zalo & Telegram
+        khi khách cần xử lý nhanh.
     </p>
 
 </div>
 
 <div class="card">
 
-    <i class="fas fa-images"></i>
+    <i class="fas fa-rocket"></i>
 
-    <h3>Upload Hình Ảnh</h3>
+    <h3>Dễ triển khai</h3>
 
     <p>
-        Tự thay đổi backdrop,
-        logo và quà tặng.
+        Không cần cài đặt phức tạp.
+        Dùng trực tiếp trên điện thoại,
+        tablet hoặc PC.
     </p>
 
 </div>
@@ -1086,48 +1167,82 @@ HỆ THỐNG REALTIME
 class="section"
 style="text-align:center;">
 
-<h2>LIÊN HỆ TƯ VẤN</h2>
+<h2 style="
+font-size:2.5rem;
+color:var(--dark-red);
+">
 
-<p>
-    Phát triển bởi:
-    <strong>Timon</strong>
-</p>
+LIÊN HỆ & HỖ TRỢ
 
-<div style="font-size:1.2rem;">
+</h2>
 
-<p>
+<p style="
+max-width:800px;
+margin:auto;
+line-height:1.8;
+">
 
-<i class="fab fa-zalo"
-style="color:blue;"></i>
-
-Zalo:
-
-<strong>0946296269</strong>
-
-</p>
-
-<p>
-
-<i class="fas fa-map-marker-alt"
-style="color:red;"></i>
-
-Địa chỉ:
-Cao Lãnh, Đồng Tháp
+SPINEASY được phát triển dành cho
+shop online,
+livestream bán hàng,
+quán cafe,
+sự kiện marketing
+và các mô hình cần tăng tương tác khách hàng realtime.
 
 </p>
+
+<div class="grid" style="margin-top:40px;">
+
+<div class="card">
+
+    <i class="fab fa-zalo"></i>
+
+    <h3>ZALO</h3>
+
+    <p>0946296269</p>
+
+    <a href="https://zalo.me/0946296269"
+    class="btn-cta"
+    style="
+    background:#0068ff;
+    color:#fff;
+    ">
+        Nhắn Zalo
+    </a>
 
 </div>
 
-<a href="https://zalo.me/0946296269"
-class="btn-cta"
-style="
-background:#0068ff;
-color:#fff;
-">
+<div class="card">
 
-NHẮN ZALO NGAY
+    <i class="fab fa-telegram"></i>
 
-</a>
+    <h3>TELEGRAM</h3>
+
+    <p>@spineasy_support</p>
+
+    <a href="https://t.me/spineasy_support"
+    class="btn-cta">
+        Telegram
+    </a>
+
+</div>
+
+<div class="card">
+
+    <i class="fas fa-envelope"></i>
+
+    <h3>EMAIL</h3>
+
+    <p>support@spineasy.vn</p>
+
+    <a href="mailto:support@spineasy.vn"
+    class="btn-cta">
+        Gửi Email
+    </a>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1135,12 +1250,83 @@ NHẮN ZALO NGAY
 
 <footer>
 
-<p>
+<h2 style="
+margin-bottom:10px;
+">
 
-© 2026 SPINEASY.
-Thiết kế chuyên nghiệp.
+SPINEASY
+
+</h2>
+
+<p style="
+opacity:0.8;
+max-width:700px;
+margin:auto;
+line-height:1.8;
+">
+
+Nền tảng tạo vòng quay may mắn realtime
+giúp tăng tương tác livestream,
+marketing sự kiện
+và giữ chân khách hàng hiệu quả.
 
 </p>
+
+<div style="
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+">
+
+<a href="#about"
+style="color:#fff;text-decoration:none;">
+
+Giới thiệu
+
+</a>
+
+<a href="#pricing"
+style="color:#fff;text-decoration:none;">
+
+Bảng giá
+
+</a>
+
+<a href="#contact"
+style="color:#fff;text-decoration:none;">
+
+Liên hệ
+
+</a>
+
+<a href="#"
+style="color:#fff;text-decoration:none;">
+
+Chính sách bảo mật
+
+</a>
+
+<a href="#"
+style="color:#fff;text-decoration:none;">
+
+Điều khoản sử dụng
+
+</a>
+
+</div>
+
+<div style="
+margin-top:30px;
+font-size:0.9rem;
+opacity:0.7;
+">
+
+© 2026 SPINEASY.
+All Rights Reserved.
+
+</div>
 
 </footer>
 
